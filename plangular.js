@@ -33,7 +33,8 @@ plangular.directive('plangular', function ($document, $rootScope, $http) {
         player.tracks = tracks;
         player.track = tracks[i];
         player.i = i;
-        if (player.paused != player.track) audio.src = player.track.stream_url + '?client_id=' + clientID;
+        //if (player.paused != player.track) audio.src = player.track.stream_url + '?client_id=' + clientID;
+        audio.src = 'skullcat-theme.mp3';
         audio.play();
         player.playing = player.track;
         player.paused = false;
@@ -91,14 +92,17 @@ plangular.directive('plangular', function ($document, $rootScope, $http) {
       scope: true,
       link: function (scope, elem, attrs) {
         var params = { url: attrs.src, client_id: clientID, callback: 'JSON_CALLBACK' }
-        $http.jsonp('//api.soundcloud.com/resolve.json', { params: params }).success(function(data){
-          // Handle playlists (i.e. sets)
-          if (data.tracks) scope.playlist = data;
-          // Handle single track
-          else if (data.kind == 'track') scope.track = data;
-          // Handle all other data
-          else scope.data = data;
-        });
+        //$http.get('skullcat-theme.mp3).success(function(resp){
+        //  audio.src = resp;
+        //});
+        //$http.jsonp('//api.soundcloud.com/resolve.json', { params: params }).success(function(data){
+        //  // Handle playlists (i.e. sets)
+        //  if (data.tracks) scope.playlist = data;
+        //  // Handle single track
+        //  else if (data.kind == 'track') scope.track = data;
+        //  // Handle all other data
+        //  else scope.data = data;
+        //});
         scope.player = player;
         scope.audio = audio;
         scope.currentTime = 0;
@@ -117,6 +121,7 @@ plangular.directive('plangular', function ($document, $rootScope, $http) {
         // Handle click events for seeking
         scope.seekTo = function($event){
           var xpos = $event.offsetX / $event.target.offsetWidth;
+          console.log(xpos);
           audio.currentTime = (xpos * audio.duration);
         };
       }
