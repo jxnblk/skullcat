@@ -1,58 +1,15 @@
 
-plangular.directive('animangular', function($rootScope, $timeout) {
+plangular.directive('animangular', function($rootScope, $timeout, $interval) {
   var keyframes = {
-    10: { log: 'o hai' },
-    6000: { flash: true },
-    6050: { flash: false },
-    6100: { flash: true },
-    6150: { flash: false },
-    7200: { flash: true, skull: true },
-    7250: { flash: false, skull: false },
-    7300: { flash: true, skull: true },
-    7350: { flash: false, skull: false },
-    7400: { flash: true, skull: true },
-    7450: { flash: false, eyes: false, skull: true },
-    7800: { eyes: false, skull: false },
-    8600: { eyes: false, skull: true },
-    8900: { eyes: false, skull: false, flash: true },
-    8950: { eyes: false, skull: false, flash: false },
-    9000: { eyes: false, skull: false, flash: true },
-    9050: { eyes: false, skull: false, flash: false },
-    10000: { eyes: false, skull: true, flash: true },
-    10050: { eyes: false, skull: true, flash: false },
-    10200: { eyes: false, skull: false, flash: true },
-    10250: { eyes: false, skull: false, flash: false },
-    10400: { eyes: false, skull: true, flash: true },
-    10450: { eyes: false, skull: true, flash: false },
-    10600: { eyes: false, skull: false, flash: true },
-    10650: { eyes: false, skull: false, flash: false },
-    10800: { eyes: false, skull: true, flash: true },
-    10850: { eyes: false, skull: true, flash: false },
-    11000: { eyes: false, skull: false, flash: true },
-    11050: { eyes: false, skull: false, flash: false },
-    11200: { eyes: false, skull: true, flash: true },
-    11250: { eyes: false, skull: true, flash: false },
-    11400: { eyes: false, skull: false, flash: true },
-    11450: { eyes: false, skull: false, flash: false },
-    11600: { eyes: false, skull: true, flash: true },
-    11650: { eyes: false, skull: true, flash: false },
-    11790: { eyes: false, skull: false, flash: false },
-    11800: { eyes: false, skull: true, flash: true },
-    11850: { eyes: false, skull: true, flash: false },
-    11900: { eyes: false, skull: false, flash: false },
-    12000: { eyes: false, skull: true, flash: false },
-    12400: { eyes: false, skull: false, flash: false },
-    12500: { eyes: false, skull: true, flash: false },
-    13000: { eyes: false, skull: false, flash: true },
-    13650: { eyes: false, skull: false, flash: false, waves: true },
-    13800: { eyes: false, skull: false, flash: false, skullGlow: true },
-    14500: { eyes: false, skull: true, flash: true, skullGlow: false },
-    14550: { eyes: false, skull: true, flash: false, skullGlow: false, waves: true },
-    14600: { eyes: false, skull: false, skullGlow: true },
-    15000: { eyes: false, skull: true, waves: true, skullGlow: true },
-    15500: { dot: true, eyes: false, skull: false, waves: true, skullGlow: false },
-    16500: { eyes: false, skull: false, waves: false, bars: true },
-    17200: { eyes: false, skull: false, waves: true, bars: false, skullGlow: true }
+    1: { log: 'o hai', eyes: true },
+    64: { eyes: true, flash: true, skull: true },
+    65: { eyes: true, flash: false, skull: false },
+    66: { eyes: true, flash: true, skull: true },
+    70: { eyes: true, flash: false, skull: false },
+    76: { eyes: true, flash: true, skull: true },
+    77: { eyes: true, flash: false, skull: false },
+    78: { eyes: true, flash: true, skull: true },
+    80: { eyes: true, flash: false, skull: false }
   };
   return {
     restrict: 'A',
@@ -63,30 +20,44 @@ plangular.directive('animangular', function($rootScope, $timeout) {
       var ms;
       var counter;
       var timer;
+      var bar = 1 ;
+      var beat = 1;
+      var oldbeat;
+      var step;
+      var offset = 0;
       scope.ms = ms;
+      console.log(offset);
       var setCounter = function() {
-        $timeout.cancel(timer);
-        ms = Math.floor(audio.currentTime * 10) * 100;
+        $interval.cancel(timer);
         var counter = function(){
-          ms+=10;
-          if(keyframes[ms]) {
-            scope.$apply(function() {
-              scope.frame = keyframes[ms];
-            });
+          ms = Math.floor(audio.currentTime * 10) * 100;
+          //ms+=10;
+          if(keyframes[step]) {
+            scope.frame = keyframes[step];
           }
           scope.ms = Math.floor(ms);
-          scope.bar = Math.floor(scope.ms * .0006) + 1;
-          scope.beat = Math.floor(scope.ms * .0024) - ((scope.bar - 1) * 4) + 1;
-          timer = $timeout(counter,10);
+          // 144 bpm // 2.4 bps // 0.0024 bpms
+          step = Math.floor(ms * .0096) + 1;
+          //bar = Math.floor(ms * .0006) + 1;
+          //beat = Math.floor(ms * .0024) - ((bar - 1) * 4) + 1;
+          bar = Math.floor(step/16) + 1;
+          beat = Math.floor(step/4) - ((bar - 1) * 4) + 1;
+          scope.bar = bar;
+          scope.beat = beat;
+          if (beat != oldbeat) { 
+            console.log(bar + '.' + beat + ' : ' + step);
+          }
+          oldbeat = beat;
+          //timer = $interval(counter,10);
         };
-        timer = $timeout(counter,10);
+        timer = $interval(counter,24);
       };
-      audio.addEventListener('play', function() {
+      audio.addEventListener('playing', function() {
         setCounter();
       });
       audio.addEventListener('pause', function() {
         console.log('paused');
-        $timeout.cancel(timer);
+        $interval.cancel(timer);
       });
       audio.addEventListener('seeked', function() {
         setCounter();

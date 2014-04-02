@@ -31,7 +31,7 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 576" ng-click="player.play()">
         <rect width="1024" height="576" fill="#111"/>
         <g transform="translate(496 252)">
-          <g ng-hide="frame.eyes == false" id="eyes"
+          <g ng-show="frame.eyes == true" id="eyes"
             ng-attr-style=" transition: -webkit-transform .5s linear;
             -webkit-transform-origin: 50% 50%;
             -webkit-transform: scale({{ (ms < 7000) && (ms / 1000) * 1.714 || !(ms) && 0.001 || 12 }});" >
@@ -102,7 +102,7 @@
         </g>
 
       </svg>
-      <pre class="h2 absolute t0 r0 p2">{{ ms }}</pre>
+      <pre class="h2 absolute t0 r0 p2">{{ ms }} | {{ bar }}.{{ beat }}</pre>
       <div class="absolute r0 b0 l0" style="height:2rem">
         <div class="absolute t0 r0 b0 l0 bg-mid-gray"></div>
         <div class="absolute t0 b0 l0 bg-white" style="width:{{ (currentTime / duration) * 100 || 0 }}%"></div>
