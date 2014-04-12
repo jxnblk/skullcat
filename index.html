@@ -10,7 +10,6 @@
   <style>
     .fill-white { fill: white; }
     svg { max-height: 100%; }
-    .bg-dark-gray { background-color: #222; }
     @-webkit-keyframes fade-out {
       from { opacity: 1; }
       to { opacity: 0; }
@@ -18,6 +17,15 @@
     .fade-out {
       opacity: 0;
       -webkit-animation: fade-out .5s ease;
+    }
+    .bg-fade {
+      background-image: linear-gradient(to bottom left, rgba(255,51,0,.1), rgba(0,204,255,.1));
+    }
+    .bg-lines {
+      background-image: linear-gradient(rgba(0,0,0,0) 87.5%, rgba(0,0,0,.1) 87.5%);
+      background-size: .25rem .25rem;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
     }
   </style>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
@@ -28,9 +36,11 @@
 
   <header class="center" plangular data-src="http://soundcloud.com/mrsjxn/bbb">
     <div animangular class="relative" >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 576" ng-click="player.play()">
-        <rect width="1024" height="576" fill="#111"/>
-        <g transform="translate(496 252)">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 576">
+        <filter id="screen">
+          <feBlend mode="screen" />
+        </filter>
+        <g transform="translate(496 264)">
           <g ng-show="frame.eyes == true" id="eyes"
             ng-attr-style=" transition: -webkit-transform .5s linear;
             -webkit-transform-origin: 50% 50%;
@@ -45,9 +55,9 @@
           </g>
         </g>
         
-        <rect ng-if="frame.flash" class="fade-out" width="1024" height="576" fill="#f30"/>
-        <circle ng-if="frame.dot" cx="64" cy="64" r="32" opacity=".5" fill="#0ff"/>
-        <circle ng-if="frame.dot2" cx="512" cy="32" r="32" opacity=".5" fill="#0ff"/>
+        <rect ng-if="frame.flash" filter="url(#screen)" opacity="0.6" class="fade-out" width="1024" height="576" fill="#f30"/>
+        <circle ng-if="frame.dot" filter="url(#screen)" class="fade-out" cx="512" cy="288" r="64" opacity=".5" fill="#0ff"/>
+        <circle ng-if="frame.dot2" filter="url(#screen)" class="fade-out" cx="512" cy="288" r="128" opacity=".5" fill="#f30"/>
 
         <g ng-if="frame.skull" class="fade-out" transform="translate(320 96)" >
           <g transform="scale(12)" >
@@ -56,32 +66,28 @@
           </g>
         </g>
         <g ng-if="frame.skullGlow" transform="translate(320 96)" >
-          <filter id="multiply">
-            <feBlend mode="screen" />
-          </filter>
           <g transform="scale(12)" >
-            <path fill="#f30" filter="url(#multiply)" opacity="0.5" d="M16 7 C13 7 2 9 2 16 C2 23 6 23 10 24 L11 28 L12 26 L20 26 L21 28 L22 24 C26 23 30 23 30 16 C30 9 19 7 16 7 M4 18 A4 4 0 0 1 12 18 A4 4 0 0 1 4 18 M20 18 A4 4 0 0 1 28 18 A4 4 0 0 1 20 18 ">
+            <path fill="#f30" filter="url(#screen)" opacity="0.5" d="M16 7 C13 7 2 9 2 16 C2 23 6 23 10 24 L11 28 L12 26 L20 26 L21 28 L22 24 C26 23 30 23 30 16 C30 9 19 7 16 7 M4 18 A4 4 0 0 1 12 18 A4 4 0 0 1 4 18 M20 18 A4 4 0 0 1 28 18 A4 4 0 0 1 20 18 ">
             <animateTransform
                attributeName="transform" type="translate"
                values="0 0;2 0;0 0" dur=".1s" repeatCount="indefinite"/>
             </path>
-            <path fill="#0cf" filter="url(#multiply)" opacity="0.5" d="M16 7 C13 7 2 9 2 16 C2 23 6 23 10 24 L11 28 L12 26 L20 26 L21 28 L22 24 C26 23 30 23 30 16 C30 9 19 7 16 7 M4 18 A4 4 0 0 1 12 18 A4 4 0 0 1 4 18 M20 18 A4 4 0 0 1 28 18 A4 4 0 0 1 20 18 ">
+            <path fill="#0cf" filter="url(#screen)" opacity="0.5" d="M16 7 C13 7 2 9 2 16 C2 23 6 23 10 24 L11 28 L12 26 L20 26 L21 28 L22 24 C26 23 30 23 30 16 C30 9 19 7 16 7 M4 18 A4 4 0 0 1 12 18 A4 4 0 0 1 4 18 M20 18 A4 4 0 0 1 28 18 A4 4 0 0 1 20 18 ">
             <animateTransform
                attributeName="transform" type="translate"
                values="0 0;-2 0;0 0" dur=".1s" repeatCount="indefinite"/>
             </path>
           </g>
         </g>
-        <g ng-if="frame.waves" id="waves" class="xfade-out" transform="scale(32 20) translate(0 -2)" fill="none" stroke="#0cf" stroke-width=".125" opacity=".6">
-          <path d=" M-32 4 C-24 4 -24 28 -16 28 C-8 28 -8 4 0 4 C8 4 8 28 16 28 C24 28 24 8 32 8 ">
-            <animateTransform attributeName="transform" type="translate" values=" 0 0; 32 0 " dur="0.8s" repeatCount="indefinite" />
+        <g ng-if="frame.waves" id="waves" class="xfade-out" transform="scale(32 20) translate(0 -2)" fill="none" stroke="#0cf" stroke-width="0.125">
+          <path opacity=".6" d=" M-32 16 Q-24 -4 -16 16 T0 16 T16 16 T32 16 ">
+            <animateTransform attributeName="transform" type="translate" values=" 0 0; 32 0 " dur="0.41s" repeatCount="indefinite" />
           </path>
-          <path d=" M-32 12 C-24 12 -24 20 -16 20 C-8 20 -8 12 0 12 C8 12 8 20 16 20 C24 20 24 12 32 12 ">
-            <animateTransform attributeName="transform" type="translate" values=" 0 0; 32 0 " dur="0.6s" repeatCount="indefinite" />
-          </path>
-          <path d=" M-32 8 C-24 8 -24 24 -16 24 C-8 24 -8 8 0 8 C8 8 8 24 16 24 C24 24 24 8 32 8 ">
-            <animateTransform attributeName="transform" type="translate" values=" 0 0; 32 0 " dur="0.2s" repeatCount="indefinite" />
-          </path>
+          <g transform="translate(4 0)">
+            <path opacity=".6" d=" M-48 16 Q-40 -4 -32 16 T-16 16 0 16 T16 16 T32 16 ">
+              <animateTransform attributeName="transform" type="translate" values=" 0 0; 32 0 " dur="0.205s" repeatCount="indefinite"/>
+            </path>
+          </g>
         </g>
         <g ng-if="frame.bars" id="bars" fill="#f30" opacity=".5" transform="scale(16 8) translate(16 16)">
           <path transform="translate(2)" d="M0 12 V20 H4 V12z"> 
@@ -100,18 +106,38 @@
             <animate attributeName="d" values="M0 12 V20 H4 V12z; M0 4 V28 H4 V4z; M0 12 V20 H4 V12z; M0 12 V20 H4 V12z" dur="1.2s" repeatCount="indefinite" begin="0.8" keytimes="0;.2;.5;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.8 0.4 0.8" calcMode="spline" />
           </path>
         </g>
+        <g ng-if="frame.slowball">
+          <path fill="#f30" filter="url(#screen)" opacity=".5" d="M0 288 A128 128 0 0 0 256 288 A128 128 0 0 0 0 288z">
+            <animateTransform attributeName="transform" type="translate" values="-256 0; 1024 0" dur="1.64s" repeatCount="indefinite" />
+          </path>
+        </g>
+        <g ng-if="frame.blocks" filter="url(#screen)">
+          <path fill="#0cf" opacity=".8" d="M0 224 h128 v128 h-128z">
+            <animateTransform attributeName="transform" type="translate" values="0 0; 1024 0" dur=".41s" repeatCount="indefinite" />
+          </path>
+          <path fill="#f30" opacity=".8" d="M0 160 h128 v256 h-128z">
+            <animateTransform attributeName="transform" type="translate" values="0 0; 1024 0" dur=".205s" repeatCount="indefinite" />
+          </path>
+        </g>
 
       </svg>
-      <pre class="h2 absolute t0 r0 p2">{{ ms }} | {{ bar }}.{{ beat }}</pre>
-      <div class="absolute r0 b0 l0" style="height:2rem">
-        <div class="absolute t0 r0 b0 l0 bg-mid-gray"></div>
-        <div class="absolute t0 b0 l0 bg-white" style="width:{{ (currentTime / duration) * 100 || 0 }}%"></div>
-        <div class="absolute t0 r0 b0 l0" ng-click="seekTo($event)"></div>
-      </div>
+      <pre class="absolute t0 r0 p2">{{ bar }}.{{ beat }}</pre>
     </div>
     <div>
       <a href ng-click="player.play(track)" ng-hide="player.playing == track"><div plangular-icon="play" class="fill-white"></div></a>
       <a href ng-click="player.pause()" ng-show="player.playing == track"><div plangular-icon="pause" class="fill-white"></div></a>
+    </div>
+    <div class="absolute t0 r0 b0 l0 bg-lines"></div>
+    <div class="center absolute t0 r0 b0 l0 bg-mid-gray" ng-click="player.play(track)" ng-hide="player.playing == track">
+      <p class="h2 bold inline-block py4">
+        Turn up the volume and click
+      </p>
+    </div>
+    <div class="absolute t0 r0 b0 l0 bg-fade" ng-click="player.pause()" ng-show="player.playing == track"></div>
+    <div class="relative r0 b0 l0" style="height:.5rem">
+      <div class="absolute t0 r0 b0 l0 xbg-mid-gray"></div>
+      <div class="absolute t0 b0 l0 bg-mid-gray" style="width:{{ (currentTime / duration) * 100 || 0 }}%"></div>
+      <div class="absolute t0 r0 b0 l0" ng-click="seekTo($event)"></div>
     </div>
   </header>
 
