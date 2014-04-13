@@ -5,13 +5,15 @@
 
         http://jxnblk.github.io/Plangular
 
- */
+        Adjusted for Skullcat
+
+*/
 
 
 'use strict';
 
 var plangular = angular.module('plangular', []),
-    clientID = '0d33361983f16d2527b01fbf6408b7d7',
+    //clientID = '0d33361983f16d2527b01fbf6408b7d7',
     iconUrl = 'icons/plangular-icons.svg';
 
 plangular.directive('plangular', function ($document, $rootScope, $http) {
@@ -25,24 +27,16 @@ plangular.directive('plangular', function ($document, $rootScope, $http) {
       paused: false,
       tracks: null,
       i: null,
-      play: function(tracks, i) {
-        if (i == null) {
-          tracks = new Array(tracks);
-          i = 0;
-        };
-        player.tracks = tracks;
-        player.track = tracks[i];
-        player.i = i;
-        //if (player.paused != player.track) audio.src = player.track.stream_url + '?client_id=' + clientID;
-        audio.src = 'skullcat-theme.mp3';
+      play: function() {
+        if (!audio.src) audio.src = 'skullcat-theme.mp3';
         audio.play();
-        player.playing = player.track;
+        player.playing = true;
         player.paused = false;
       },
       pause: function() {
         audio.pause();
         if (player.playing) {
-          player.paused = player.playing;
+          player.paused = true;
           player.playing = false;
         };
       },
@@ -91,7 +85,7 @@ plangular.directive('plangular', function ($document, $rootScope, $http) {
       restrict: 'A',
       scope: true,
       link: function (scope, elem, attrs) {
-        var params = { url: attrs.src, client_id: clientID, callback: 'JSON_CALLBACK' }
+        //var params = { url: attrs.src, client_id: clientID, callback: 'JSON_CALLBACK' }
         //$http.get('skullcat-theme.mp3).success(function(resp){
         //  audio.src = resp;
         //});
