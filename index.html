@@ -69,11 +69,29 @@
             </path>
           </g>
         </g>
-        <circle ng-show="frame.dot" filter="url(#screen)" class="fade-out" cx="416" cy="310" r="64" opacity=".5" fill="#0ff"/>
-        <circle ng-show="frame.dot2" filter="url(#screen)" class="fade-out" cx="608" cy="310" r="128" opacity=".5" fill="#f30"/>
+        <circle ng-show="frame.dot" class="fade-out" cx="416" cy="310" r="64" fill="#fff"/>
+        <circle ng-show="frame.dot2" class="fade-out" cx="608" cy="310" r="128" fill="#fff"/>
+        <g id="stepseq" fill="#fff">
+          <rect ng-show="frame.step1" class="fade-out" width="56" height="56" x="4" y="260" />
+          <rect ng-show="frame.step2" class="fade-out" width="56" height="56" x="68" y="260" />
+          <rect ng-show="frame.step3" class="fade-out" width="56" height="56" x="132" y="260" />
+          <rect ng-show="frame.step4" class="fade-out" width="56" height="56" x="196" y="260" />
+          <rect ng-show="frame.step5" class="fade-out" width="56" height="56" x="260" y="260" />
+          <rect ng-show="frame.step6" class="fade-out" width="56" height="56" x="324" y="260" />
+          <rect ng-show="frame.step7" class="fade-out" width="56" height="56" x="388" y="260" />
+          <rect ng-show="frame.step8" class="fade-out" width="56" height="56" x="452" y="260" />
+          <rect ng-show="frame.step9" class="fade-out" width="56" height="56" x="516" y="260" />
+          <rect ng-show="frame.step10" class="fade-out" width="56" height="56" x="580" y="260" />
+          <rect ng-show="frame.step11" class="fade-out" width="56" height="56" x="644" y="260" />
+          <rect ng-show="frame.step12" class="fade-out" width="56" height="56" x="708" y="260" />
+          <rect ng-show="frame.step13" class="fade-out" width="56" height="56" x="772" y="260" />
+          <rect ng-show="frame.step14" class="fade-out" width="56" height="56" x="836" y="260" />
+          <rect ng-show="frame.step15" class="fade-out" width="56" height="56" x="900" y="260" />
+          <rect ng-show="frame.step16" class="fade-out" width="56" height="56" x="964" y="260" />
+        </g>
 
       </svg>
-      <pre class="absolute t0 r0 p2">{{ bar }}.{{ beat }} | {{ (ms * .0096) + 1 | number:0 }}</pre>
+      <pre class="absolute b0 r0 p2">{{ bar }}.{{ beat }} | {{ (ms * .0096) + 1 | number:0 }}</pre>
     </div>
     <!--
     <div class="absolute t0 r0 b0 l0 bg-lines"></div>
