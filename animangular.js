@@ -31,54 +31,15 @@ plangular.directive('animangular', function($rootScope, $timeout, $interval) {
     121: { eyes: true, flash: false, skull: false },
     122: { eyes: true, flash: true, skull: true },
     123: { eyes: true, flash: false, skull: false },
-    128: { flash: true, skullGlow: true, blocks: true, waves: true },
-    135: { waves: true, blocks: true },
-    136: { flash: true, skull: true, waves: true },
-    140: { dot: true, waves: true },
-    142: { dot2: true, waves: true },
-    144: { flash: true, skull: true, waves: false },
-    148: { blocks: true, waves: true },
-    152: { flash: true, skullGlow: true },
-    159: {},
-    160: { flash: true, skull: true },
-    168: { waves: true, blocks: true, slowball: true, dot: true },
+    128: { flash: true, skullGlow:true },
+    134: { skullGlow:true },
+    136: { flash: true, skull: true },
+    142: {},
+    144: { flash:true, skull:true },
+    148: {},
 
     // 12.1 - 176
 
-    172: { flash: true, skull: true },
-    173: { flash: false, skull: false },
-    174: { flash: true, skull: true },
-    175: { flash: false, skull: false },
-    176: { flash: true, skull: true },
-    177: { flash: false, skull: false },
-    178: { flash: true, skull: true },
-    179: { flash: false, skull: false },
-    180: { flash: true, skull: true },
-    181: { flash: false, skull: false },
-    182: { flash: true, skull: true },
-    183: { flash: false, skull: false },
-    184: { flash: true, skull: true },
-    185: { flash: false, skull: false },
-    186: { flash: true, skull: true },
-    187: { flash: false, skull: false },
-    188: { flash: true, skull: true },
-    189: { flash: false, skull: false },
-    190: { flash: true, skull: true },
-    191: { flash: false, skull: false },
-    192: { skullGlow: true, waves: true, dot2: true },
-    200: { waves: true, dot: true },
-    208: { dot2: true, flash: true, skull: true, waves: true },
-    216: { dot: true },
-    220: { dot2: true },
-    224: { flash: true, skullGlow: true, blocks: true, waves: true },
-    231: {},
-    232: { flash: true, skull: true, dot: true },
-    239: {},
-
-    //236: { flash: true, skull: true },
-    //337: { flash: false, skull: false },
-    //238: { flash: true, skull: true },
-    //239: { flash: false, skull: false },
     // 16.1 - build up
     240: { flash: true, skull: true },
     241: { flash: false, skull: false },
@@ -97,12 +58,7 @@ plangular.directive('animangular', function($rootScope, $timeout, $interval) {
     254: {},
  
     // 17.1 - splash
-    256: { flash: true, skullGlow: true , waves: true, bar: true },
-    263: { waves: true, bar: true },
-    264: { flash: true, skull: true },
-    265: {},
-    266: { flash: true, skull: true },
-    272: { blocks: true, skullGlow: true },
+    256: { flash: true, skullGlow: true },
     
     300: { flash: true, skull: true },
     301: { flash: false, skull: false },
@@ -127,10 +83,6 @@ plangular.directive('animangular', function($rootScope, $timeout, $interval) {
     // 21.1 - 320 splash
     320: { flash: true, skullGlow: true },
     327: {},
-    328: { skull: true, flash: true, slowball: true, waves: true },
-    336: { slowball: true, waves: true, blocks: true },
-    344: { slowball: true, waves: true, blocks: true, skullGlow: true },
-    352: { flash: true, skull: true, slowball: true, waves: true, blocks: true },
 
     // 24.1 - 368 build up
     368: { flash: true, skull: true },
@@ -150,23 +102,7 @@ plangular.directive('animangular', function($rootScope, $timeout, $interval) {
     382: {},
 
     // 25.1 - 384 splash
-    384: { slowball: true, waves: true },
-    392: { slowball: true, waves: true, blocks: true, skullGlow: true, flash: true },
     // 28.1 - 432 build up
-    432: { flash: true, skull: true },
-    433: { flash: false, skull: false },
-    434: { flash: true, skull: true },
-    435: { flash: false, skull: false },
-    436: { flash: true, skull: true },
-    437: { flash: false, skull: false },
-    438: { flash: true, skull: true },
-    439: { flash: false, skull: false },
-    440: { flash: true, skull: true },
-    441: { flash: false, skull: false },
-    442: { flash: true, skull: true },
-    443: { flash: false, skull: false },
-    444: { flash: true, skull: true },
-    445: { flash: false, skull: false },
     446: {},
     // 29.1 - 448 splash
     // 32.1 - 496 build up
@@ -185,7 +121,7 @@ plangular.directive('animangular', function($rootScope, $timeout, $interval) {
     restrict: 'A',
     scope: true,
     link: function(scope, elem, attrs) {
-      console.log('A N I M A N G U L A R');
+      //console.log('A N I M A N G U L A R');
       var audio = $rootScope.audio;
       var ms;
       var counter;
@@ -208,7 +144,7 @@ plangular.directive('animangular', function($rootScope, $timeout, $interval) {
           bar = Math.floor(step/16) + 1;
           beat = Math.floor(step/4) - ((bar - 1) * 4) + 1;
           if (beat != oldbeat) {
-            console.log(bar + '.' + beat + ' : ' + step);
+            //console.log(bar + '.' + beat + ' : ' + step);
           }
           scope.bar = bar;
           scope.beat = beat;

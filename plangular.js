@@ -104,12 +104,10 @@ plangular.directive('plangular', function ($document, $rootScope, $http) {
 
         // Updates the currentTime and duration for the audio
         audio.addEventListener('timeupdate', function() {
-          if (scope.track == player.track || (scope.playlist && scope.playlist.tracks == player.tracks)){
-            scope.$apply(function() {
-              scope.currentTime = (audio.currentTime * 1000).toFixed();
-              scope.duration = (audio.duration * 1000).toFixed();
-            });  
-          };
+          scope.$apply(function() {
+            scope.currentTime = (audio.currentTime * 1000).toFixed();
+            scope.duration = (audio.duration * 1000).toFixed();
+          });  
         }, false);
 
         // Handle click events for seeking
