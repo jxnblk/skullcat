@@ -16,7 +16,61 @@
     }
     .fade-out {
       opacity: 0;
-      -webkit-animation: fade-out .5s ease;
+      -webkit-animation: fade-out .5s ease forwards;
+    }
+    @-webkit-keyframes boom {
+      0% { -webkit-transform: scale(1); }
+      6.25% { -webkit-transform: scale(1.25); }
+      100% { -webkit-transform: scale(.75); }
+    }
+    .splode {
+      opacity: 0;
+      -webkit-transform-origin: 50% 50%;
+      -webkit-animation: fade-out .625s ease forwards, boom .625s ease-out forwards;
+    }
+    @-webkit-keyframes vibrate {
+      0% { -webkit-transform: translateX(-2px); }
+      50% { -webkit-transform: translateX(2px); }
+      100% { -webkit-transform: translateX(-2px); }
+    }
+    .vibrate1 { -webkit-animation: vibrate .1s linear infinite; }
+    .vibrate2 { -webkit-animation: vibrate .1s .05s linear infinite; }
+    .vibrate-fade-out { -webkit-animation: vibrate .1s linear infinite, fade-out .5s ease forwards; }
+    @-webkit-keyframes spin-grow {
+      from { -webkit-transform: rotate(45deg) scale(1); }
+      to { -webkit-transform: rotate(945deg) scale(4); }
+    }
+    .spin-grow {
+      -webkit-transform-origin: 50% 50%;
+      -webkit-animation: spin-grow 6.66s linear;
+    }
+    .spin-grow-2 {
+      -webkit-transform-origin: 50% 50%;
+      -webkit-animation: spin-grow 4.995s linear;
+    }
+    @-webkit-keyframes strobe {
+      from { opacity: .6; }
+      to { opacity: 0; }
+    }
+    .strobe { -webkit-animation: strobe .05s steps(2) infinite; }
+    @-webkit-keyframes warp {
+      from { -webkit-transform: scale(.1); }
+      to { -webkit-transform: scale(8); }
+    }
+    .warp1 {
+      -webkit-transform: scale(.1);
+      -webkit-transform-origin: 50%;
+      -webkit-animation: warp .41s ease-in infinite;
+    }
+    .warp2 {
+      -webkit-transform: scale(.1);
+      -webkit-transform-origin: 50%;
+      -webkit-animation: warp .41s .2s ease-in infinite;
+    }
+    .warp3 {
+      -webkit-transform: scale(.1);
+      -webkit-transform-origin: 50%;
+      -webkit-animation: warp .41s .3s ease-in infinite;
     }
     .bg-fade {
       background-image: linear-gradient(to bottom left, rgba(255,51,0,.1), rgba(0,204,255,.1));
@@ -27,9 +81,20 @@
       -webkit-transform: translateZ(0);
       transform: translateZ(0);
     }
+    @-webkit-keyframes up {
+      from { -webkit-transform: translateY(32rem); }
+      to { -webkit-transform: translateY(-32rem); }
+    }
+    .bg-video-lines {
+      background-image: linear-gradient(rgba(0,0,0,0) 98%, rgba(0,0,0,.1) 99%, rgba(0,0,0,0) 100%);
+      background-size: 64rem;
+      -webkit-animation: up 13.333s linear infinite;
+      -webkit-transform: translateZ(0);
+    }
     .gpu { transform: translateZ(0); }
     .table { display: table; table-layout: fixed; width: 100%; }
     .table-cell { display: table-cell; vertical-align: middle; }
+    .pointer { cursor: pointer; }
   </style>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
   <script src="plangular.js"></script>
@@ -40,15 +105,33 @@
   <header class="center min-h100" plangular data-src="http://soundcloud.com/mrsjxn/bbb">
     <div animangular class="relative" >
       <div ng-show="frame.flash" style="background-color:#fff;opacity:.6" class="absolute t0 r0 b0 l0 fade-out"></div>
+      <div ng-show="frame.strobe" style="background-color:#fff;opacity:.6" class="absolute t0 r0 b0 l0 strobe gpu"></div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 576" class="relative">
         <filter id="screen"><feBlend mode="screen"/></filter>
-        <g id="eyes" ng-show="frame.eyes" transform="translate(496 264)">
-          <g ng-attr-style=" transition: -webkit-transform .5s linear; -webkit-transform-origin: 50% 50%; -webkit-transform: scale({{ (ms < 7000) && (ms / 1000) * 1.714 || !(ms) && 0.001 || 12 }});" >
+        <g id="eyes" ng-show="frame.eyes" transform="translate(496 260)">
+          <g ng-attr-style=" -webkit-transition: -webkit-transform .5s linear; -webkit-transform-origin: 50% 50%; -webkit-transform: scale({{ (ms < 7000) && (ms / 1000) * 1.714 || !(ms) && 0.001 || 12 }});" >
             <path fill="#161616" d=" M2 0 C4 0 10 5 10 5 C13 4 15 4 16 4 C17 4 18 4 22 5 C22 5 28 0 30 0 C31 0 32 10 32 16 C32 26 24 30 16 30 C8 30 0 26 0 16 C0 10 1 0 2 0 "/>
             <!-- #af0 -->
             <path fill="#999" d=" M4 18 A4 4 0 0 0 12 18 A4 4 0 0 0 4 18 M5.5 18 A2.5 2.5 0 0 1 10.5 18 A2.5 2.5 0 0 1 5.5 18 M20 18 A4 4 0 0 0 28 18 A4 4 0 0 0 20 18 M21.5 18 A2.5 2.5 0 0 1 26.5 18 A2.5 2.5 0 0 1 21.5 18 "/>
           </g>
         </g>
+        <circle ng-show="frame.ringWarp" cx="512" cy="288" r="128" fill="none" stroke="#fff" class="warp1" />
+        <g id="stars" ng-show="frame.stars">
+          <g class="warp1" fill="#fff">
+            <circle cx="512" cy="288" r="128" fill="none" />
+            <circle cx="448" cy="160" r="2" /> <circle cx="384" cy="304" r="2" /> <circle cx="400" cy="368" r="2" /> <circle cx="580" cy="344" r="2" /> <circle cx="588" cy="256" r="2" /> <circle cx="524" cy="192" r="2" />
+          </g>
+          <g class="warp2" fill="#fff">
+            <circle cx="512" cy="288" r="128" fill="none"/>
+            <circle cx="360" cy="160" r="2" /> <circle cx="576" cy="188" r="2" /> <circle cx="620" cy="288" r="2" /> <circle cx="604" cy="312" r="2" /> <circle cx="512" cy="388" r="2" /> <circle cx="436" cy="366" r="2" />
+          </g>
+          <g class="warp3" fill="#fff">
+            <circle cx="512" cy="288" r="128" fill="none"/>
+            <circle cx="384" cy="280" r="2"/> <circle cx="496" cy="160" r="2"/> <circle cx="560" cy="180" r="2"/> <circle cx="640" cy="180" r="2"/> <circle cx="604" cy="330" r="2"/> <circle cx="580" cy="390" r="2"/> <circle cx="460" cy="400" r="2"/>
+          </g>
+        </g>
+        <rect ng-show="frame.diamond" class="spin-grow" fill="none" stroke="#fff" stroke-width="4" opacity="0.4" width="128" height="128" x="448" y="224" />
+        <rect ng-show="frame.diamond2" class="spin-grow-2" fill="none" stroke="#fff" stroke-width="8" opacity="0.4" width="128" height="128" x="448" y="224" />
         <g ng-show="frame.skull" class="fade-out" transform="translate(320 96)" >
           <g transform="scale(12)" >
             <path fill="#333" d=" M2 0 C4 0 10 5 10 5 C13 4 15 4 16 4 C17 4 18 4 22 5 C22 5 28 0 30 0 C31 0 32 10 32 16 C32 26 24 30 16 30 C8 30 0 26 0 16 C0 10 1 0 2 0 "/>
@@ -57,56 +140,32 @@
         </g>
         <g ng-show="frame.skullGlow" transform="translate(320 96)" >
           <g transform="scale(12)" >
-            <path fill="#f30" filter="url(#screen)" opacity="0.5" d="M16 7 C13 7 2 9 2 16 C2 23 6 23 10 24 L11 28 L12 26 L20 26 L21 28 L22 24 C26 23 30 23 30 16 C30 9 19 7 16 7 M4 18 A4 4 0 0 1 12 18 A4 4 0 0 1 4 18 M20 18 A4 4 0 0 1 28 18 A4 4 0 0 1 20 18 ">
-            <animateTransform
-               attributeName="transform" type="translate"
-               values="0 0;2 0;0 0" dur=".1s" repeatCount="indefinite"/>
-            </path>
-            <path fill="#0cf" filter="url(#screen)" opacity="0.5" d="M16 7 C13 7 2 9 2 16 C2 23 6 23 10 24 L11 28 L12 26 L20 26 L21 28 L22 24 C26 23 30 23 30 16 C30 9 19 7 16 7 M4 18 A4 4 0 0 1 12 18 A4 4 0 0 1 4 18 M20 18 A4 4 0 0 1 28 18 A4 4 0 0 1 20 18 ">
-            <animateTransform
-               attributeName="transform" type="translate"
-               values="0 0;-2 0;0 0" dur=".1s" repeatCount="indefinite"/>
-            </path>
+            <!-- #f30 & #0cf -->
+            <path class="vibrate1" fill="#fff" opacity="0.5" d="M16 7 C13 7 2 9 2 16 C2 23 6 23 10 24 L11 28 L12 26 L20 26 L21 28 L22 24 C26 23 30 23 30 16 C30 9 19 7 16 7 M4 18 A4 4 0 0 1 12 18 A4 4 0 0 1 4 18 M20 18 A4 4 0 0 1 28 18 A4 4 0 0 1 20 18 "/>
+            <path class="vibrate2" fill="#fff" opacity="0.5" d="M16 7 C13 7 2 9 2 16 C2 23 6 23 10 24 L11 28 L12 26 L20 26 L21 28 L22 24 C26 23 30 23 30 16 C30 9 19 7 16 7 M4 18 A4 4 0 0 1 12 18 A4 4 0 0 1 4 18 M20 18 A4 4 0 0 1 28 18 A4 4 0 0 1 20 18 "/>
           </g>
         </g>
-        <circle ng-show="frame.dot" class="fade-out" cx="416" cy="310" r="64" fill="#fff"/>
-        <circle ng-show="frame.dot2" class="fade-out" cx="608" cy="310" r="128" fill="#fff"/>
-        <g id="stepseq" fill="#fff">
-          <rect ng-show="frame.step1" class="fade-out" width="56" height="56" x="4" y="260" />
-          <rect ng-show="frame.step2" class="fade-out" width="56" height="56" x="68" y="260" />
-          <rect ng-show="frame.step3" class="fade-out" width="56" height="56" x="132" y="260" />
-          <rect ng-show="frame.step4" class="fade-out" width="56" height="56" x="196" y="260" />
-          <rect ng-show="frame.step5" class="fade-out" width="56" height="56" x="260" y="260" />
-          <rect ng-show="frame.step6" class="fade-out" width="56" height="56" x="324" y="260" />
-          <rect ng-show="frame.step7" class="fade-out" width="56" height="56" x="388" y="260" />
-          <rect ng-show="frame.step8" class="fade-out" width="56" height="56" x="452" y="260" />
-          <rect ng-show="frame.step9" class="fade-out" width="56" height="56" x="516" y="260" />
-          <rect ng-show="frame.step10" class="fade-out" width="56" height="56" x="580" y="260" />
-          <rect ng-show="frame.step11" class="fade-out" width="56" height="56" x="644" y="260" />
-          <rect ng-show="frame.step12" class="fade-out" width="56" height="56" x="708" y="260" />
-          <rect ng-show="frame.step13" class="fade-out" width="56" height="56" x="772" y="260" />
-          <rect ng-show="frame.step14" class="fade-out" width="56" height="56" x="836" y="260" />
-          <rect ng-show="frame.step15" class="fade-out" width="56" height="56" x="900" y="260" />
-          <rect ng-show="frame.step16" class="fade-out" width="56" height="56" x="964" y="260" />
-        </g>
+        <circle ng-show="frame.dot" class="splode" cx="416" cy="310" r="128" fill="#fff"/>
+        <circle ng-show="frame.dot2" class="splode" cx="608" cy="310" r="128" fill="#fff"/>
+        <path ng-show="frame.zag" fill="none" stroke="#fff" stroke-width="16" class="vibrate-fade-out" d="M0 384 l128 -128 l128 128 l128 -128 l128 128 l128 -128 l128 128 l128 -128 l128 128"/>
+        <path ng-show="frame.zig1" fill="none" stroke="#fff" stroke-width="16" class="vibrate-fade-out" d="M208 -16 L816 592"/>
+        <path ng-show="frame.zig2" fill="none" stroke="#fff" stroke-width="16" class="vibrate-fade-out" d="M816 -16 L208 592"/>
 
       </svg>
-      <pre class="absolute b0 r0 p2">{{ bar }}.{{ beat }} | {{ (ms * .0096) + 1 | number:0 }}</pre>
+      <div class="bold caps absolute b0 r0 p2">{{ bar }}.{{ beat }} | {{ (ms * .0096) + 1 | number:0 }}</div>
     </div>
-    <!--
     <div class="absolute t0 r0 b0 l0 bg-lines"></div>
-    -->
-    <div class="center absolute t0 b0 l0 r0 bg-mid-gray" ng-click="player.play(track)" ng-hide="player.playing">
-      <div class="table h100">
-        <div class="table-cell">
-          <p class="h2 bold inline-block py4">Turn up the volume and click</p>
-        </div>
-      </div>
+    <div class="oh absolute t0 r0 b0 l0 xbg-video-lines">
+      <div class="absolute t0 r0 b0 l0 bg-video-lines"></div>
     </div>
-    <div class="absolute t0 r0 b0 l0 bg-fade" ng-click="player.pause()" ng-show="player.playing"> </div>
-    <div class="relative" style="height:3rem;">
+    <div class="absolute t0 r0 b0 l0 bg-fade"></div>
+    <div class="center absolute t0 b0 l0 r0 pointer" ng-click="player.play(track)" ng-hide="player.playing">
+      <p class="absolute t0 r0 b0 l0 h2 bold inline-block py4 strobe" style="height:2em;margin:auto">Turn up the volume and click</p>
+    </div>
+    <div class="absolute t0 r0 b0 l0 pointer" ng-click="player.pause()" ng-show="player.playing"> </div>
+    <div class="absolute r0 b0 l0" style="height:3rem;">
       <div  class="absolute t0 r0 b0 l0" style="height:.125rem;margin-top:1.375rem;margin-bottom:1.375rem">
-        <div class="absolute t0 r0 b0 l0 bg-white"></div>
+        <div class="absolute t0 r0 b0 l0 bg-white" style="opacity:.2"></div>
         <div class="absolute t0 b0 l0 bg-green" style="background-color:cyan;width: {{ (currentTime / duration) * 100 }}%"></div>
       </div>
       <div class="absolute t0 r0 b0 l0" ng-click="seekTo($event)"></div>
