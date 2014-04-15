@@ -5,7 +5,7 @@
 
         http://jxnblk.github.io/Plangular
 
-        Adjusted for Skullcat
+        Highly customized for Skullcat
 
 */
 
@@ -13,7 +13,6 @@
 'use strict';
 
 var plangular = angular.module('plangular', []),
-    //clientID = '0d33361983f16d2527b01fbf6408b7d7',
     iconUrl = 'icons/plangular-icons.svg';
 
 plangular.directive('plangular', function ($document, $rootScope, $http) {
@@ -72,8 +71,11 @@ plangular.directive('plangular', function ($document, $rootScope, $http) {
 
     audio.addEventListener('ended', function() {
       $rootScope.$apply(function(){
-        if (player.tracks.length > 0) player.next();
-        else player.pause();
+        if (player.tracks.length > 0) {
+          player.next();
+        } else {
+          player.pause();
+        }
       });
       
     }, false);
@@ -85,18 +87,6 @@ plangular.directive('plangular', function ($document, $rootScope, $http) {
       restrict: 'A',
       scope: true,
       link: function (scope, elem, attrs) {
-        //var params = { url: attrs.src, client_id: clientID, callback: 'JSON_CALLBACK' }
-        //$http.get('skullcat-theme.mp3).success(function(resp){
-        //  audio.src = resp;
-        //});
-        //$http.jsonp('//api.soundcloud.com/resolve.json', { params: params }).success(function(data){
-        //  // Handle playlists (i.e. sets)
-        //  if (data.tracks) scope.playlist = data;
-        //  // Handle single track
-        //  else if (data.kind == 'track') scope.track = data;
-        //  // Handle all other data
-        //  else scope.data = data;
-        //});
         scope.player = player;
         scope.audio = audio;
         scope.currentTime = 0;
