@@ -13,7 +13,7 @@
 'use strict';
 
 var plangular = angular.module('plangular', []),
-    iconUrl = 'icons/plangular-icons.svg';
+    iconUrl = 'site/plangular-icons.svg';
 
 plangular.directive('plangular', function ($document, $rootScope, $http) {
     // Define the audio engine
