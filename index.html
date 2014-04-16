@@ -69,27 +69,34 @@
         <path ng-show="frame.zig2" fill="none" stroke="#fff" stroke-width="4" class="vibrate-fade-out" d="M816 -16 L208 592"/>
 
       </svg>
-        <!--
-        <div class="bold caps absolute b0 r0 p2 mid-gray">{{ bar }}.{{ beat }}</div>
-        <div>{{ (ms * .0096) + 1 | number:0 }}</div>
-        -->
+      <div ng-show="player.playing" class="f5 bold caps absolute b0 r0 p2 mid-gray">
+        {{ bar }}.{{ beat }}
+      </div>
     </div>
     <div class="absolute t0 r0 b0 l0 bg-lines"></div>
     <div class="oh absolute t0 r0 b0 l0">
       <div class="absolute t0 r0 b0 l0 bg-video-lines"></div>
     </div>
     <div class="absolute t0 r0 b0 l0 bg-fade"></div>
-    <div class="center absolute t0 b0 l0 r0 pointer" ng-click="player.play(track)" ng-hide="player.playing">
+    <div class="center absolute t0 b0 l0 r0 pointer" ng-click="player.play(track)" ng-hide="player.playing || player.ended">
       <div class="mobile-table min-h100 absolute t0 r0 b0 l0 py4 strobe">
         <div class="mobile-table-cell">
-          <div class="h1 button button-ghost"> <div plangular-icon="play" class="fill-white"></div> </div>
+          <div class="h1 button button-circle button-ghost"> <div plangular-icon="play"></div> </div>
           <p class="h2 bold">Turn up the volume and click</p>
         </div>
       </div>
     </div>
+    <div class="center absolute t0 b0 l0 r0 strobe" ng-show="player.ended">
+      <div class="mobile-table min-h100">
+        <div class="mobile-table-cell">
+          <a href="#" ng-click="player.play(track)" class="p mr1 button button-ghost">Replay</a>
+          <a href="guidelines" class="p button button-ghost">Brand Guidelines</a>
+        </div>
+      </div>
+    </div>
     <div class="absolute t0 r0 b0 l0 pointer" ng-click="player.pause()" ng-show="player.playing"> </div>
-    <div class="absolute r0 b0 l0" style="height:1rem;">
-      <div  class="absolute t0 r0 b0 l0" style="height:.125rem;margin-top:.375rem;margin-bottom:.375rem">
+    <div class="absolute r0 b0 l0" style="height:2rem;">
+      <div  class="absolute t0 r0 b0 l0" style="height:.25rem;margin-top:1.75rem;">
         <div class="absolute t0 r0 b0 l0 xbg-white" style="opacity:.2"></div>
         <div class="absolute t0 b0 l0 bg-green" style="background-color:cyan;width: {{ (currentTime / duration) * 100 }}%"></div>
       </div>

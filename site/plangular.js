@@ -25,8 +25,10 @@ plangular.directive('plangular', function ($document, $rootScope, $http) {
       playing: false,
       paused: false,
       tracks: null,
+      ended: false,
       i: null,
       play: function() {
+        player.ended = false;
         if (!audio.src) audio.src = 'skullcat-theme.mp3';
         audio.play();
         player.playing = true;
@@ -71,11 +73,8 @@ plangular.directive('plangular', function ($document, $rootScope, $http) {
 
     audio.addEventListener('ended', function() {
       $rootScope.$apply(function(){
-        if (player.tracks.length > 0) {
-          player.next();
-        } else {
-          player.pause();
-        }
+        player.ended = true;
+        player.pause();
       });
       
     }, false);
