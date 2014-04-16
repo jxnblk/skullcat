@@ -1,5 +1,5 @@
 # Skullcat
-An avatar for @mrmrs
+a avatar fur mrmrs
 
 http://jxnblk.github.io/skullcat
 
