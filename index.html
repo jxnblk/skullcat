@@ -6,6 +6,8 @@
   <meta name="author" content="Jxnblk">
   <meta name="description" content="Skullcat for Mrmrs">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="skullcat-32.png">
+  <link rel="apple-touch-icon-precomposed" href="skullcat-2014.png">
   <link href="site/basscss.min.css" rel="stylesheet">
   <link href="site/skullcat.css" rel="stylesheet">
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
@@ -73,15 +75,15 @@
         -->
     </div>
     <div class="absolute t0 r0 b0 l0 bg-lines"></div>
-    <div class="oh absolute t0 r0 b0 l0 xbg-video-lines">
+    <div class="oh absolute t0 r0 b0 l0">
       <div class="absolute t0 r0 b0 l0 bg-video-lines"></div>
     </div>
     <div class="absolute t0 r0 b0 l0 bg-fade"></div>
     <div class="center absolute t0 b0 l0 r0 pointer" ng-click="player.play(track)" ng-hide="player.playing">
-      <div class="absolute t0 r0 b0 l0 py4 strobe" style="height:2em;margin:auto">
-        <p class="h2 bold">Turn up the volume and click</p>
-        <div class="f1 button button-ghost">
-          <div plangular-icon="play" class="fill-white"></div>
+      <div class="mobile-table min-h100 absolute t0 r0 b0 l0 py4 strobe">
+        <div class="mobile-table-cell">
+          <div class="h1 button button-ghost"> <div plangular-icon="play" class="fill-white"></div> </div>
+          <p class="h2 bold">Turn up the volume and click</p>
         </div>
       </div>
     </div>
