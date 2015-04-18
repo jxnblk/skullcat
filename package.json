@@ -36,6 +36,8 @@
     "basscss-utility-layout": "^1.0.0",
     "basscss-utility-typography": "^1.0.1",
     "basscss-white-space": "^1.0.1",
+    "bumpkit": "0.0.2",
+    "classnames": "^1.2.0",
     "cssnext": "^1.3.0",
     "flex-object": "^1.1.3",
     "json-loader": "^0.5.1",

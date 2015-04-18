@@ -1,6 +1,7 @@
 
 var React = require('react');
 var Html = require('react-html');
+var Bump = require('./Bump.jsx');
 
 var Root = React.createClass({
 
@@ -12,7 +13,7 @@ var Root = React.createClass({
 
     return (
       <Html {...this.props}>
-        skullcat 2
+        <Bump samples={this.props.samples} />
         <script id="initial-props"
           type="application/json"
           dangerouslySetInnerHTML={initialProps} />

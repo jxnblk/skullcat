@@ -1,6 +1,6 @@
 
 var React = require('react');
-var Root = require('./components/Root.jsx');
+var Root = require('./Root.jsx');
 
 if (typeof document !== 'undefined') {
   // Client render code goes here...
