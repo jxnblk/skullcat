@@ -3,13 +3,13 @@ var React = require('react');
 var Bumpkit = require('bumpkit');
 var classnames = require('classnames');
 var Controls = require('./Controls.jsx');
+var StepVisualizer = require('./StepVisualizer.jsx');
 
 var bumpkit = false;
 
 try {
   bumpkit = new Bumpkit();
 } catch(e) {
-  //console.log('server side');
 }
 
 var mixer;
@@ -68,6 +68,8 @@ var Bump = React.createClass({
       tracks: this.props.samples,
       queue: [],
       unqueue: [],
+      drop: true,
+      time: -1
     }
   },
 
@@ -85,10 +87,11 @@ var Bump = React.createClass({
       var step = e.detail.step
       var when = e.detail.when; 
       var lookahead = step + 1;
+      var time = self.state.time + 1; 
       if (lookahead % 32 === 0) {
         self.processQueue();
       }
-      self.setState({ currentStep: step });
+      self.setState({ currentStep: step, time: time });
     });
   },
 
@@ -164,21 +167,22 @@ var Bump = React.createClass({
     var playing = this.state.playing;
     var step = this.state.currentStep;
     return (
-      <div>
-        <div className="p2">
-          <button onClick={this.playPause}
-            className="button">
-            Play/Pause
-          </button>
+      <div className="flex flex-column white bg-black" style={{minHeight:'100vh'}}>
+        <div className="flex-auto">
+          stage
         </div>
-        <hr />
         <Controls
+          playing={playing}
+          playPause={this.playPause}
           step={this.state.currentStep}
           loopLength={loopLength}
           tracks={this.state.tracks}
           queue={this.state.queue}
           unqueue={this.state.unqueue}
           toggleTrack={this.toggleTrack} />
+        <StepVisualizer
+          step={step}
+          length={loopLength} />
       </div>
     )
   }

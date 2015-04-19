@@ -1,10 +1,13 @@
 
 var React = require('react');
 var classnames = require('classnames');
+var Icon = require('react-geomicons');
 
 var Controls = React.createClass({
 
   propTypes: {
+    playing: React.PropTypes.bool.isRequired,
+    playPause: React.PropTypes.func.isRequired,
     toggleTrack: React.PropTypes.func.isRequired,
     tracks: React.PropTypes.array.isRequired,
     queue: React.PropTypes.array.isRequired,
@@ -22,7 +25,24 @@ var Controls = React.createClass({
     this.props.toggleTrack(index);
   },
 
-  renderTrack: function(track, i, handler) {
+  renderControlGroup: function(name, arr) {
+    var self = this;
+    var handler = function(index) {
+      self.switchSample(index, arr);
+    };
+    return (
+      <div className="px2">
+        <h3 className="h5">{name}</h3>
+        <div className="flex">
+          {arr.map(function(index, i) {
+            return self.renderTrack(index, i, handler)
+          })}
+        </div>
+      </div>
+    )
+  },
+
+  renderTrack: function(i, n, handler) {
     var self = this;
     if (typeof handler !== 'function') {
       var handler = this.props.toggleTrack;
@@ -32,6 +52,7 @@ var Controls = React.createClass({
     }
     var queued = false;
     var unqueued = false;
+    var active = this.props.tracks[i].active;
     if (this.props.queue.indexOf(i) > -1) {
       queued = true;
     }
@@ -49,16 +70,17 @@ var Controls = React.createClass({
       <div key={'track-'+i}>
         <button style={styles.button}
           className={
-            classnames('button', 'button-transparent',
+            classnames('button',
               {
                 'vhs-flash vhs-infinite vhs-alternate': queued,
                 'muted': unqueued,
-                'red': track.active,
+                'button-transparent': !active,
+                'black bg-white': active,
               }
             )
           }
           onClick={handleClick}>
-          {i}
+          {n+1}
         </button>
       </div>
     )
@@ -66,89 +88,21 @@ var Controls = React.createClass({
 
   render: function() {
     var self = this;
-    var tracks = this.props.tracks;
-    var switchDrums = function(index) {
-      self.switchSample(index, [1,2,3,4]);
-    };
-    var switchBass = function(index) {
-      self.switchSample(index, [5,6]);
-    };
-    var switchFx = function(index) {
-      self.switchSample(index, [7,8,9,10,11,12]);
-    };
-    var switchStabs = function(index) {
-      self.switchSample(index, [13,14,15]);
-    };
-    var switchMeow = function(index) {
-      self.switchSample(index, [16,17]);
-    };
-    var switchChords = function(index) {
-      self.switchSample(index, [18,19]);
-    };
-    var switchVocals = function(index) {
-      self.switchSample(index, [20,21,22,23]);
-    };
+    var playing = this.props.playing;
     return (
       <div>
-        <div className="flex flex-wrap">
-          <div>
-            <h3 className="h5">Drums</h3>
-            <div className="flex">
-              {this.renderTrack(tracks[1], 1, switchDrums)}
-              {this.renderTrack(tracks[2], 2, switchDrums)}
-              {this.renderTrack(tracks[3], 3, switchDrums)}
-              {this.renderTrack(tracks[4], 4, switchDrums)}
-            </div>
-          </div>
-          <div>
-            <h3 className="h5">Bass</h3>
-            <div className="flex">
-              {this.renderTrack(tracks[5], 5, switchBass)}
-              {this.renderTrack(tracks[6], 6, switchBass)}
-            </div>
-          </div>
-          <div>
-            <h3 className="h5">FX</h3>
-            <div className="flex">
-              {this.renderTrack(tracks[7], 7, switchFx)}
-              {this.renderTrack(tracks[8], 8, switchFx)}
-              {this.renderTrack(tracks[9], 9, switchFx)}
-              {this.renderTrack(tracks[10], 10, switchFx)}
-              {this.renderTrack(tracks[11], 11, switchFx)}
-              {this.renderTrack(tracks[12], 12, switchFx)}
-            </div>
-          </div>
-          <div>
-            <h3 className="h5">Stabs</h3>
-            <div className="flex">
-              {this.renderTrack(tracks[13], 13, switchStabs)}
-              {this.renderTrack(tracks[14], 14, switchStabs)}
-              {this.renderTrack(tracks[15], 15, switchStabs)}
-            </div>
-          </div>
-          <div>
-            <h3 className="h5">Meow</h3>
-            <div className="flex">
-              {this.renderTrack(tracks[16], 16, switchMeow)}
-              {this.renderTrack(tracks[17], 17, switchMeow)}
-            </div>
-          </div>
-          <div>
-            <h3 className="h5">Chords</h3>
-            <div className="flex">
-              {this.renderTrack(tracks[18], 18, switchChords)}
-              {this.renderTrack(tracks[19], 19, switchChords)}
-            </div>
-          </div>
-          <div>
-            <h3 className="h5">Vocals</h3>
-            <div className="flex">
-              {this.renderTrack(tracks[20], 20, switchVocals)}
-              {this.renderTrack(tracks[21], 21, switchVocals)}
-              {this.renderTrack(tracks[22], 22, switchVocals)}
-              {this.renderTrack(tracks[23], 23, switchVocals)}
-            </div>
-          </div>
+        <div className="flex flex-center flex-wrap">
+          <button onClick={this.props.playPause}
+            className={classnames('h2', 'button', 'ml2', 'mr2', 'button-transparent')}>
+            <Icon name={playing ? 'pause' : 'play'} />
+          </button>
+          {this.renderControlGroup('Drums', [1,2,3,4])}
+          {this.renderControlGroup('Bass', [5,6])}
+          {this.renderControlGroup('FX', [7,8,9,10,11,12])}
+          {this.renderControlGroup('Stabs', [13,14,15])}
+          {this.renderControlGroup('Meow', [16,17])}
+          {this.renderControlGroup('Chords', [18,19])}
+          {this.renderControlGroup('Vocals', [20,21,22,23])}
         </div>
       </div>
     )
