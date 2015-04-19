@@ -9,25 +9,26 @@ var bumpkit = false;
 try {
   bumpkit = new Bumpkit();
 } catch(e) {
-  console.log('server side');
+  //console.log('server side');
 }
 
 var mixer;
 var samplers = [];
 var clips = [];
-var tracksLength = 15;
+var loopLength = 32;
+var tempo = 80;
 
-function initMixer() {
+function initMixer(length) {
   mixer = bumpkit.createMixer();
-  for (var i = 0; i < tracksLength; i++) {
+  for (var i = 0; i < length; i++) {
     mixer.addTrack();
   }
 }
 
 function initSamplers(samples) {
-  var stepDuration = 60 / (bumpkit.tempo * 4);
-  for (var i = 0; i < tracksLength; i++) {
-    var dur = samples[i].steps * stepDuration;
+  var stepDuration = 60 / (tempo * 4);
+  for (var i = 0; i < samples.length; i++) {
+    var dur = loopLength * stepDuration;
     samplers[i] = bumpkit.createSampler().connect(mixer.tracks[i]);
     samplers[i].duration = dur;
   }
@@ -37,23 +38,18 @@ function loadSamples(samples) {
   samples.forEach(function(sample, i) {
     (function(index) {
       bumpkit.loadBuffer(sample.src, function(buffer) {
-        //console.log(sample.src + ' loaded');
         samplers[index].buffer(buffer);
       });
     })(i);
   });
 }
 
-function initClips(samples, loopLength) {
-  for (var i = 0; i < tracksLength; i++) {
+function initClips(samples) {
+  for (var i = 0; i < samples.length; i++) {
     clips[i] = bumpkit.createClip();
     clips[i].pattern = [];
-    var sampleLength = samples[i].steps;
     for (var s = 0; s < loopLength; s++) {
-      var step = 0;
-      if (s % sampleLength === 0) {
-        step = 1;
-      }
+      var step = (s === 0) ? 1 : 0;
       clips[i].pattern.push(step);
     }
     clips[i].connect(samplers[i]);
@@ -67,33 +63,16 @@ var Bump = React.createClass({
 
   getInitialState: function() {
     return {
-      loopLength: 128,
-      tempo: 80,
       currentStep: 0,
       playing: false,
-      tracks: [
-        { name: 'Intro', active: false, steps: 128 },
-        { name: 'Drum 1', active: false, steps: 32 },
-        { name: 'Drum 2', active: false, steps: 32 },
-        { name: 'Drum 3', active: false, steps: 32 },
-        { name: 'Drum 4', active: false, steps: 32 },
-        { name: 'Bass', active: false, steps: 64 },
-        { name: 'FX 1', active: false, steps: 128 },
-        { name: 'FX 2', active: false, steps: 128 },
-        { name: 'Sweep', active: false, steps: 32 },
-        { name: 'Stabs', active: false, steps: 128 },
-        { name: 'Meow', active: false, steps: 64 },
-        { name: 'Chords', active: false, steps: 64 },
-        { name: 'Vocals 1', active: false, steps: 64 },
-        { name: 'Vocals 2', active: false, steps: 64 },
-        { name: 'Vocals 3', active: false, steps: 64 },
-      ],
+      tracks: this.props.samples,
       queue: [],
       unqueue: [],
     }
   },
 
   playPause: function() {
+    this.processQueue();
     bumpkit.playPause();
     var playing = bumpkit.isPlaying;
     this.setState({ playing: playing });
@@ -105,10 +84,9 @@ var Bump = React.createClass({
     window.addEventListener('step', function(e) {
       var step = e.detail.step
       var when = e.detail.when; 
-      var lookahead = step + 2;
+      var lookahead = step + 1;
       if (lookahead % 32 === 0) {
-        console.log(step, 'clear');
-        self.clearQueue(lookahead);
+        self.processQueue();
       }
       self.setState({ currentStep: step });
     });
@@ -128,11 +106,9 @@ var Bump = React.createClass({
     this.setState({ tracks: tracks });
   },
 
-
   queueTrack: function(i) {
     var queue = this.state.queue;
     queue.push(i);
-    //this.activateTrack(i);
     this.setState({ queue: queue });
   },
 
@@ -142,29 +118,24 @@ var Bump = React.createClass({
     this.setState({ unqueue: unqueue });
   },
 
-  clearQueue: function(step) {
+  processQueue: function() {
     var self = this;
     var queue = this.state.queue;
     var unqueue = this.state.unqueue;
     var tracks = this.state.tracks;
     queue.forEach(function(index, i) {
-      var track = tracks[index];
-      if (step === 0 || step % track.steps === 0) {
-        self.activateTrack(index);
-        queue.splice(i, 1);
-      }
+      self.activateTrack(index);
     });
     unqueue.forEach(function(index, i) {
       self.deactivateTrack(index);
     });
-    this.setState({ queue: queue, unqueue: [] });
+    this.setState({ queue: [], unqueue: [] });
   },
 
   toggleTrack: function(i) {
     var tracks = this.state.tracks;
     var queue = this.state.queue;
     var qIndex = queue.indexOf(i);
-    console.log('queue indexOf', qIndex);
     if (!tracks[i].active && qIndex < 0) {
       this.queueTrack(i);
     } else if (tracks[i].active) {
@@ -177,13 +148,14 @@ var Bump = React.createClass({
 
   componentDidMount: function() {
     if (bumpkit && typeof window !== 'undefined') {
-      bumpkit.tempo = this.state.tempo;
-      bumpkit.loopLength = this.state.loopLength;
-      initMixer();
-      initSamplers(this.props.samples);
-      initClips(this.props.samples, this.state.loopLength);
+      var samples = this.props.samples;
+      bumpkit.tempo = tempo;
+      bumpkit.loopLength = loopLength;
+      initMixer(samples.length);
+      initSamplers(samples);
+      initClips(samples);
       this.addStepListener();
-      loadSamples(this.props.samples);
+      loadSamples(samples);
     }
   },
 
@@ -194,8 +166,6 @@ var Bump = React.createClass({
     return (
       <div>
         <div className="p2">
-          <code>{step}</code>
-          <hr /> 
           <button onClick={this.playPause}
             className="button">
             Play/Pause
@@ -204,17 +174,11 @@ var Bump = React.createClass({
         <hr />
         <Controls
           step={this.state.currentStep}
+          loopLength={loopLength}
           tracks={this.state.tracks}
           queue={this.state.queue}
           unqueue={this.state.unqueue}
           toggleTrack={this.toggleTrack} />
-        <hr />
-        <div className="p2">
-          <h2>queue</h2>
-          {this.state.queue.map(function(q, i) {
-            return <code key={i} className="p2">{q}</code>
-          })}
-        </div>
       </div>
     )
   }
