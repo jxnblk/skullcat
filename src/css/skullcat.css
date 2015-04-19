@@ -12,6 +12,7 @@
 @import 'flex-object';
 @import 'basscss-color-base';
 @import 'basscss-button-transparent';
+@import 'basscss-progress';
 @import 'basscss-colors';
 
 @import 'vhs';

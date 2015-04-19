@@ -33,6 +33,7 @@
     "basscss-defaults": "^2.0.1",
     "basscss-grid": "^1.0.2",
     "basscss-positions": "^1.0.1",
+    "basscss-progress": "^1.0.5",
     "basscss-utility-layout": "^1.0.0",
     "basscss-utility-typography": "^1.0.1",
     "basscss-white-space": "^1.0.1",

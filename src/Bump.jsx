@@ -2,6 +2,8 @@
 var React = require('react');
 var Bumpkit = require('bumpkit');
 var classnames = require('classnames');
+var Controls = require('./Controls.jsx');
+
 var bumpkit = false;
 
 try {
@@ -13,7 +15,7 @@ try {
 var mixer;
 var samplers = [];
 var clips = [];
-var tracksLength = 8;
+var tracksLength = 15;
 
 function initMixer() {
   mixer = bumpkit.createMixer();
@@ -22,63 +24,78 @@ function initMixer() {
   }
 }
 
-function initSamplers() {
+function initSamplers(samples) {
+  var stepDuration = 60 / (bumpkit.tempo * 4);
   for (var i = 0; i < tracksLength; i++) {
+    var dur = samples[i].steps * stepDuration;
     samplers[i] = bumpkit.createSampler().connect(mixer.tracks[i]);
-    samplers[i].duration = 3;
+    samplers[i].duration = dur;
   }
 }
 
 function loadSamples(samples) {
   samples.forEach(function(sample, i) {
     (function(index) {
-      bumpkit.loadBuffer(sample, function(buffer) {
-        console.log(sample, buffer);
+      bumpkit.loadBuffer(sample.src, function(buffer) {
+        //console.log(sample.src + ' loaded');
         samplers[index].buffer(buffer);
       });
     })(i);
   });
 }
 
-function initClips() {
+function initClips(samples, loopLength) {
   for (var i = 0; i < tracksLength; i++) {
     clips[i] = bumpkit.createClip();
-    clips[i].pattern = [
-      1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-      0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-    ];
+    clips[i].pattern = [];
+    var sampleLength = samples[i].steps;
+    for (var s = 0; s < loopLength; s++) {
+      var step = 0;
+      if (s % sampleLength === 0) {
+        step = 1;
+      }
+      clips[i].pattern.push(step);
+    }
     clips[i].connect(samplers[i]);
     clips[i].active = false;
   }
 }
 
 
-if (bumpkit) {
-  initMixer();
-  initSamplers();
-  initClips();
-  bumpkit.loopLength = 16;
-}
 
 var Bump = React.createClass({
 
   getInitialState: function() {
     return {
-      loopLength: 32,
-      tempo: 96,
+      loopLength: 128,
+      tempo: 80,
       currentStep: 0,
       playing: false,
       tracks: [
-        true, false, false, false,
-        false, false, false, false,
+        { name: 'Intro', active: false, steps: 128 },
+        { name: 'Drum 1', active: false, steps: 32 },
+        { name: 'Drum 2', active: false, steps: 32 },
+        { name: 'Drum 3', active: false, steps: 32 },
+        { name: 'Drum 4', active: false, steps: 32 },
+        { name: 'Bass', active: false, steps: 64 },
+        { name: 'FX 1', active: false, steps: 128 },
+        { name: 'FX 2', active: false, steps: 128 },
+        { name: 'Sweep', active: false, steps: 32 },
+        { name: 'Stabs', active: false, steps: 128 },
+        { name: 'Meow', active: false, steps: 64 },
+        { name: 'Chords', active: false, steps: 64 },
+        { name: 'Vocals 1', active: false, steps: 64 },
+        { name: 'Vocals 2', active: false, steps: 64 },
+        { name: 'Vocals 3', active: false, steps: 64 },
       ],
+      queue: [],
+      unqueue: [],
     }
   },
 
   playPause: function() {
     bumpkit.playPause();
     var playing = bumpkit.isPlaying;
-    console.log('playpause', bumpkit, playing);
     this.setState({ playing: playing });
   },
 
@@ -87,55 +104,116 @@ var Bump = React.createClass({
     var self = this;
     window.addEventListener('step', function(e) {
       var step = e.detail.step
+      var when = e.detail.when; 
+      var lookahead = step + 2;
+      if (lookahead % 32 === 0) {
+        console.log(step, 'clear');
+        self.clearQueue(lookahead);
+      }
       self.setState({ currentStep: step });
     });
   },
 
-  toggleTrack: function(i) {
-    clips[i].toggle();
+  activateTrack: function(i) {
+    clips[i].active = true;
     var tracks = this.state.tracks;
-    tracks[i] = clips[i].active;
+    tracks[i].active = clips[i].active;
     this.setState({ tracks: tracks });
   },
 
-  componentDidMount: function() {
-    if (typeof window !== 'undefined') {
-      this.addStepListener();
-      loadSamples(this.props.samples);
-      bumpkit.tempo = this.state.tempo;
+  deactivateTrack: function(i) {
+    clips[i].active = false;
+    var tracks = this.state.tracks;
+    tracks[i].active = clips[i].active;
+    this.setState({ tracks: tracks });
+  },
+
+
+  queueTrack: function(i) {
+    var queue = this.state.queue;
+    queue.push(i);
+    //this.activateTrack(i);
+    this.setState({ queue: queue });
+  },
+
+  unqueueTrack: function(i) {
+    var unqueue = this.state.unqueue;
+    unqueue.push(i);
+    this.setState({ unqueue: unqueue });
+  },
+
+  clearQueue: function(step) {
+    var self = this;
+    var queue = this.state.queue;
+    var unqueue = this.state.unqueue;
+    var tracks = this.state.tracks;
+    queue.forEach(function(index, i) {
+      var track = tracks[index];
+      if (step === 0 || step % track.steps === 0) {
+        self.activateTrack(index);
+        queue.splice(i, 1);
+      }
+    });
+    unqueue.forEach(function(index, i) {
+      self.deactivateTrack(index);
+    });
+    this.setState({ queue: queue, unqueue: [] });
+  },
+
+  toggleTrack: function(i) {
+    var tracks = this.state.tracks;
+    var queue = this.state.queue;
+    var qIndex = queue.indexOf(i);
+    console.log('queue indexOf', qIndex);
+    if (!tracks[i].active && qIndex < 0) {
+      this.queueTrack(i);
+    } else if (tracks[i].active) {
+      this.unqueueTrack(i);
+    } else if (qIndex > -1) {
+      queue.splice(qIndex, 1);
+      this.setState({ queue: queue });
     }
   },
 
-  renderTrack: function(track, i) {
-    var self = this;
-    function handleClick(e) {
-      self.toggleTrack(i);
+  componentDidMount: function() {
+    if (bumpkit && typeof window !== 'undefined') {
+      bumpkit.tempo = this.state.tempo;
+      bumpkit.loopLength = this.state.loopLength;
+      initMixer();
+      initSamplers(this.props.samples);
+      initClips(this.props.samples, this.state.loopLength);
+      this.addStepListener();
+      loadSamples(this.props.samples);
     }
-    return (
-      <button
-        className={classnames('button', 'button-transparent', track ? 'red' : 'blue' )}
-        onClick={handleClick}>
-        {i}
-      </button>
-    )
   },
+
 
   render: function() {
     var playing = this.state.playing;
     var step = this.state.currentStep;
     return (
       <div>
-        <div>bumpkit</div>
+        <div className="p2">
+          <code>{step}</code>
+          <hr /> 
+          <button onClick={this.playPause}
+            className="button">
+            Play/Pause
+          </button>
+        </div>
         <hr />
-        <code>{playing ? 'playing' : 'paused'}</code>
-        <code>{step}</code>
-        <label>Tempo</label>
-        <input type="number" readOnly value={this.state.tempo} />
+        <Controls
+          step={this.state.currentStep}
+          tracks={this.state.tracks}
+          queue={this.state.queue}
+          unqueue={this.state.unqueue}
+          toggleTrack={this.toggleTrack} />
         <hr />
-        <button onClick={this.playPause}>Play/Pause</button>
-        <hr />
-        <div className="flex">
-          {this.state.tracks.map(this.renderTrack)}
+        <div className="p2">
+          <h2>queue</h2>
+          {this.state.queue.map(function(q, i) {
+            return <code key={i} className="p2">{q}</code>
+          })}
         </div>
       </div>
     )
