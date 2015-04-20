@@ -5,6 +5,7 @@
 @import 'basscss-base-typography';
 @import 'basscss-utility-layout';
 @import 'basscss-utility-typography';
+@import 'basscss-utility-headings';
 @import 'basscss-white-space';
 @import 'basscss-positions';
 @import 'basscss-responsive-states';

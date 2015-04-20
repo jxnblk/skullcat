@@ -75,7 +75,7 @@ var Controls = React.createClass({
                 'vhs-flash vhs-infinite vhs-alternate': queued,
                 'muted': unqueued,
                 'button-transparent': !active,
-                'black bg-white': active,
+                'black bg-white vhs-pop': active,
               }
             )
           }
@@ -93,7 +93,7 @@ var Controls = React.createClass({
       <div className="flex px1">
         <div className="mx-auto flex flex-center flex-wrap mxn1">
           <button onClick={this.props.playPause}
-            className={classnames('h2', 'button', 'button-narrow', 'button-transparent')}>
+            className={classnames('h2', 'button', 'button-narrow', 'button-transparent', { 'vhs-pop': playing })}>
             <Icon name={playing ? 'pause' : 'play'} />
           </button>
           {this.renderControlGroup('Drums', [1,2,3,4])}

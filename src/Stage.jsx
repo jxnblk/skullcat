@@ -3,6 +3,8 @@ var React = require('react');
 var Skull = require('./Skull.jsx');
 var Tachyons = require('./Tachyons.jsx');
 var Bass = require('./Bass.jsx');
+var Lyrics = require('./Lyrics.jsx');
+var Stabs = require('./Stabs.jsx');
 
 var Stage = React.createClass({
 
@@ -27,6 +29,8 @@ var Stage = React.createClass({
       <div className="relative flex-auto" style={styles.container}>
         <Tachyons {...this.props} />
         <Bass {...this.props} />
+        <Stabs {...this.props} />
+        <Lyrics {...this.props} />
         <Skull {...this.props} />
       </div>
     )

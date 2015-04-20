@@ -4,20 +4,20 @@ var classnames = require('classnames');
 
 var frames = [
   // 1.1
-  { className: 'vhs-fade vhs-reverse' },
-  { className: 'vhs-fade vhs-reverse' },
-  { className: 'vhs-fade vhs-reverse' },
-  { className: 'vhs-fade vhs-reverse' },
+  { className: '' },
+  { className: '' },
+  { className: '' },
+  { className: '' },
   // 1.2
-  { className: 'vhs-fade vhs-reverse' },
-  { className: 'vhs-fade vhs-reverse' },
-  { className: 'vhs-fade vhs-reverse' },
-  { className: 'vhs-fade vhs-reverse' },
+  { className: '' },
+  { className: '' },
+  { className: '' },
+  { className: '' },
   // 1.3
-  { className: 'vhs-fade vhs-reverse' },
-  { className: 'vhs-fade vhs-reverse' },
-  { className: 'vhs-fade vhs-reverse' },
-  { className: 'vhs-fade vhs-reverse' },
+  { className: '' },
+  { className: '' },
+  { className: '' },
+  { className: '' },
   // 1.4
   { className: 'display-none' },
   { className: 'display-none' },
@@ -53,7 +53,7 @@ var Tachyons = React.createClass({
     var playing = this.props.playing;
     var step = this.props.step;
     var tracks = this.props.tracks;
-    var animationDuration = '1.5s';
+    var animationDuration = '2.25s';
     var active = false;
     if (tracks[9].active) {
       // FX 3
@@ -84,17 +84,15 @@ var Tachyons = React.createClass({
         <svg 
           style={styles.svg}
           viewBox="0 0 1024 576"
-          fill="currentColor"
-          width="100%"
-          height="576">
+          width="100%">
             <g className="warp1">
               <circle cx="512" cy="288" r="128" fill="none" />
-              <circle cx="448" cy="160" r="2" />
-              <circle cx="384" cy="304" r="2" />
-              <circle cx="400" cy="368" r="2" />
-              <circle cx="580" cy="344" r="2" />
-              <circle cx="588" cy="256" r="2" />
-              <circle cx="524" cy="192" r="2" />
+              <circle cx="448" cy="160" r="2" fill="white" />
+              <circle cx="384" cy="304" r="2" fill="white" />
+              <circle cx="400" cy="368" r="2" fill="white" />
+              <circle cx="580" cy="344" r="2" fill="white" />
+              <circle cx="588" cy="256" r="2" fill="white" />
+              <circle cx="524" cy="192" r="2" fill="white" />
             </g>
             <g className="warp2" fill="green">
               <circle cx="512" cy="288" r="128" fill="none"/>
