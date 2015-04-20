@@ -6,8 +6,9 @@
 @import 'basscss-utility-layout';
 @import 'basscss-utility-typography';
 @import 'basscss-white-space';
-@import 'basscss-white-space';
 @import 'basscss-positions';
+@import 'basscss-responsive-states';
+@import 'basscss-button-sizes';
 @import 'basscss-grid';
 @import 'flex-object';
 @import 'basscss-color-base';
@@ -18,6 +19,32 @@
 @import 'vhs';
 
 @import 'basscss-defaults';
+
+@keyframes warp {
+  from { transform: scale(.1); }
+  to { transform: scale(8); }
+}
+.warp-fast {
+  transform: scale(.1);
+  transform-origin: 50%;
+  animation: warp .375s ease-in infinite;
+}
+.warp1 {
+  transform: scale(.1);
+  transform-origin: 50%;
+  animation: warp .5s ease-in infinite;
+}
+.warp2 {
+  transform: scale(.1);
+  transform-origin: 50%;
+  animation: warp .5s .2s ease-in infinite;
+}
+.warp3 {
+  transform: scale(.1);
+  transform-origin: 50%;
+  animation: warp .5s .3s ease-in infinite;
+}
+
 
 :root {
 }

@@ -2,6 +2,7 @@
 var React = require('react');
 var Bumpkit = require('bumpkit');
 var classnames = require('classnames');
+var Stage = require('./Stage.jsx');
 var Controls = require('./Controls.jsx');
 var StepVisualizer = require('./StepVisualizer.jsx');
 
@@ -166,17 +167,20 @@ var Bump = React.createClass({
   render: function() {
     var playing = this.state.playing;
     var step = this.state.currentStep;
+    var tracks = this.state.tracks;
     return (
       <div className="flex flex-column white bg-black" style={{minHeight:'100vh'}}>
-        <div className="flex-auto">
-          stage
-        </div>
+        <Stage
+          playing={playing}
+          tracks={tracks}
+          step={step}
+          />
         <Controls
           playing={playing}
           playPause={this.playPause}
           step={this.state.currentStep}
           loopLength={loopLength}
-          tracks={this.state.tracks}
+          tracks={tracks}
           queue={this.state.queue}
           unqueue={this.state.unqueue}
           toggleTrack={this.toggleTrack} />

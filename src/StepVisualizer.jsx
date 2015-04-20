@@ -31,10 +31,12 @@ var StepVisualizer = React.createClass({
       steps.push(i);
     }
     return (
-      <div className="h2 bold flex flex-center">
-        {steps.map(this.renderStep)}
-        <div className="h6 muted">
-          {stepCount(this.props.step)}
+      <div className="flex px1">
+        <div className="h2 bold flex flex-center mx-auto">
+          {steps.map(this.renderStep)}
+          <div className="h6 muted">
+            {stepCount(this.props.step)}
+          </div>
         </div>
       </div>
     )

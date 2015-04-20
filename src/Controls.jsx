@@ -31,8 +31,8 @@ var Controls = React.createClass({
       self.switchSample(index, arr);
     };
     return (
-      <div className="px2">
-        <h3 className="h5">{name}</h3>
+      <div className="px1 mb1">
+        <h3 className="h6 mt0">{name}</h3>
         <div className="flex">
           {arr.map(function(index, i) {
             return self.renderTrack(index, i, handler)
@@ -70,7 +70,7 @@ var Controls = React.createClass({
       <div key={'track-'+i}>
         <button style={styles.button}
           className={
-            classnames('button',
+            classnames('button', 'button-narrow',
               {
                 'vhs-flash vhs-infinite vhs-alternate': queued,
                 'muted': unqueued,
@@ -90,10 +90,10 @@ var Controls = React.createClass({
     var self = this;
     var playing = this.props.playing;
     return (
-      <div>
-        <div className="flex flex-center flex-wrap">
+      <div className="flex px1">
+        <div className="mx-auto flex flex-center flex-wrap mxn1">
           <button onClick={this.props.playPause}
-            className={classnames('h2', 'button', 'ml2', 'mr2', 'button-transparent')}>
+            className={classnames('h2', 'button', 'button-narrow', 'button-transparent')}>
             <Icon name={playing ? 'pause' : 'play'} />
           </button>
           {this.renderControlGroup('Drums', [1,2,3,4])}
