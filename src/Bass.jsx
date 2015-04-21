@@ -4,44 +4,44 @@ var classnames = require('classnames');
 
 var frames1 = [
   // 1.1
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
   // 1.2
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
   // 1.3
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
   // 1.4
   { className: 'display-none' },
   { className: 'display-none' },
   { className: 'display-none' },
   { className: 'display-none' },
   // 2.1 
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
   // 2.2
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
   // 2.3
   { className: 'display-none' },
   { className: 'display-none' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
   // 2.4
   { className: 'display-none' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
   { className: 'display-none' },
 ];
 
@@ -67,25 +67,25 @@ var frames2 = [
   { className: 'display-none' },
   { className: 'display-none' },
   // 2.1 
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
   // 2.2
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
   // 2.3
-  { className: 'vhs-blur' },
+  { className: 'vhs-zoom' },
   { className: 'display-none' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
   // 2.4
   { className: 'display-none' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
-  { className: 'vhs-blur' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
+  { className: 'vhs-zoom' },
 ];
 
 
@@ -128,10 +128,14 @@ var Bass = React.createClass({
           viewBox="0 0 32 32"
           width="640"
           height="640">
-          <circle cx="16" cy="16" r="13"
+          <circle cx="16" cy="16" r="12"
             fill="none"
             stroke="white"
-            strokeWidth="1"/>
+            strokeWidth="0.5"/>
+          <circle cx="16" cy="16" r="13"
+            fill="none"
+            stroke="black"
+            strokeWidth="0.5"/>
         </svg>
       </div>
     )

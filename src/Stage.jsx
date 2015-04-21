@@ -28,10 +28,10 @@ var Stage = React.createClass({
     return (
       <div className="relative flex-auto" style={styles.container}>
         <Tachyons {...this.props} />
-        <Bass {...this.props} />
         <Stabs {...this.props} />
-        <Lyrics {...this.props} />
         <Skull {...this.props} />
+        <Bass {...this.props} />
+        <Lyrics {...this.props} />
       </div>
     )
   }

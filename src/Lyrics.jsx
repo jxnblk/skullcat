@@ -9,40 +9,40 @@ var frames = [
   { skull: 'display-none', cat: 'display-none' },
   { skull: 'display-none', cat: 'display-none' },
   // 1.2
-  { skull: 'vhs-left', cat: 'display-none' },
-  { skull: 'vhs-left', cat: 'display-none' },
-  { skull: 'vhs-left', cat: 'vhs-right' },
-  { skull: 'vhs-left', cat: 'vhs-right' },
+  { skull: 'vhs-pop', cat: 'display-none' },
+  { skull: 'vhs-pop', cat: 'display-none' },
+  { skull: 'display-none', cat: 'vhs-pop' },
+  { skull: 'display-none', cat: 'vhs-pop' },
   // 1.3
   { skull: 'display-none', cat: 'display-none' },
   { skull: 'display-none', cat: 'display-none' },
   { skull: 'display-none', cat: 'display-none' },
   { skull: 'display-none', cat: 'display-none' },
   // 1.4
-  { skull: 'vhs-left', cat: 'display-none' },
-  { skull: 'vhs-left', cat: 'display-none' },
-  { skull: 'vhs-left', cat: 'vhs-right' },
-  { skull: 'vhs-left', cat: 'vhs-right' },
+  { skull: 'vhs-pop', cat: 'display-none' },
+  { skull: 'vhs-pop', cat: 'display-none' },
+  { skull: 'display-none', cat: 'vhs-pop' },
+  { skull: 'display-none', cat: 'vhs-pop' },
   // 2.1 
-  { skull: 'display-none', cat: 'display-non' },
-  { skull: 'display-none', cat: 'display-non' },
+  { skull: 'display-none', cat: 'display-none' },
+  { skull: 'display-none', cat: 'display-none' },
   { skull: 'display-none', cat: 'display-none' },
   { skull: 'display-none', cat: 'display-none' },
   // 2.2
-  { skull: 'vhs-left', cat: 'display-none' },
-  { skull: 'vhs-left', cat: 'display-none' },
-  { skull: 'vhs-left', cat: 'vhs-right' },
-  { skull: 'vhs-left', cat: 'vhs-right' },
+  { skull: 'vhs-pop', cat: 'display-none' },
+  { skull: 'vhs-pop', cat: 'display-none' },
+  { skull: 'display-none', cat: 'vhs-pop' },
+  { skull: 'display-none', cat: 'vhs-pop' },
   // 2.3
   { skull: 'display-none', cat: 'display-none' },
   { skull: 'display-none', cat: 'display-none' },
   { skull: 'display-none', cat: 'display-none' },
   { skull: 'display-none', cat: 'display-none' },
   // 2.4
-  { skull: 'vhs-left', cat: 'display-none' },
-  { skull: 'vhs-left', cat: 'display-none' },
-  { skull: 'vhs-left', cat: 'vhs-right' },
-  { skull: 'vhs-left', cat: 'vhs-right' },
+  { skull: 'vhs-pop', cat: 'display-none' },
+  { skull: 'vhs-pop', cat: 'display-none' },
+  { skull: 'display-none', cat: 'vhs-pop' },
+  { skull: 'display-none', cat: 'vhs-pop' },
 ];
 
 
@@ -64,11 +64,11 @@ var Lyrics = React.createClass({
       skull: {
         position: 'absolute',
         display: (tracks[20].active || tracks[21].active) ? '' : 'none',
-        top: '50%',
-        left: 0,
-        MozTransform: 'translateY(-50%)',
-        WebkitTransform: 'translateY(-50%)',
-        transform: 'translateY(-50%)',
+        bottom: '0',
+        left: '50%',
+        MozTransform: 'translate(-50%, 0%)',
+        WebkitTransform: 'translate(-50%, 0%)',
+        transform: 'translate(-50%, 0%)',
         MozAnimationDuration: animationDuration,
         WebkitAnimationDuration: animationDuration,
         animationDuration: animationDuration,
@@ -76,11 +76,11 @@ var Lyrics = React.createClass({
       cat: {
         position: 'absolute',
         display: (tracks[20].active || tracks[21].active) ? '' : 'none',
-        top: '50%',
-        right: 0,
-        MozTransform: 'translateY(-50%)',
-        WebkitTransform: 'translateY(-50%)',
-        transform: 'translateY(-50%)',
+        bottom: '0',
+        left: '50%',
+        MozTransform: 'translate(-50%, 0%)',
+        WebkitTransform: 'translate(-50%, 0%)',
+        transform: 'translate(-50%, 0%)',
         MozAnimationDuration: animationDuration,
         WebkitAnimationDuration: animationDuration,
         animationDuration: animationDuration,
@@ -89,13 +89,13 @@ var Lyrics = React.createClass({
 
     if (playing) {
       var classNames = {
-        skull: classnames('h00', 'h00-responsive', frames[step].skull),
-        cat: classnames('h00', 'h00-responsive', frames[step].cat),
+        skull: classnames('h00', 'xh00-responsive', frames[step].skull),
+        cat: classnames('h00', 'xh00-responsive', frames[step].cat),
       }
     } else {
       var classNames = {
-        skull: classnames('h00', 'h00-responsive'),
-        cat: classnames('h00', 'h00-responsive'),
+        skull: classnames('h00', 'h00-responsive', 'display-none'),
+        cat: classnames('h00', 'h00-responsive', 'display-none'),
       };
     }
 
