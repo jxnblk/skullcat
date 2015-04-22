@@ -3,134 +3,14 @@ var React = require('react');
 var classnames = require('classnames');
 
 var frames1 = [
-  // 1.1
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  // 1.2
-  { circle1: 'vhs-fade' },
-  { circle1: 'vhs-fade' },
-  { circle1: 'vhs-fade' },
-  { circle1: 'vhs-fade' },
-  // 1.3
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  // 1.4
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  // 2.1 
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  // 2.2
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  // 2.3
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  // 2.4
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
-  { circle1: 'display-none' },
+  0,0,0,0, 1,1,1,1, 0,0,0,0, 0,0,0,0,
+  0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
 ];
 
 var frames2 = [
-  // 1.1
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  // 1.2
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  // 1.3
-  { circle2: 'vhs-bottom' },
-  { circle2: 'vhs-bottom' },
-  { circle2: 'vhs-bottom' },
-  { circle2: 'vhs-bottom' },
-  // 1.4
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  // 2.1 
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  // 2.2
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  // 2.3
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  // 2.4
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
-  { circle2: 'display-none' },
+  0,0,0,0, 0,0,0,0, 1,1,1,1, 0,0,0,0,
+  0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
 ];
-
-var frames3 = [
-  // 1.1
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  // 1.2
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  // 1.3
-  { circle3: 'vhs-left' },
-  { circle3: 'vhs-left' },
-  { circle3: 'vhs-left' },
-  { circle3: 'vhs-left' },
-  // 1.4
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  // 2.1 
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  // 2.2
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  // 2.3
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  // 2.4
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-  { circle3: 'display-none' },
-];
-
 
 
 var Stabs = React.createClass({
@@ -148,63 +28,51 @@ var Stabs = React.createClass({
         bottom: 0,
         left: 0,
         display: active ? '' : 'none',
-        MozAnimationDuration: animationDuration,
-        WebkitAnimationDuration: animationDuration,
-        animationDuration: animationDuration,
       },
       svg: {
         height: '100%',
-        maxHeight: '100%'
+        maxHeight: '100%',
+        outline: '2px solid red'
       },
       circle1: {
+        display: 'none',
         MozAnimationDuration: '.75s',
         WebkitAnimationDuration: '.75s',
         animationDuration: '.75s',
       },
-      circle2: {},
-      circle3: {},
+      circle2: {
+        display: 'none',
+      },
+      circle3: {
+        display: 'none'
+      },
     };
     if (playing) {
       if (tracks[13].active) {
+        styles.circle1.display = frames1[step] ? '' : 'none';
         var classNames = frames1[step]; 
-        classNames.circle2 = 'display-none';
-        classNames.circle3 = 'display-none';
       } else if (tracks[14].active) {
+        styles.circle2.display = frames2[step] ? '' : 'none';
         var classNames = frames2[step]; 
-        classNames.circle1 = 'display-none';
-        classNames.circle3 = 'display-none';
       } else if (tracks[15].active) {
+        styles.circle3.display = frames3[step] ? '' : 'none';
         var classNames = frames3[step]; 
-        classNames.circle1 = 'display-none';
-        classNames.circle2 = 'display-none';
-      } else {
-        var classNames = {};
-        classNames.circle1 = 'display-none';
-        classNames.circle2 = 'display-none';
-        classNames.circle3 = 'display-none';
       }
-    } else {
-      var classNames = {
-        circle1: '',
-        circle2: '',
-        circle3: '',
-      };
     }
     return (
       <div className="absolute" style={styles.container}>
         <svg style={styles.svg}
           width="100%"
           viewBox="0 0 32 32">
-          <g opacity="0.25">
-            <circle
-              style={styles.circle1}
-              className={classNames.circle1}
-              cx="16" cy="16" r="16" fill="white" />
-          </g>
+          <rect width="32" height="32" fill="aqua" />
           <circle
-            className={classNames.circle2}
-            opacity="0.75"
-            cx="16" cy="4" r="2" fill="white" />
+            className="vhs-fade"
+            style={styles.circle1}
+            cx="16" cy="16" r="14" fill="none" stroke="white" stroke-width=".5" />
+          <circle
+            className="vhs-pop"
+            style={styles.circle2}
+            r="2" fill="white" />
         </svg>
       </div>
     )

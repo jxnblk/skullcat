@@ -1,50 +1,16 @@
 
 var React = require('react');
-var classnames = require('classnames');
 
-var frames = [
-  // 1.1
-  { skull: 'display-none', cat: 'display-none' },
-  { skull: 'display-none', cat: 'display-none' },
-  { skull: 'display-none', cat: 'display-none' },
-  { skull: 'display-none', cat: 'display-none' },
-  // 1.2
-  { skull: 'vhs-pop', cat: 'display-none' },
-  { skull: 'vhs-pop', cat: 'display-none' },
-  { skull: 'display-none', cat: 'vhs-pop' },
-  { skull: 'display-none', cat: 'vhs-pop' },
-  // 1.3
-  { skull: 'display-none', cat: 'display-none' },
-  { skull: 'display-none', cat: 'display-none' },
-  { skull: 'display-none', cat: 'display-none' },
-  { skull: 'display-none', cat: 'display-none' },
-  // 1.4
-  { skull: 'vhs-pop', cat: 'display-none' },
-  { skull: 'vhs-pop', cat: 'display-none' },
-  { skull: 'display-none', cat: 'vhs-pop' },
-  { skull: 'display-none', cat: 'vhs-pop' },
-  // 2.1 
-  { skull: 'display-none', cat: 'display-none' },
-  { skull: 'display-none', cat: 'display-none' },
-  { skull: 'display-none', cat: 'display-none' },
-  { skull: 'display-none', cat: 'display-none' },
-  // 2.2
-  { skull: 'vhs-pop', cat: 'display-none' },
-  { skull: 'vhs-pop', cat: 'display-none' },
-  { skull: 'display-none', cat: 'vhs-pop' },
-  { skull: 'display-none', cat: 'vhs-pop' },
-  // 2.3
-  { skull: 'display-none', cat: 'display-none' },
-  { skull: 'display-none', cat: 'display-none' },
-  { skull: 'display-none', cat: 'display-none' },
-  { skull: 'display-none', cat: 'display-none' },
-  // 2.4
-  { skull: 'vhs-pop', cat: 'display-none' },
-  { skull: 'vhs-pop', cat: 'display-none' },
-  { skull: 'display-none', cat: 'vhs-pop' },
-  { skull: 'display-none', cat: 'vhs-pop' },
-];
-
+var frames = {
+  skull: [
+    0,0,0,0, 1,1,0,0, 0,0,0,0, 1,1,0,0,
+    0,0,0,0, 1,1,0,0, 0,0,0,0, 1,1,0,0,
+  ],
+  cat: [
+    0,0,0,0, 0,0,1,1, 0,0,0,0, 0,0,1,1,
+    0,0,0,0, 0,0,1,1, 0,0,0,0, 0,0,1,1,
+  ]
+};
 
 var Lyrics = React.createClass({
 
@@ -60,10 +26,10 @@ var Lyrics = React.createClass({
         right: 0,
         bottom: 0,
         left: 0,
+        display: (tracks[20].active || tracks[21].active) ? '' : 'none',
       },
       skull: {
         position: 'absolute',
-        display: (tracks[20].active || tracks[21].active) ? '' : 'none',
         bottom: '0',
         left: '50%',
         MozTransform: 'translate(-50%, 0%)',
@@ -75,7 +41,6 @@ var Lyrics = React.createClass({
       },
       cat: {
         position: 'absolute',
-        display: (tracks[20].active || tracks[21].active) ? '' : 'none',
         bottom: '0',
         left: '50%',
         MozTransform: 'translate(-50%, 0%)',
@@ -87,25 +52,18 @@ var Lyrics = React.createClass({
       }
     };
 
-    if (playing) {
-      var classNames = {
-        skull: classnames('h00', 'xh00-responsive', frames[step].skull),
-        cat: classnames('h00', 'xh00-responsive', frames[step].cat),
-      }
-    } else {
-      var classNames = {
-        skull: classnames('h00', 'h00-responsive', 'display-none'),
-        cat: classnames('h00', 'h00-responsive', 'display-none'),
-      };
+    if (tracks[20].active || tracks[21].active) {
+      styles.skull.display = frames.skull[step] ? '' : 'none';
+      styles.cat.display = frames.cat[step] ? '' : 'none';
     }
 
     return (
       <div style={styles.container}>
         <div style={styles.skull} className="px3">
-          <h1 className={classNames.skull}>skull</h1>
+          <h1 className="h00 vhs-pop">skull</h1>
         </div>
         <div style={styles.cat} className="px3">
-          <h1 className={classNames.cat}>cat</h1>
+          <h1 className="h00 vhs-pop">cat</h1>
         </div>
       </div>
     )

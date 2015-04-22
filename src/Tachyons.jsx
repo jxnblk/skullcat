@@ -3,47 +3,8 @@ var React = require('react');
 var classnames = require('classnames');
 
 var frames = [
-  // 1.1
-  { className: '' },
-  { className: '' },
-  { className: '' },
-  { className: '' },
-  // 1.2
-  { className: '' },
-  { className: '' },
-  { className: '' },
-  { className: '' },
-  // 1.3
-  { className: '' },
-  { className: '' },
-  { className: '' },
-  { className: '' },
-  // 1.4
-  { className: 'display-none' },
-  { className: 'display-none' },
-  { className: 'display-none' },
-  { className: 'display-none' },
-  // 2.1 
-  { className: 'display-none' },
-  { className: 'display-none' },
-  { className: 'display-none' },
-  { className: 'display-none' },
-  // 2.2
-  { className: 'display-none' },
-  { className: 'display-none' },
-  { className: 'display-none' },
-  { className: 'display-none' },
-  // 2.3
-  { className: 'display-none' },
-  { className: 'display-none' },
-  { className: 'display-none' },
-  { className: 'display-none' },
-  // 2.4
-  { className: 'display-none' },
-  { className: 'display-none' },
-  { className: 'display-none' },
-  { className: 'display-none' },
-  // 32
+  1,1,1,1, 1,1,1,1, 1,1,1,1, 0,0,0,0,
+  0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
 ];
 
 
@@ -61,6 +22,7 @@ var Tachyons = React.createClass({
     }
     var styles = {
       container: {
+        position: 'absolute',
         top: 0,
         right: 0,
         bottom: 0,
@@ -75,12 +37,11 @@ var Tachyons = React.createClass({
         maxHeight: '100%',
       }
     };
-    var className = classnames(
-      'absolute',
-      playing ? frames[step].className : ''
-    );
+    if (tracks[9].active) {
+      styles.svg.display = frames[step] ? '' : 'none';
+    }
     return (
-      <div className={className} style={styles.container}>
+      <div style={styles.container}>
         <svg 
           style={styles.svg}
           viewBox="0 0 1024 576"
