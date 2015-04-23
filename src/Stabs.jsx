@@ -3,12 +3,17 @@ var React = require('react');
 var classnames = require('classnames');
 
 var frames1 = [
-  0,0,0,0, 1,1,1,1, 0,0,0,0, 0,0,0,0,
+  0,0,0,0, 1,1,1,1, 1,1,0,0, 0,0,0,0,
   0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
 ];
 
 var frames2 = [
   0,0,0,0, 0,0,0,0, 1,1,1,1, 0,0,0,0,
+  0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+];
+
+var frames3 = [
+  0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
   0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
 ];
 
@@ -34,6 +39,17 @@ var Stabs = React.createClass({
         maxHeight: '100%',
         outline: '2px solid red'
       },
+      backdrop: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        display: 'none',
+        MozAnimationDuration: '1.5s',
+        WebkitAnimationDuration: '1.5s',
+        animationDuration: '1.5s',
+      },
       circle1: {
         display: 'none',
         MozAnimationDuration: '.75s',
@@ -49,22 +65,19 @@ var Stabs = React.createClass({
     };
     if (playing) {
       if (tracks[13].active) {
-        styles.circle1.display = frames1[step] ? '' : 'none';
-        var classNames = frames1[step]; 
+        styles.backdrop.display = frames1[step] ? '' : 'none';
       } else if (tracks[14].active) {
         styles.circle2.display = frames2[step] ? '' : 'none';
-        var classNames = frames2[step]; 
       } else if (tracks[15].active) {
         styles.circle3.display = frames3[step] ? '' : 'none';
-        var classNames = frames3[step]; 
       }
     }
     return (
       <div className="absolute" style={styles.container}>
+        <div className="vhs-fade bg-white" style={styles.backdrop} />
         <svg style={styles.svg}
           width="100%"
           viewBox="0 0 32 32">
-          <rect width="32" height="32" fill="aqua" />
           <circle
             className="vhs-fade"
             style={styles.circle1}
@@ -72,7 +85,7 @@ var Stabs = React.createClass({
           <circle
             className="vhs-pop"
             style={styles.circle2}
-            r="2" fill="white" />
+            cx="16" cy="4" r="2" fill="white" />
         </svg>
       </div>
     )
