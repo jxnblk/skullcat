@@ -33,6 +33,13 @@ var Bass = React.createClass({
         MozAnimationDuration: animationDuration,
         WebkitAnimationDuration: animationDuration,
         animationDuration: animationDuration,
+      },
+      circle: {
+        WebkitTransformOrigin: '16 16',
+        transformOrigin: '16 16',
+        MozAnimationDuration: animationDuration,
+        WebkitAnimationDuration: animationDuration,
+        animationDuration: animationDuration,
       }
     };
     var className = 'vhs-zoom';
@@ -47,14 +54,12 @@ var Bass = React.createClass({
       <div className="absolute" style={styles.container}>
         <svg xmlns="http://www.w3.org/2000/svg"
           style={styles.svg}
-          className="vhs-zoom"
           viewBox="0 0 32 32"
           width="768"
           height="768">
           <circle cx="16" cy="16" r="12"
-            fill="none"
-            stroke="white"
-            strokeWidth="0.5"/>
+            className="stroke vhs-zoom"
+            style={styles.circle} />
         </svg>
       </div>
     )

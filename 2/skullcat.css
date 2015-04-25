@@ -1147,6 +1147,56 @@ hr {
   background-size: 12px 12px;
 }
 
+.stroke {
+  fill: none;
+  stroke: white;
+  stroke-width: 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.rotate-down {
+  -webkit-animation-name: rotate-down;
+          animation-name: rotate-down;
+  -webkit-animation-duration: 4.5s;
+          animation-duration: 4.5s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-transform-origin: 50% 50%;
+      -ms-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+
+@-webkit-keyframes rotate-down {
+  from { -webkit-transform: scale(1) rotate(360deg); transform: scale(1) rotate(360deg) }
+    to { -webkit-transform: scale(0) rotate(0); transform: scale(0) rotate(0) }
+}
+
+@keyframes rotate-down {
+  from { -webkit-transform: scale(1) rotate(360deg); transform: scale(1) rotate(360deg) }
+    to { -webkit-transform: scale(0) rotate(0); transform: scale(0) rotate(0) }
+}
+
+.cycle-right {
+  -webkit-animation-name: cycle-right;
+          animation-name: cycle-right;
+  -webkit-animation-duration: .3s;
+          animation-duration: .3s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes cycle-right {
+  from { -webkit-transform: translateX(0); transform: translateX(0) }
+    to { -webkit-transform: translateX(32px); transform: translateX(32px) }
+}
+
+@keyframes cycle-right {
+  from { -webkit-transform: translateX(0); transform: translateX(0) }
+    to { -webkit-transform: translateX(32px); transform: translateX(32px) }
+}
+
 @-webkit-keyframes warp {
   from { -webkit-transform: scale(.1); transform: scale(.1); }
   to { -webkit-transform: scale(8); transform: scale(8); }

@@ -26,6 +26,37 @@
   background-size: 12px 12px;
 }
 
+.stroke {
+  fill: none;
+  stroke: white;
+  stroke-width: 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.rotate-down {
+  animation-name: rotate-down;
+  animation-duration: 4.5s;
+  animation-timing-function: linear;
+  transform-origin: 50% 50%;
+}
+
+@keyframes rotate-down {
+  from { transform: scale(1) rotate(360deg) }
+    to { transform: scale(0) rotate(0) }
+}
+
+.cycle-right {
+  animation-name: cycle-right;
+  animation-duration: .3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes cycle-right {
+  from { transform: translateX(0) }
+    to { transform: translateX(32px) }
+}
+
 @keyframes warp {
   from { transform: scale(.1); }
   to { transform: scale(8); }

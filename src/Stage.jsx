@@ -5,8 +5,9 @@ var Tachyons = require('./Tachyons.jsx');
 var Bass = require('./Bass.jsx');
 var Lyrics = require('./Lyrics.jsx');
 var Stabs = require('./Stabs.jsx');
-var Icon = require('react-geomicons');
+var Fx = require('./Fx.jsx');
 var StepVisualizer = require('./StepVisualizer.jsx');
+var Icon = require('react-geomicons');
 
 var Stage = React.createClass({
 
@@ -40,6 +41,7 @@ var Stage = React.createClass({
       <div className="relative flex-auto" style={styles.container}>
         <Tachyons {...this.props} />
         <Stabs {...this.props} />
+        <Fx {...this.props} />
         <Bass {...this.props} />
         <Skull {...this.props} />
         <Lyrics {...this.props} />
