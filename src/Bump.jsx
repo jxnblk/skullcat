@@ -97,6 +97,7 @@ var Bump = React.createClass({
       var lookahead = step + 1;
       var time = self.state.time + 1; 
       if (lookahead % 32 === 0) {
+        self.autolaunch();
         self.processQueue();
       }
       if (self.state.drop) {
@@ -178,6 +179,35 @@ var Bump = React.createClass({
     this.activateTrack(13);
     this.activateTrack(16);
     this.activateTrack(20);
+  },
+
+  autolaunch: function() {
+    var self = this;
+    var launches = [
+      [5,6],
+      [7,8],
+      [9,10],
+      [13,14],
+      [16,17],
+      [18,19],
+    ];
+    launches.forEach(function(launch) {
+      var active = false;
+      var current;
+      var next;
+      launch.forEach(function(n, i) {
+        if (self.state.tracks[n].active && self.state.unqueue.indexOf(n) === -1) {
+          active = i;
+          current = n;
+        }
+        next = launch[active+1] || launch[0];
+      });
+      if (active === false) { return false; }
+      if (next) {
+        self.deactivateTrack(current);
+        self.queueTrack(next);
+      }
+    });
   },
 
   componentDidMount: function() {
