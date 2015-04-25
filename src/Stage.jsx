@@ -25,6 +25,7 @@ var Stage = React.createClass({
         overflowX: 'hidden'
       }
     };
+
     return (
       <div className="relative flex-auto" style={styles.container}>
         <Tachyons {...this.props} />

@@ -3,7 +3,7 @@ var React = require('react');
 var classnames = require('classnames');
 
 var frames1 = [
-  0,0,0,0, 1,1,1,1, 1,1,0,0, 0,0,0,0,
+  0,0,0,0, 1,1,1,1, 0,0,0,0, 0,0,0,0,
   0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
 ];
 
@@ -81,7 +81,7 @@ var Stabs = React.createClass({
           <circle
             className="vhs-fade"
             style={styles.circle1}
-            cx="16" cy="16" r="14" fill="none" stroke="white" stroke-width=".5" />
+            cx="16" cy="16" r="14" fill="none" stroke="white" strokeWidth=".5" />
           <circle
             className="vhs-pop"
             style={styles.circle2}

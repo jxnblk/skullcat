@@ -112,7 +112,8 @@ var Skull = React.createClass({
       }
     };
     var className = '';
-    if (playing) {
+    console.log('skull step', step);
+    if (playing && frames1[step]) {
       if (tracks[1].active || tracks[2].active || tracks[4].active) {
         var className = frames1[step].className; 
       } else if (tracks[3].active) {

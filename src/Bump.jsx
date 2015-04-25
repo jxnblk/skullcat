@@ -29,7 +29,8 @@ function initMixer(length) {
 function initSamplers(samples) {
   var stepDuration = 60 / (tempo * 4);
   for (var i = 0; i < samples.length; i++) {
-    var dur = loopLength * stepDuration;
+    var length = (i === 0) ? 64 : loopLength;
+    var dur = length * stepDuration;
     samplers[i] = bumpkit.createSampler().connect(mixer.tracks[i]);
     samplers[i].duration = dur;
   }
@@ -47,9 +48,10 @@ function loadSamples(samples) {
 
 function initClips(samples) {
   for (var i = 0; i < samples.length; i++) {
+    var length = (i === 0) ? 64 : loopLength;
     clips[i] = bumpkit.createClip();
     clips[i].pattern = [];
-    for (var s = 0; s < loopLength; s++) {
+    for (var s = 0; s < length; s++) {
       var step = (s === 0) ? 1 : 0;
       clips[i].pattern.push(step);
     }
@@ -64,13 +66,13 @@ var Bump = React.createClass({
 
   getInitialState: function() {
     return {
-      currentStep: 0,
+      step: 0,
       playing: false,
       tracks: this.props.samples,
       queue: [],
       unqueue: [],
       drop: true,
-      time: -1
+      time: 0
     }
   },
 
@@ -78,7 +80,12 @@ var Bump = React.createClass({
     this.processQueue();
     bumpkit.playPause();
     var playing = bumpkit.isPlaying;
-    this.setState({ playing: playing });
+    if (playing) {
+      mixer.master.mute.gain.value = 1;
+    } else {
+      mixer.master.mute.gain.value = 0;
+    }
+    this.setState({ playing: playing, time: 0 });
   },
 
   addStepListener: function() {
@@ -92,7 +99,15 @@ var Bump = React.createClass({
       if (lookahead % 32 === 0) {
         self.processQueue();
       }
-      self.setState({ currentStep: step, time: time });
+      if (self.state.drop) {
+        if (step === 63) {
+          self.endDrop();
+        } else if (time > 64) {
+          bumpkit.loopLength = loopLength;
+          self.setState({ drop: false });
+        }
+      }
+      self.setState({ step: step, time: time });
     });
   },
 
@@ -150,6 +165,20 @@ var Bump = React.createClass({
     }
   },
 
+  setDrop: function() {
+    this.activateTrack(0);
+    bumpkit.loopLength = 64;
+  },
+
+  endDrop: function() {
+    console.log('end drop');
+    this.deactivateTrack(0);
+    this.activateTrack(1);
+    this.activateTrack(13);
+    this.activateTrack(16);
+    this.activateTrack(20);
+  },
+
   componentDidMount: function() {
     if (bumpkit && typeof window !== 'undefined') {
       var samples = this.props.samples;
@@ -160,32 +189,26 @@ var Bump = React.createClass({
       initClips(samples);
       this.addStepListener();
       loadSamples(samples);
+      this.setDrop();
     }
   },
 
 
   render: function() {
-    var playing = this.state.playing;
-    var step = this.state.currentStep;
-    var tracks = this.state.tracks;
     return (
       <div className="flex flex-column white bg-black" style={{minHeight:'100vh'}}>
         <Stage
-          playing={playing}
-          tracks={tracks}
-          step={step}
-          />
+          {...this.props}
+          {...this.state}
+          playPause={this.playPause} />
         <Controls
-          playing={playing}
-          playPause={this.playPause}
-          step={this.state.currentStep}
+          {...this.props}
+          {...this.state}
           loopLength={loopLength}
-          tracks={tracks}
-          queue={this.state.queue}
-          unqueue={this.state.unqueue}
+          playPause={this.playPause}
           toggleTrack={this.toggleTrack} />
         <StepVisualizer
-          step={step}
+          step={this.state.step}
           length={loopLength} />
       </div>
     )
