@@ -71,7 +71,8 @@ var Bump = React.createClass({
       tracks: this.props.samples,
       queue: [],
       unqueue: [],
-      drop: true,
+      // dev only
+      drop: false, //true,
       time: 0
     }
   },
@@ -166,14 +167,16 @@ var Bump = React.createClass({
   },
 
   setDrop: function() {
-    this.activateTrack(0);
-    bumpkit.loopLength = 64;
+    // dev only
+    //this.activateTrack(0);
+    //bumpkit.loopLength = 64;
   },
 
   endDrop: function() {
     console.log('end drop');
     this.deactivateTrack(0);
     this.activateTrack(1);
+    this.activateTrack(9);
     this.activateTrack(13);
     this.activateTrack(16);
     this.activateTrack(20);
@@ -207,9 +210,6 @@ var Bump = React.createClass({
           loopLength={loopLength}
           playPause={this.playPause}
           toggleTrack={this.toggleTrack} />
-        <StepVisualizer
-          step={this.state.step}
-          length={loopLength} />
       </div>
     )
   }

@@ -95,8 +95,8 @@ var Skull = React.createClass({
     var playing = this.props.playing;
     var step = this.props.step;
     var tracks = this.props.tracks;
-    var animationDuration = '.1875s';
-    var active = (tracks[1].active || tracks[2].active || tracks[3].active || tracks[4].active);
+    var animationDuration = tracks[0].active ? '6s' : '.1875s';
+    var active = (playing && (tracks[0].active || tracks[1].active || tracks[2].active || tracks[3].active || tracks[4].active));
     var styles = {
       container: {
         top: '50%',
@@ -112,9 +112,10 @@ var Skull = React.createClass({
       }
     };
     var className = '';
-    console.log('skull step', step);
-    if (playing && frames1[step]) {
-      if (tracks[1].active || tracks[2].active || tracks[4].active) {
+    if (playing && step < 32) {
+      if (tracks[0].active) {
+        var className = 'vhs-blur';
+      } else if (tracks[1].active || tracks[2].active || tracks[4].active) {
         var className = frames1[step].className; 
       } else if (tracks[3].active) {
         var className = frames2[step].className; 

@@ -89,9 +89,15 @@ var Controls = React.createClass({
   render: function() {
     var self = this;
     var playing = this.props.playing;
+    var styles = {
+      container: {
+        visibility: this.props.drop ? 'hidden' : '',
+      }
+    };
     return (
-      <div className="flex px1">
-        <div className="mx-auto flex flex-center flex-wrap mxn1">
+      <div className="flex px1 mt2"
+        style={styles.container}>
+        <div className={classnames('mx-auto flex flex-center flex-wrap mxn1', this.props.drop ? '' : 'vhs-bottom')}>
           <button onClick={this.props.playPause}
             className={classnames('h2', 'button', 'button-narrow', 'button-transparent', { 'vhs-pop': playing })}>
             <Icon name={playing ? 'pause' : 'play'} />

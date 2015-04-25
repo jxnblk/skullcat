@@ -21,6 +21,11 @@
 
 @import 'basscss-defaults';
 
+.bg-striped {
+  background-image: repeating-linear-gradient(45deg, #fff 0, #fff 12%, transparent 0, transparent 50%);
+  background-size: 12px 12px;
+}
+
 @keyframes warp {
   from { transform: scale(.1); }
   to { transform: scale(8); }
@@ -46,6 +51,15 @@
   animation: warp .5s .3s ease-in infinite;
 }
 
+@-webkit-keyframes vhs-blur {
+  from { filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="128" /></filter></svg>#filter'); -webkit-filter: blur(128px); filter: blur(128px) }
+  to { filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="0" /></filter></svg>#filter'); -webkit-filter: blur(0); filter: blur(0) }
+}
+
+@keyframes vhs-blur {
+  from { filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="128" /></filter></svg>#filter'); -webkit-filter: blur(128px); filter: blur(128px) }
+  to { filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="0" /></filter></svg>#filter'); -webkit-filter: blur(0); filter: blur(0) }
+}
 
 :root {
 }

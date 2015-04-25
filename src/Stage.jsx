@@ -5,6 +5,8 @@ var Tachyons = require('./Tachyons.jsx');
 var Bass = require('./Bass.jsx');
 var Lyrics = require('./Lyrics.jsx');
 var Stabs = require('./Stabs.jsx');
+var Icon = require('react-geomicons');
+var StepVisualizer = require('./StepVisualizer.jsx');
 
 var Stage = React.createClass({
 
@@ -23,6 +25,14 @@ var Stage = React.createClass({
     var styles = {
       container: {
         overflowX: 'hidden'
+      },
+      play: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        display: (this.props.drop && !this.props.playing) ? '' : 'none',
       }
     };
 
@@ -33,6 +43,18 @@ var Stage = React.createClass({
         <Bass {...this.props} />
         <Skull {...this.props} />
         <Lyrics {...this.props} />
+        <div className="absolute left-0 bottom-0 right-0">
+          <StepVisualizer
+            drop={this.props.drop}
+            step={this.props.step}
+            length={32} />
+        </div>
+        <div className="flex flex-center center" style={styles.play}>
+          <button className="mx-auto h0 button button-transparent"
+            onClick={this.props.playPause}>
+            <Icon name="play" />
+          </button>
+        </div>
       </div>
     )
   }

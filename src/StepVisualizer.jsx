@@ -30,8 +30,13 @@ var StepVisualizer = React.createClass({
     for (var i = 0; i < this.props.length; i++) {
       steps.push(i);
     }
+    var styles = {
+      container: {
+        visibility: this.props.drop ? 'hidden' : '',
+      }
+    };
     return (
-      <div className="flex px1">
+      <div className="flex px1" style={styles.container}>
         <div className="h2 bold flex flex-center mx-auto">
           {steps.map(this.renderStep)}
           <div className="h6 muted">
