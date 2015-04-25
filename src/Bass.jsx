@@ -27,9 +27,13 @@ var Bass = React.createClass({
         left: '50%',
         WebkitTransform: 'translate3d(-50%, -50%, 0)',
         transform: 'translate3d(-50%, -50%, 0)',
+        WebkitTransformOrigin: '50% 50%',
+        transformOrigin: '50% 50%',
         display: active ? '' : 'none',
       },
       svg: {
+        WebkitTransformOrigin: '50% 50%',
+        transformOrigin: '50% 50%',
         MozAnimationDuration: animationDuration,
         WebkitAnimationDuration: animationDuration,
         animationDuration: animationDuration,
@@ -54,11 +58,12 @@ var Bass = React.createClass({
       <div className="absolute" style={styles.container}>
         <svg xmlns="http://www.w3.org/2000/svg"
           style={styles.svg}
+          className="vhs-zoom"
           viewBox="0 0 32 32"
           width="768"
           height="768">
           <circle cx="16" cy="16" r="12"
-            className="stroke vhs-zoom"
+            className="stroke"
             style={styles.circle} />
         </svg>
       </div>

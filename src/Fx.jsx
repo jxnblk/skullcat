@@ -146,27 +146,31 @@ var Fx = React.createClass({
         </svg>
 
         <svg style={styles.box}
+          className="rotate-down"
           viewBox="0 0 32 32">
           <rect x="2" y="2" width="28" height="28"
-            className="rotate-down stroke"
+            className="stroke"
             style={styles.boxRect} />
         </svg>
         <svg style={styles.box}
+          className="rotate-down vhs-delay-2"
           viewBox="0 0 32 32">
           <rect x="2" y="2" width="28" height="28"
-            className="rotate-down vhs-delay-2 stroke"
+            className="stroke"
             style={styles.boxRect} />
         </svg>
         <svg style={styles.box}
+          className="rotate-down vhs-delay-3"
           viewBox="0 0 32 32">
           <rect x="2" y="2" width="28" height="28"
-            className="rotate-down vhs-delay-3 stroke"
+            className="stroke"
             style={styles.boxRect} />
         </svg>
         <svg style={styles.box}
+          className="rotate-down vhs-delay-4"
           viewBox="0 0 32 32">
           <rect x="2" y="2" width="28" height="28"
-            className="rotate-down vhs-delay-4 stroke"
+            className="stroke"
             style={styles.boxRect} />
         </svg>
 

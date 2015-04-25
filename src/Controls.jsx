@@ -105,9 +105,9 @@ var Controls = React.createClass({
             <Icon name={playing ? 'pause' : 'play'} />
           </button>
           {this.renderControlGroup('Drums', [1,2,3,4])}
-          {this.renderControlGroup('Bass', [5,6])}
-          {this.renderControlGroup('FX', [7,8,9,10,11,12])}
-          {this.renderControlGroup('Stabs', [13,14,15])}
+          {this.renderControlGroup('Bass', [5,6], { autolaunch: [4,5] })}
+          {this.renderControlGroup('FX', [7,8,9,10,11,12], { autolaunch: [7,8,9] })}
+          {this.renderControlGroup('Stabs', [13,14,15], { autolaunch: [13,14,15] } )}
           {this.renderControlGroup('Meow', [16,17])}
           {this.renderControlGroup('Chords', [18,19])}
           {this.renderControlGroup('Vocals', [20,21,22,23])}
