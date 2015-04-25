@@ -17,8 +17,10 @@ var Controls = React.createClass({
 
   switchSample: function(index, tracks) {
     var self = this;
+    var queue = this.props.queue;
     tracks.forEach(function(i) {
-      if (i !== index && self.props.tracks[i].active) {
+      var qIndex = queue.indexOf(i);
+      if (i !== index && (self.props.tracks[i].active || qIndex > -1)) {
         self.props.toggleTrack(i);
       }
     })
