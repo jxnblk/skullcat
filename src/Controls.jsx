@@ -35,7 +35,7 @@ var Controls = React.createClass({
     return (
       <div className="px1 mb1">
         <h3 className="h6 mt0">{name}</h3>
-        <div className="flex">
+        <div className="flex border border-white">
           {arr.map(function(index, i) {
             return self.renderTrack(index, i, handler)
           })}
@@ -72,12 +72,12 @@ var Controls = React.createClass({
       <div key={'track-'+i}>
         <button style={styles.button}
           className={
-            classnames('button', 'button-narrow',
+            classnames('button',
               {
                 'vhs-flash vhs-infinite vhs-alternate': queued,
                 'muted': unqueued,
                 'button-transparent': !active,
-                'black bg-white vhs-pop': active,
+                'black bg-white not-rounded vhs-pop': active,
               }
             )
           }
@@ -94,16 +94,23 @@ var Controls = React.createClass({
     var styles = {
       container: {
         visibility: this.props.drop ? 'hidden' : '',
+      },
+      button: {
+        position: 'fixed',
+        top: 0,
+        right: 0,
       }
     };
     return (
       <div className="flex px1 mt2"
         style={styles.container}>
+        <button
+          onClick={this.props.playPause}
+          style={styles.button}
+          className={classnames('h2', 'm1', 'button', 'button-transparent', { 'vhs-pop': playing })}>
+          <Icon name={playing ? 'pause' : 'play'} />
+        </button>
         <div className={classnames('mx-auto flex flex-center flex-wrap mxn1', this.props.drop ? '' : 'vhs-bottom')}>
-          <button onClick={this.props.playPause}
-            className={classnames('h2', 'button', 'button-narrow', 'button-transparent', { 'vhs-pop': playing })}>
-            <Icon name={playing ? 'pause' : 'play'} />
-          </button>
           {this.renderControlGroup('Drums', [1,2,3,4])}
           {this.renderControlGroup('Bass', [5,6])}
           {this.renderControlGroup('FX', [7,8,9,10,11,12])}
