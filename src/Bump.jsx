@@ -71,7 +71,7 @@ var Bump = React.createClass({
       tracks: this.props.samples,
       queue: [],
       unqueue: [],
-      drop: false, 
+      drop: true, 
       time: 0
     }
   },
@@ -167,12 +167,11 @@ var Bump = React.createClass({
   },
 
   setDrop: function() {
-    //this.activateTrack(0);
-    //bumpkit.loopLength = 64;
+    this.activateTrack(0);
+    bumpkit.loopLength = 64;
   },
 
   endDrop: function() {
-    console.log('end drop');
     this.deactivateTrack(0);
     this.activateTrack(1);
     this.activateTrack(7);
@@ -185,11 +184,12 @@ var Bump = React.createClass({
     var self = this;
     var launches = [
       [5,6],
-      [7,8],
-      [9,10,11,12],
-      [13,14],
+      [7,8,9],
+      [10,11,12],
+      [13,14,15],
       [16,17],
       [18,19],
+      [22,23],
     ];
     launches.forEach(function(launch) {
       var active = false;
@@ -221,13 +221,14 @@ var Bump = React.createClass({
       this.addStepListener();
       loadSamples(samples);
       this.setDrop();
+      //this.bindKeys();
     }
   },
 
 
   render: function() {
     return (
-      <div className="flex flex-column white bg-black" style={{minHeight:'100vh'}}>
+      <div className="flex flex-column white xbg-black" style={{minHeight:'100vh',backgroundColor:'#000'}}>
         <Stage
           {...this.props}
           {...this.state}

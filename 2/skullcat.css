@@ -1191,6 +1191,27 @@ hr {
     to { -webkit-transform: scale(0) rotate(0); transform: scale(0) rotate(0) }
 }
 
+.haha-right {
+  -webkit-animation-name: haha-right;
+          animation-name: haha-right;
+  -webkit-animation-duration: 6s;
+          animation-duration: 6s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes haha-right {
+  from { -webkit-transform: translateX(100%); transform: translateX(100%) }
+    to { -webkit-transform: translateX(-100%); transform: translateX(-100%) }
+}
+
+@keyframes haha-right {
+  from { -webkit-transform: translateX(100%); transform: translateX(100%) }
+    to { -webkit-transform: translateX(-100%); transform: translateX(-100%) }
+}
+
 .cycle-right {
   -webkit-animation-name: cycle-right;
           animation-name: cycle-right;

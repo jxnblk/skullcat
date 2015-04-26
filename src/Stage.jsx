@@ -52,9 +52,11 @@ var Stage = React.createClass({
             length={32} />
         </div>
         <div className="flex flex-center center" style={styles.play}>
-          <button className="mx-auto h0 button button-transparent"
+          <button className="caps mx-auto button button-big button-transparent"
+            autoFocus="true"
             onClick={this.props.playPause}>
-            <Icon name="play" />
+            <Icon name="play" className="h0" />
+            <div>Drop It</div>
           </button>
         </div>
       </div>

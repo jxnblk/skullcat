@@ -45,6 +45,18 @@
     to { transform: scale(0) rotate(0) }
 }
 
+.haha-right {
+  animation-name: haha-right;
+  animation-duration: 6s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes haha-right {
+  from { transform: translateX(100%) }
+    to { transform: translateX(-100%) }
+}
+
 .cycle-right {
   animation-name: cycle-right;
   animation-duration: .3s;

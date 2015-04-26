@@ -88,6 +88,15 @@ var frames2 = [
   { className: '' },
 ];
 
+var frames = {
+  drop: [
+    1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1,
+    1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1,
+    1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1,
+    0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+  ]
+};
+
 
 var Skull = React.createClass({
 
@@ -95,7 +104,7 @@ var Skull = React.createClass({
     var playing = this.props.playing;
     var step = this.props.step;
     var tracks = this.props.tracks;
-    var animationDuration = tracks[0].active ? '6s' : '.1875s';
+    var animationDuration = (tracks[0].active && step < 40) ? '6s' : '.1875s';
     var active = (playing && (tracks[0].active || tracks[1].active || tracks[2].active || tracks[3].active || tracks[4].active));
     var styles = {
       container: {
@@ -112,13 +121,22 @@ var Skull = React.createClass({
       }
     };
     var className = '';
-    if (playing && step < 32) {
+    if (playing) {
       if (tracks[0].active) {
-        var className = 'vhs-blur';
-      } else if (tracks[1].active || tracks[2].active || tracks[4].active) {
-        var className = frames1[step].className; 
-      } else if (tracks[3].active) {
-        var className = frames2[step].className; 
+        console.log(step);
+        if (step < 40) {
+          className = 'vhs-blur';
+        } else {
+          className = 'vhs-zoom vhs-reverse';
+          console.log('>40', className, step);
+        }
+        styles.container.display = frames.drop[step] ? '' : 'none';
+      } else if (step < 32) {
+        if (tracks[1].active || tracks[2].active || tracks[4].active) {
+          var className = frames1[step].className; 
+        } else if (tracks[3].active) {
+          var className = frames2[step].className; 
+        }
       }
     }
     return (

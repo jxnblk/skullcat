@@ -3,6 +3,23 @@ var React = require('react');
 var classnames = require('classnames');
 var Icon = require('react-geomicons');
 
+var keymap = [
+  'Drop',
+  'A', 'S', 'D', 'F',
+  // 5 bass
+  'G', 'H',
+  // 7 fx
+  'Q', 'W', 'E', 'R', 'T', 'Y',
+  // 13 stabs
+  'J', 'K', 'L',
+  // 16 meows
+  'U', 'I',
+  // 18 meows
+  'O', 'P',
+  // 20 vocals
+  '1', '2', '3', '4',
+];
+
 var Controls = React.createClass({
 
   propTypes: {
@@ -15,6 +32,117 @@ var Controls = React.createClass({
     step: React.PropTypes.number.isRequired,
   },
 
+  handleKeydown: function(e) {
+    if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) {
+      return false;
+    }
+    switch (e.keyCode) {
+      case 32:
+        e.preventDefault();
+        this.props.playPause();
+        break;
+      case 65: // A
+        e.preventDefault();
+        this.switchSample(1, [1,2,3,4,]);
+        break;
+      case 83: // S
+        e.preventDefault();
+        this.switchSample(2, [1,2,3,4,]);
+        break;
+      case 68: // D
+        e.preventDefault();
+        this.switchSample(3, [1,2,3,4,]);
+        break;
+      case 70: // F
+        e.preventDefault();
+        this.switchSample(4, [1,2,3,4,]);
+        break;
+      case 71: // G
+        e.preventDefault();
+        this.switchSample(5, [5,6]);
+        break;
+      case 72: // H
+        e.preventDefault();
+        this.switchSample(6, [5,6]);
+        break;
+      case 81: // Q
+        e.preventDefault();
+        this.switchSample(7, [7,8,9,10,11,12]);
+        break;
+      case 87: // W
+        e.preventDefault();
+        this.switchSample(8, [7,8,9,10,11,12]);
+        break;
+      case 69: // E
+        e.preventDefault();
+        this.switchSample(9, [7,8,9,10,11,12]);
+        break;
+      case 82: // R
+        e.preventDefault();
+        this.switchSample(10, [7,8,9,10,11,12]);
+        break;
+      case 84: // T
+        e.preventDefault();
+        this.switchSample(11, [7,8,9,10,11,12]);
+        break;
+      case 89: // Y
+        e.preventDefault();
+        this.switchSample(12, [7,8,9,10,11,12]);
+        break;
+      case 74: // J
+        e.preventDefault();
+        this.switchSample(13, [13,14,15]);
+        break;
+      case 75: // K
+        e.preventDefault();
+        this.switchSample(14, [13,14,15]);
+        break;
+      case 76: // L
+        e.preventDefault();
+        this.switchSample(15, [13,14,15]);
+        break;
+      case 85: // U
+        e.preventDefault();
+        this.switchSample(16, [16,17]);
+        break;
+      case 73: // I
+        e.preventDefault();
+        this.switchSample(17, [16,17]);
+        break;
+      case 79: // O
+        e.preventDefault();
+        this.switchSample(18, [18,19]);
+        break;
+      case 80: // O
+        e.preventDefault();
+        this.switchSample(19, [18,19]);
+        break;
+      case 49: // 1
+        e.preventDefault();
+        this.switchSample(20, [20,21,22,23]);
+        break;
+      case 50: // 2
+        e.preventDefault();
+        this.switchSample(21, [20,21,22,23]);
+        break;
+      case 51: // 3
+        e.preventDefault();
+        this.switchSample(22, [20,21,22,23]);
+        break;
+      case 52: // 4
+        e.preventDefault();
+        this.switchSample(23, [20,21,22,23]);
+        break;
+    }
+  },
+
+  bindKeys: function() {
+    var self = this;
+    window.addEventListener('keydown', function(e) {
+      self.handleKeydown(e);
+    });
+  },
+
   switchSample: function(index, tracks) {
     var self = this;
     var queue = this.props.queue;
@@ -25,6 +153,12 @@ var Controls = React.createClass({
       }
     })
     this.props.toggleTrack(index);
+  },
+
+  componentDidMount: function() {
+    if (typeof window !== 'undefined') {
+      this.bindKeys();
+    }
   },
 
   renderControlGroup: function(name, arr) {
@@ -82,7 +216,7 @@ var Controls = React.createClass({
             )
           }
           onClick={handleClick}>
-          {n+1}
+          {keymap[i]}
         </button>
       </div>
     )

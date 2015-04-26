@@ -34,6 +34,12 @@ var frames = {
     0,0,0,0, 0,0,0,0, 0,0,0,0, 1,1,1,1,
     0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
   ],
+  ahahaha: [
+    0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+    1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1,
+    1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1,
+    1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1,
+  ],
 };
 
 var Lyrics = React.createClass({
@@ -127,9 +133,20 @@ var Lyrics = React.createClass({
         transform: 'translate(-50%, 0)',
         display: 'none',
       },
+      ahahaha: {
+        position: 'absolute',
+        bottom: '0',
+        left: '50%',
+        MozTransform: 'translate(-50%, 0)',
+        WebkitTransform: 'translate(-50%, 0)',
+        transform: 'translate(-50%, 0)',
+        display: 'none',
+      },
     };
 
-    if (tracks[20].active || tracks[21].active) {
+    if (tracks[0].active) {
+      styles.ahahaha.display = frames.ahahaha[step] ? '' : 'none';
+    } else if (tracks[20].active || tracks[21].active) {
       styles.skull.display = frames.skull[step] ? '' : 'none';
       styles.cat.display = frames.cat[step] ? '' : 'none';
       styles.who.display = frames.who[step] ? '' : 'none';
@@ -165,6 +182,9 @@ var Lyrics = React.createClass({
         </div>
         <div style={styles.okay} className="px3">
           <h1 className="h00 vhs-top">okay</h1>
+        </div>
+        <div style={styles.ahahaha} className="px3">
+          <h1 className="h00 caps nowrap haha-right">Ahahahaha!!! hahahahahahahahahahahaha!!!</h1>
         </div>
       </div>
     )
