@@ -21,7 +21,7 @@ var frames = {
   ],
   dots: [
     0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-    0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,1,1,
+    0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,1,0,
   ],
   bar: [
     0,0,0,0, 0,0,0,0, 0,0,0,0, 1,1,1,1,
@@ -149,7 +149,7 @@ var Stabs = React.createClass({
           className="vhs-fade"
           preserveAspectRatio="none"
           viewBox="0 0 32 32">
-          <rect y="14" width="32" height="2" />
+          <rect y="15" width="32" height="2" className="vhs-flicker" />
         </svg>
 
       </div>

@@ -6,6 +6,7 @@ var Bass = require('./Bass.jsx');
 var Lyrics = require('./Lyrics.jsx');
 var Stabs = require('./Stabs.jsx');
 var Fx = require('./Fx.jsx');
+var Science = require('./Science.jsx');
 var StepVisualizer = require('./StepVisualizer.jsx');
 var Icon = require('react-geomicons');
 
@@ -37,6 +38,7 @@ var Stage = React.createClass({
         <Tachyons {...this.props} />
         <Stabs {...this.props} />
         <Fx {...this.props} />
+        <Science {...this.props} />
         <Bass {...this.props} />
         <Skull {...this.props} />
         <Lyrics {...this.props} />

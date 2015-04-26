@@ -14,13 +14,17 @@ var frames = {
     0,0,0,0, 0,0,0,0, 1,1,1,1, 1,1,1,1,
     1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,0,
   ],
-  wave: [
-    1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1,
-    1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,0,
-  ],
-  lines: [
+  bar: [
+    1,1,1,1, 0,0,0,0, 0,0,0,0, 0,0,0,0,
     0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-    0,0,0,0, 1,1,1,1, 1,1,1,1, 1,1,1,0,
+  ],
+  bubble: [
+    0,0,1,1, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+    0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+  ],
+  horizon: [
+    0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+    0,0,0,0, 1,1,1,1, 1,1,1,1, 1,1,1,1,
   ],
 };
 
@@ -70,22 +74,6 @@ var Fx = React.createClass({
         WebkitAnimationDuration: '.1875s',
         animationDuration: '.1875s',
       },
-      lines: {
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        maxHeight: '100%',
-        display: 'none',
-        MozAnimationDuration: '.1875s',
-        WebkitAnimationDuration: '.1875s',
-        animationDuration: '.1875s',
-      },
-      line: {
-        display: 'none',
-        MozAnimationDuration: '1.5s',
-        WebkitAnimationDuration: '1.5s',
-        animationDuration: '1.5s',
-      },
       box: {
         position: 'absolute',
         width: '100%',
@@ -95,18 +83,36 @@ var Fx = React.createClass({
         WebkitTransformOrigin: '50% 50%',
         transformOrigin: '50% 50%',
       },
-      boxRect: {
-        //WebkitTransformOrigin: '16 17',
-        //transformOrigin: '16 17',
-      },
-      wave: {
+      bar: {
         position: 'absolute',
-        top: '25%',
         width: '100%',
-        height: '50%',
+        height: '100%',
+        maxHeight: '100%',
+        MozAnimationDuration: '.1875s',
+        WebkitAnimationDuration: '.1875s',
+        animationDuration: '.1875s',
+        display: 'none',
+      },
+      bubble: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
         maxHeight: '100%',
         display: 'none',
-      }
+      },
+      bubbleCircle: {
+        WebkitTransformOrigin: '10.5 16',
+        transformOrigin: '10.5 16',
+      },
+      horizon: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        maxHeight: '100%',
+        //WebkitTransformOrigin: '50% 50%',
+        //transformOrigin: '50% 50%',
+        display: 'none',
+      },
     };
 
     if (playing) {
@@ -116,11 +122,10 @@ var Fx = React.createClass({
         styles.square.display = frames.square[step] ? '' : 'none';
       } else if (tracks[8].active) {
         styles.box.display = frames.box[step] ? '' : 'none';
-      } else if (tracks[11].active) {
-        styles.wave.display = frames.wave[step] ? '' : 'none';
-      } else if (tracks[14].active) {
-        styles.lines.display = frames.lines[step] ? '' : 'none';
-        styles.line.display = frames.lines[step] ? '' : 'none';
+      } else if (tracks[10].active) {
+        styles.bar.display = frames.bar[step] ? '' : 'none';
+        styles.bubble.display = frames.bubble[step] ? '' : 'none';
+        styles.horizon.display = frames.horizon[step] ? '' : 'none';
       }
     }
 
@@ -132,13 +137,18 @@ var Fx = React.createClass({
           preserveAspectRatio="none"
           viewBox="0 0 32 32">
           <path d="M0 16 H32"
-            className="stroke" />
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="0.25" />
         </svg>
         <svg style={styles.horizontal2}
           className="vhs-bottom"
           preserveAspectRatio="none"
           viewBox="0 0 32 32">
-          <path d="M0 16 H32" className="stroke" />
+          <path d="M0 16 H32"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="0.25" />
         </svg>
         <svg style={styles.square}
           className="vhs-bottom"
@@ -150,8 +160,7 @@ var Fx = React.createClass({
           className="rotate-down"
           viewBox="0 0 32 32">
           <rect x="2" y="2" width="28" height="28"
-            className="stroke"
-            style={styles.boxRect} />
+            className="stroke" />
         </svg>
         <svg style={styles.box}
           className="rotate-down vhs-delay-2"
@@ -175,29 +184,22 @@ var Fx = React.createClass({
             style={styles.boxRect} />
         </svg>
 
-        <svg style={styles.wave}
-          viewBox="0 0 32 32"
-          preserveAspectRatio="none">
-          <path 
-            className="stroke cycle-right"
-            d=" M-32 16 Q-24 -4 -16 16 T0 16 T16 16 T32 16 "/>
+        <svg style={styles.bar}
+          className="vhs-top "
+          viewBox="0 0 32 32">
+          <rect x="4" y="26" width="24" height="2" />
         </svg>
-        <svg style={styles.wave}
-          viewBox="0 0 32 32"
-          preserveAspectRatio="none">
-          <path 
-            className="stroke cycle-right vhs-delay-3"
-            d=" M-32 16 Q-24 -4 -16 16 T0 16 T16 16 T32 16 "/>
+        <svg style={styles.bubble}
+          className="xvhs-pop"
+          viewBox="0 0 32 32">
+          <circle cx="10.5" cy="16" r="2"
+            style={styles.bubbleCircle}
+            className="vhs-pop stroke" />
         </svg>
-
-        <svg style={styles.lines}
+        <svg style={styles.horizon}
           preserveAspectRatio="none"
           viewBox="0 0 32 32">
-          <path style={styles.line} className="stroke vhs-flicker vhs-delay-1" d="M0 14 H32" />
-          <path style={styles.line} className="stroke vhs-flicker " d="M0 15 H32" />
-          <path style={styles.line} className="stroke vhs-flicker vhs-delay-3" d="M0 16 H32" />
-          <path style={styles.line} className="stroke vhs-flicker vhs-delay-2" d="M0 17 H32" />
-          <path style={styles.line} className="stroke vhs-flicker vhs-delay-4" d="M0 18 H32" />
+          <path className="rotate stroke" d="M-16 16 H48" />
         </svg>
 
       </div>

@@ -1173,6 +1173,31 @@ svg { fill: currentcolor }
   stroke: currentColor;
   stroke-width: 4;
   vector-effect: non-scaling-stroke;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+}
+
+.rotate {
+  -webkit-animation-name: rotate;
+          animation-name: rotate;
+  -webkit-animation-duration: 2.25s;
+          animation-duration: 2.25s;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-transform-origin: 50% 50%;
+      -ms-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+
+@-webkit-keyframes rotate {
+  from { -webkit-transform: rotate(0deg); transform: rotate(0deg) }
+    to { -webkit-transform: rotate(180deg); transform: rotate(180deg) }
+}
+
+@keyframes rotate {
+  from { -webkit-transform: rotate(0deg); transform: rotate(0deg) }
+    to { -webkit-transform: rotate(180deg); transform: rotate(180deg) }
 }
 
 .rotate-down {

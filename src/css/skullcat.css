@@ -38,6 +38,19 @@ svg { fill: currentcolor }
   stroke: currentColor;
   stroke-width: 4;
   vector-effect: non-scaling-stroke;
+  transform: scale(1);
+}
+
+.rotate {
+  animation-name: rotate;
+  animation-duration: 2.25s;
+  animation-timing-function: ease-out;
+  transform-origin: 50% 50%;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg) }
+    to { transform: rotate(180deg) }
 }
 
 .rotate-down {
