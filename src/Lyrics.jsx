@@ -169,10 +169,10 @@ var Lyrics = React.createClass({
           <h1 className="h00 vhs-pop">cat</h1>
         </div>
         <div style={styles.who} className="px3">
-          <h1 className="h1 vhs-left">who?</h1>
+          <h1 className="h1 vhs-pop">who?</h1>
         </div>
         <div style={styles.what} className="px3">
-          <h1 className="h1 vhs-right">what?</h1>
+          <h1 className="h1 vhs-pop">what?</h1>
         </div>
         <div style={styles.yeah} className="px3">
           <h1 className="h00 vhs-top">yeah!</h1>
@@ -184,7 +184,7 @@ var Lyrics = React.createClass({
           <h1 className="h00 vhs-top">okay</h1>
         </div>
         <div style={styles.ahahaha} className="px3">
-          <h1 className="h00 caps nowrap haha-right">Ahahahaha!!! hahahahahahahahahahahaha!!!</h1>
+          <h1 className="h0 caps nowrap haha-right">Ahahahaha!!! hahahahahahahahahahahaha!!!</h1>
         </div>
       </div>
     )

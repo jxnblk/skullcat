@@ -3,6 +3,30 @@ var React = require('react');
 var classnames = require('classnames');
 
 var frames = {
+  bar1: [
+    1,1,0,0, 1,1,0,0, 0,0,0,0, 0,0,0,0,
+    1,1,0,0, 1,1,0,0, 0,0,0,0, 0,0,0,0,
+  ],
+  bar2: [
+    0,0,0,0, 0,0,0,0, 1,1,0,0, 0,0,0,0,
+    0,0,0,0, 0,0,0,0, 1,1,0,0, 0,0,0,0,
+  ],
+  bar3: [
+    0,0,0,0, 0,0,0,0, 0,0,0,0, 1,1,0,0,
+    0,0,0,0, 0,0,0,0, 0,0,0,0, 1,1,0,0,
+  ],
+  bar1b: [
+    0,0,0,0, 1,1,0,0, 0,0,0,0, 1,1,0,0,
+    1,1,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+  ],
+  bar2b: [
+    1,1,0,0, 0,0,0,0, 1,1,0,0, 0,0,0,0,
+    0,0,0,0, 1,1,0,0, 1,1,0,0, 0,0,0,0,
+  ],
+  bar3b: [
+    0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+    0,0,0,0, 0,0,0,0, 0,0,0,0, 1,1,0,0,
+  ],
   dots: [
     1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1,
     1,1,1,1, 1,1,1,1, 1,1,1,1, 0,0,0,0,
@@ -35,6 +59,36 @@ var Chords = React.createClass({
         maxHeight: '100%',
         display: 'none',
       },
+      bar1: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        maxHeight: '100%',
+        MozAnimationDuration: '.09375s',
+        WebkitAnimationDuration: '.09375s',
+        animationDuration: '.09375s',
+        display: 'none',
+      },
+      bar2: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        maxHeight: '100%',
+        MozAnimationDuration: '.09375s',
+        WebkitAnimationDuration: '.09375s',
+        animationDuration: '.09375s',
+        display: 'none',
+      },
+      bar3: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        maxHeight: '100%',
+        MozAnimationDuration: '.09375s',
+        WebkitAnimationDuration: '.09375s',
+        animationDuration: '.09375s',
+        display: 'none',
+      },
       keys: {
         position: 'absolute',
         width: '100%',
@@ -49,6 +103,13 @@ var Chords = React.createClass({
 
     if (playing) {
       if (tracks[25].active) {
+        styles.bar1.display = frames.bar1[step] ? '' : 'none';
+        styles.bar2.display = frames.bar2[step] ? '' : 'none';
+        styles.bar3.display = frames.bar3[step] ? '' : 'none';
+      } else if (tracks[26].active) {
+        styles.bar1.display = frames.bar1b[step] ? '' : 'none';
+        styles.bar2.display = frames.bar2b[step] ? '' : 'none';
+        styles.bar3.display = frames.bar3b[step] ? '' : 'none';
       } else if (tracks[27].active) {
         styles.dots.display = frames.dots[step] ? '' : 'none';
       } else if (tracks[28].active) {
@@ -58,6 +119,22 @@ var Chords = React.createClass({
 
     return (
       <div className="absolute" style={styles.container}>
+
+        <svg style={styles.bar1}
+          className="vhs-top"
+          viewBox="0 0 32 32">
+          <rect x="4" y="9" width="24" height="2" />
+        </svg>
+        <svg style={styles.bar2}
+          className="vhs-top"
+          viewBox="0 0 32 32">
+          <rect x="4" y="15" width="24" height="2" />
+        </svg>
+        <svg style={styles.bar3}
+          className="vhs-top"
+          viewBox="0 0 32 32">
+          <rect x="4" y="21" width="24" height="2" />
+        </svg>
 
         <svg style={styles.dots}
           className="rotate-down"
