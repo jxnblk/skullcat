@@ -200,7 +200,7 @@ var Controls = React.createClass({
       self.switchSample(index, arr);
     };
     return (
-      <div className="px1 mb1">
+      <div className="flex-auto px1 mb1">
         <h3 className="h6 mt0">{name}</h3>
         <div className="flex border">
           {arr.map(function(index, i) {
@@ -236,23 +236,22 @@ var Controls = React.createClass({
       }
     };
     return (
-      <div key={'track-'+i}>
-        <button style={styles.button}
-          className={
-            classnames('button',
-              {
-                'vhs-flash vhs-infinite vhs-alternate': queued,
-                'muted': unqueued,
-                'button-transparent': !active,
-                'black bg-white not-rounded vhs-pop': active,
-              },
-              (active && this.props.terminator) ? 'bg-red' : ''
-            )
-          }
-          onClick={handleClick}>
-          {keymap[i]}
-        </button>
-      </div>
+      <button key={'track-'+i}
+        style={styles.button}
+        className={
+          classnames('button', 'button-narrow', 'flex-auto',
+            {
+              'vhs-flash vhs-infinite vhs-alternate': queued,
+              'muted': unqueued,
+              'button-transparent': !active,
+              'black bg-white not-rounded vhs-pop': active,
+            },
+            (active && this.props.terminator) ? 'bg-red' : ''
+          )
+        }
+        onClick={handleClick}>
+        {keymap[i]}
+      </button>
     )
   },
 
@@ -270,7 +269,7 @@ var Controls = React.createClass({
       }
     };
     return (
-      <div className="flex px1 mt2"
+      <div className="p1"
         style={styles.container}>
         <button
           onClick={this.props.playPause}
@@ -278,15 +277,21 @@ var Controls = React.createClass({
           className={classnames('h2', 'm1', 'button', 'button-transparent', { 'vhs-pop': playing })}>
           <Icon name={playing ? 'pause' : 'play'} />
         </button>
-        <div className={classnames('mx-auto flex flex-center flex-wrap mxn1', this.props.drop ? '' : 'vhs-bottom')}>
-          {this.renderControlGroup('Drums', [1,2,3,4])}
-          {this.renderControlGroup('Bass', [5,6])}
-          {this.renderControlGroup('FX', [7,8,9,10])}
-          {this.renderControlGroup('Science', [11,12,13,14])}
-          {this.renderControlGroup('Stabs', [15,16,17,18])}
-          {this.renderControlGroup('Meow', [19,20])}
-          {this.renderControlGroup('Vocals', [21,22,23,24])}
-          {this.renderControlGroup('Chords', [25,26,27,28])}
+        <div className={classnames('md-flex', 'px1', 'mxn1', this.props.drop ? '' : 'vhs-bottom')}>
+          <div className="flex flex-center flex-auto flex-last">
+            {this.renderControlGroup('Vocals', [21,22,23,24])}
+            {this.renderControlGroup('Chords', [25,26,27,28])}
+          </div>
+          <div className="flex flex-center flex-auto">
+            {this.renderControlGroup('FX', [7,8,9,10])}
+            {this.renderControlGroup('Science', [11,12,13,14])}
+            {this.renderControlGroup('Meow', [19,20])}
+          </div>
+          <div className="flex flex-center flex-auto flex-first">
+            {this.renderControlGroup('Drums', [1,2,3,4])}
+            {this.renderControlGroup('Bass', [5,6])}
+            {this.renderControlGroup('Stabs', [15,16,17,18])}
+          </div>
         </div>
       </div>
     )

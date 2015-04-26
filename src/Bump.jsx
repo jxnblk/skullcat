@@ -176,9 +176,9 @@ var Bump = React.createClass({
     this.deactivateTrack(0);
     this.activateTrack(1);
     this.activateTrack(7);
-    this.activateTrack(13);
-    this.activateTrack(16);
-    this.activateTrack(20);
+    this.activateTrack(15);
+    this.activateTrack(19);
+    this.activateTrack(21);
   },
 
   toggleTerminator: function() {
