@@ -6,18 +6,20 @@ var Icon = require('react-geomicons');
 var keymap = [
   'Drop',
   'A', 'S', 'D', 'F',
-  // 5 bass
+  // 5, 6 bass
   'G', 'H',
-  // 7 fx
-  'Q', 'W', 'E', 'R', 'T', 'Y',
-  // 13 stabs
-  'J', 'K', 'L',
-  // 16 meows
-  'U', 'I',
-  // 18 meows
+  // 7, 8, 9, 10 fx
+  'Q', 'W', 'E', 'R',
+  // 11, 12, 13, 14 science
+  'T', 'Y', 'U', 'I',
+  // 15, 16, 17, 18 stabs
+  'J', 'K', 'L', ';',
+  // 19, 20 meows
   'O', 'P',
-  // 20 vocals
+  // 21, 22, 23, 24 vocals
   '1', '2', '3', '4',
+  // 25, 26, 27, 28 chords
+  '7', '8', '9', '0',
 ];
 
 var Controls = React.createClass({
@@ -33,6 +35,7 @@ var Controls = React.createClass({
   },
 
   handleKeydown: function(e) {
+    console.log(e.keyCode);
     if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) {
       return false;
     }
@@ -65,73 +68,103 @@ var Controls = React.createClass({
         e.preventDefault();
         this.switchSample(6, [5,6]);
         break;
+      // FX
       case 81: // Q
         e.preventDefault();
-        this.switchSample(7, [7,8,9,10,11,12]);
+        this.switchSample(7, [7,8,9,10]);
         break;
       case 87: // W
         e.preventDefault();
-        this.switchSample(8, [7,8,9,10,11,12]);
+        this.switchSample(8, [7,8,9,10]);
         break;
       case 69: // E
         e.preventDefault();
-        this.switchSample(9, [7,8,9,10,11,12]);
+        this.switchSample(9, [7,8,9,10]);
         break;
       case 82: // R
         e.preventDefault();
-        this.switchSample(10, [7,8,9,10,11,12]);
+        this.switchSample(10, [7,8,9,10]);
         break;
+      // science
       case 84: // T
         e.preventDefault();
-        this.switchSample(11, [7,8,9,10,11,12]);
+        this.switchSample(11, [11,12,13,14]);
         break;
       case 89: // Y
         e.preventDefault();
-        this.switchSample(12, [7,8,9,10,11,12]);
-        break;
-      case 74: // J
-        e.preventDefault();
-        this.switchSample(13, [13,14,15]);
-        break;
-      case 75: // K
-        e.preventDefault();
-        this.switchSample(14, [13,14,15]);
-        break;
-      case 76: // L
-        e.preventDefault();
-        this.switchSample(15, [13,14,15]);
+        this.switchSample(12, [11,12,13,14]);
         break;
       case 85: // U
         e.preventDefault();
-        this.switchSample(16, [16,17]);
+        this.switchSample(13, [11,12,13,14]);
         break;
       case 73: // I
         e.preventDefault();
-        this.switchSample(17, [16,17]);
+        this.switchSample(14, [11,12,13,14]);
         break;
+      // stabs
+      case 74: // J
+        e.preventDefault();
+        this.switchSample(15, [15,16,17,18]);
+        break;
+      case 75: // K
+        e.preventDefault();
+        this.switchSample(16, [15,16,17,18]);
+        break;
+      case 76: // L
+        e.preventDefault();
+        this.switchSample(17, [15,16,17,18]);
+        break;
+      case 186: // ;
+        e.preventDefault();
+        this.switchSample(18, [15,16,17,18]);
+        break;
+      // meow
       case 79: // O
         e.preventDefault();
-        this.switchSample(18, [18,19]);
+        this.switchSample(19, [19,20]);
         break;
-      case 80: // O
+      case 80: // P
         e.preventDefault();
-        this.switchSample(19, [18,19]);
+        this.switchSample(20, [19,20]);
         break;
+      // vocals
       case 49: // 1
         e.preventDefault();
-        this.switchSample(20, [20,21,22,23]);
+        this.switchSample(21, [21,22,23,24]);
         break;
       case 50: // 2
         e.preventDefault();
-        this.switchSample(21, [20,21,22,23]);
+        this.switchSample(22, [21,22,23,24]);
         break;
       case 51: // 3
         e.preventDefault();
-        this.switchSample(22, [20,21,22,23]);
+        this.switchSample(23, [21,22,23,24]);
         break;
       case 52: // 4
         e.preventDefault();
-        this.switchSample(23, [20,21,22,23]);
+        this.switchSample(24, [21,22,23,24]);
+        break;
+      // chords
+      case 55: // 7
+        e.preventDefault();
+        this.switchSample(25, [25,26,27,28]);
+        break;
+      case 56: // 8
+        e.preventDefault();
+        this.switchSample(26, [25,26,27,28]);
+        break;
+      case 57: // 9
+        e.preventDefault();
+        this.switchSample(27, [25,26,27,28]);
+        break;
+      case 48: // 0
+        e.preventDefault();
+        this.switchSample(28, [25,26,27,28]);
+        break;
+      case 90: // z
+        e.preventDefault();
+        this.props.toggleTerminator();
         break;
     }
   },
@@ -169,7 +202,7 @@ var Controls = React.createClass({
     return (
       <div className="px1 mb1">
         <h3 className="h6 mt0">{name}</h3>
-        <div className="flex border border-white">
+        <div className="flex border">
           {arr.map(function(index, i) {
             return self.renderTrack(index, i, handler)
           })}
@@ -212,7 +245,8 @@ var Controls = React.createClass({
                 'muted': unqueued,
                 'button-transparent': !active,
                 'black bg-white not-rounded vhs-pop': active,
-              }
+              },
+              (active && this.props.terminator) ? 'bg-red' : ''
             )
           }
           onClick={handleClick}>
@@ -247,11 +281,12 @@ var Controls = React.createClass({
         <div className={classnames('mx-auto flex flex-center flex-wrap mxn1', this.props.drop ? '' : 'vhs-bottom')}>
           {this.renderControlGroup('Drums', [1,2,3,4])}
           {this.renderControlGroup('Bass', [5,6])}
-          {this.renderControlGroup('FX', [7,8,9,10,11,12])}
-          {this.renderControlGroup('Stabs', [13,14,15])}
-          {this.renderControlGroup('Meow', [16,17])}
-          {this.renderControlGroup('Chords', [18,19])}
-          {this.renderControlGroup('Vocals', [20,21,22,23])}
+          {this.renderControlGroup('FX', [7,8,9,10])}
+          {this.renderControlGroup('Science', [11,12,13,14])}
+          {this.renderControlGroup('Stabs', [15,16,17,18])}
+          {this.renderControlGroup('Meow', [19,20])}
+          {this.renderControlGroup('Vocals', [21,22,23,24])}
+          {this.renderControlGroup('Chords', [25,26,27,28])}
         </div>
       </div>
     )

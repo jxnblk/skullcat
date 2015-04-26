@@ -146,16 +146,16 @@ var Lyrics = React.createClass({
 
     if (tracks[0].active) {
       styles.ahahaha.display = frames.ahahaha[step] ? '' : 'none';
-    } else if (tracks[20].active || tracks[21].active) {
+    } else if (tracks[21].active || tracks[22].active) {
       styles.skull.display = frames.skull[step] ? '' : 'none';
       styles.cat.display = frames.cat[step] ? '' : 'none';
       styles.who.display = frames.who[step] ? '' : 'none';
       styles.what.display = frames.what[step] ? '' : 'none';
       styles.yeah.display = frames.yeah[step] ? '' : 'none';
-    } else if (tracks[22].active) {
+    } else if (tracks[23].active) {
       styles.uhhuh.display = frames.uhhuh[step] ? '' : 'none';
       styles.okay.display = frames.okay[step] ? '' : 'none';
-    } else if (tracks[23].active) {
+    } else if (tracks[24].active) {
       styles.yeah.display = frames.yeah2[step] ? '' : 'none';
       styles.okay.display = frames.okay[step] ? '' : 'none';
     }

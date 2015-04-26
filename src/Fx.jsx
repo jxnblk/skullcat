@@ -101,8 +101,9 @@ var Fx = React.createClass({
       },
       wave: {
         position: 'absolute',
+        top: '25%',
         width: '100%',
-        height: '100%',
+        height: '50%',
         maxHeight: '100%',
         display: 'none',
       }
@@ -115,9 +116,9 @@ var Fx = React.createClass({
         styles.square.display = frames.square[step] ? '' : 'none';
       } else if (tracks[8].active) {
         styles.box.display = frames.box[step] ? '' : 'none';
-      } else if (tracks[10].active) {
+      } else if (tracks[11].active) {
         styles.wave.display = frames.wave[step] ? '' : 'none';
-      } else if (tracks[12].active) {
+      } else if (tracks[14].active) {
         styles.lines.display = frames.lines[step] ? '' : 'none';
         styles.line.display = frames.lines[step] ? '' : 'none';
       }
@@ -142,7 +143,7 @@ var Fx = React.createClass({
         <svg style={styles.square}
           className="vhs-bottom"
           viewBox="0 0 32 32">
-          <rect x="15" y="2" width="2" height="2" fill="white" />
+          <rect x="15" y="2" width="2" height="2" fill="currentColor" />
         </svg>
 
         <svg style={styles.box}

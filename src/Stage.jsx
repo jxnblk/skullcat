@@ -18,11 +18,6 @@ var Stage = React.createClass({
 
   render: function() {
     var tracks = this.props.tracks;
-    var active = {
-      bass: (tracks[5].active || tracks[6].active),
-      chorus: (tracks[20].active || tracks[20].active),
-      verse: (tracks[21].active || tracks[22].active), 
-    };
     var styles = {
       container: {
         overflowX: 'hidden'

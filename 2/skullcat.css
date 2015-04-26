@@ -1162,9 +1162,13 @@ hr {
   background-size: 12px 12px;
 }
 
+.border { border-color: currentColor }
+.bg-currentcolor { background-color: currentcolor }
+
 .stroke {
   fill: none;
   stroke: white;
+  stroke: currentColor;
   stroke-width: 4;
   vector-effect: non-scaling-stroke;
 }

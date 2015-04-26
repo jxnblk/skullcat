@@ -16,7 +16,7 @@ var StepVisualizer = React.createClass({
       <div key={'step-dot-'+step}
         className={
           classnames({
-            'muted gray': !active,
+            'muted': !active,
             'mr1': (step%4 == 3),
           })
         }>

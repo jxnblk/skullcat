@@ -73,41 +73,37 @@ var Stabs = React.createClass({
     };
 
     if (playing) {
-      if (tracks[13].active) {
+      if (tracks[15].active) {
         styles.backdrop.display = frames.backdrop[step] ? '' : 'none';
         styles.zigzag.display = frames.zigzag[step] ? '' : 'none';
-      } else if (tracks[14].active) {
+      } else if (tracks[16].active) {
         styles.diagonal.display = frames.diagonal1[step] ? '' : 'none';
-      } else if (tracks[15].active) {
+      } else if (tracks[17].active) {
         styles.diagonal.display = frames.diagonal2[step] ? '' : 'none';
       }
     }
 
     return (
       <div className="absolute" style={styles.container}>
-        <div className="vhs-fade bg-striped" style={styles.backdrop} />
+        <div className="vhs-fade xbg-white xbg-striped bg-currentcolor" style={styles.backdrop} />
         <svg style={styles.zigzag}
           className="vhs-left"
           viewBox="0 0 32 32">
           <path
             d="M0 16 L4 20 L12 12 L20 20 L28 12 L32 16"
-            fill="none"
-            stroke="white"
-            strokeWidth="0.125" />
+            className="stroke" />
         </svg>
         <svg style={styles.zigzag}
           className="vhs-right"
           viewBox="0 0 32 32">
           <path
             d="M0 16 L4 12 L12 20 L20 12 L28 20 L32 16"
-            fill="none"
-            stroke="white"
-            strokeWidth="0.125" />
+            className="stroke" />
         </svg>
         <svg style={styles.diagonal}
           className="vhs-right"
           viewBox="0 0 32 32">
-          <path d="M34 -2 L-2 34" fill="none" stroke="white" strokeWidth=".125" />
+          <path d="M34 -2 L-2 34" className="stroke" />
         </svg>
       </div>
     )

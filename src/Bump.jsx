@@ -71,8 +71,9 @@ var Bump = React.createClass({
       tracks: this.props.samples,
       queue: [],
       unqueue: [],
-      drop: true, 
-      time: 0
+      drop: false, 
+      time: 0,
+      terminator: false,
     }
   },
 
@@ -167,8 +168,8 @@ var Bump = React.createClass({
   },
 
   setDrop: function() {
-    this.activateTrack(0);
-    bumpkit.loopLength = 64;
+    //this.activateTrack(0);
+    //bumpkit.loopLength = 64;
   },
 
   endDrop: function() {
@@ -180,16 +181,21 @@ var Bump = React.createClass({
     this.activateTrack(20);
   },
 
+  toggleTerminator: function() {
+    var terminator = !this.state.terminator;
+    this.setState({ terminator: terminator });
+  },
+
   autolaunch: function() {
     var self = this;
     var launches = [
       [5,6],
-      [7,8,9],
-      [10,11,12],
-      [13,14,15],
-      [16,17],
-      [18,19],
-      [22,23],
+      [7,8,9,10],
+      [11,12,13,14],
+      [15,16,17,18],
+      [19,20],
+      [23,24],
+      [25,26],
     ];
     launches.forEach(function(launch) {
       var active = false;
@@ -221,14 +227,14 @@ var Bump = React.createClass({
       this.addStepListener();
       loadSamples(samples);
       this.setDrop();
-      //this.bindKeys();
     }
   },
 
 
   render: function() {
     return (
-      <div className="flex flex-column white xbg-black" style={{minHeight:'100vh',backgroundColor:'#000'}}>
+      <div className={classnames('flex flex-column', this.state.terminator ? 'red' : 'white')}
+        style={{minHeight:'100vh',backgroundColor:'#000'}}>
         <Stage
           {...this.props}
           {...this.state}
@@ -238,7 +244,8 @@ var Bump = React.createClass({
           {...this.state}
           loopLength={loopLength}
           playPause={this.playPause}
-          toggleTrack={this.toggleTrack} />
+          toggleTrack={this.toggleTrack}
+          toggleTerminator={this.toggleTerminator} />
       </div>
     )
   }
