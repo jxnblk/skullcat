@@ -196,7 +196,7 @@ var Bump = React.createClass({
       var current;
       var next;
       launch.forEach(function(n, i) {
-        if (self.state.tracks[n].active && self.state.unqueue.indexOf(n) === -1) {
+        if (self.state.tracks[n].active && self.state.unqueue.indexOf(n) < 0) {
           active = i;
           current = n;
         }
