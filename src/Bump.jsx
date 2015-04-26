@@ -71,7 +71,7 @@ var Bump = React.createClass({
       tracks: this.props.samples,
       queue: [],
       unqueue: [],
-      drop: false, 
+      drop: true, 
       time: 0,
       terminator: false,
     }
@@ -168,8 +168,8 @@ var Bump = React.createClass({
   },
 
   setDrop: function() {
-    //this.activateTrack(0);
-    //bumpkit.loopLength = 64;
+    this.activateTrack(0);
+    bumpkit.loopLength = 64;
   },
 
   endDrop: function() {

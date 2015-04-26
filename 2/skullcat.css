@@ -1207,6 +1207,8 @@ svg { fill: currentcolor }
           animation-duration: 4.5s;
   -webkit-animation-timing-function: linear;
           animation-timing-function: linear;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
   -webkit-transform-origin: 50% 50%;
       -ms-transform-origin: 50% 50%;
           transform-origin: 50% 50%;

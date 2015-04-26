@@ -7,6 +7,7 @@ var Lyrics = require('./Lyrics.jsx');
 var Stabs = require('./Stabs.jsx');
 var Fx = require('./Fx.jsx');
 var Science = require('./Science.jsx');
+var Chords = require('./Chords.jsx');
 var StepVisualizer = require('./StepVisualizer.jsx');
 var Icon = require('react-geomicons');
 
@@ -39,6 +40,7 @@ var Stage = React.createClass({
         <Stabs {...this.props} />
         <Fx {...this.props} />
         <Science {...this.props} />
+        <Chords {...this.props} />
         <Bass {...this.props} />
         <Skull {...this.props} />
         <Lyrics {...this.props} />
