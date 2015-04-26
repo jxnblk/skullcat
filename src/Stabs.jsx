@@ -19,6 +19,14 @@ var frames = {
     0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,1,1,
     1,1,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
   ],
+  dots: [
+    0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+    0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,1,1,
+  ],
+  bar: [
+    0,0,0,0, 0,0,0,0, 0,0,0,0, 1,1,1,1,
+    0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+  ]
 };
 
 
@@ -29,7 +37,6 @@ var Stabs = React.createClass({
     var step = this.props.step;
     var tracks = this.props.tracks;
     var animationDuration = '.375s';
-    var active = playing && (tracks[13].active || tracks[14].active || tracks[15].active);
 
     var styles = {
       container: {
@@ -37,7 +44,6 @@ var Stabs = React.createClass({
         right: 0,
         bottom: 0,
         left: 0,
-        display: active ? '' : 'none',
       },
       backdrop: {
         position: 'absolute',
@@ -70,6 +76,26 @@ var Stabs = React.createClass({
         WebkitAnimationDuration: '.1875s',
         animationDuration: '.1875s',
       },
+      dots: {
+        display: 'none',
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        maxHeight: '100%',
+        MozAnimationDuration: '.1875s',
+        WebkitAnimationDuration: '.1875s',
+        animationDuration: '.1875s',
+      },
+      bar: {
+        display: 'none',
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        maxHeight: '100%',
+        MozAnimationDuration: '.75s',
+        WebkitAnimationDuration: '.75s',
+        animationDuration: '.75s',
+      },
     };
 
     if (playing) {
@@ -80,12 +106,17 @@ var Stabs = React.createClass({
         styles.diagonal.display = frames.diagonal1[step] ? '' : 'none';
       } else if (tracks[17].active) {
         styles.diagonal.display = frames.diagonal2[step] ? '' : 'none';
+        styles.dots.display = frames.dots[step] ? '' : 'none';
+      } else if (tracks[18].active) {
+        styles.bar.display = frames.bar[step] ? '' : 'none';
       }
     }
 
     return (
       <div className="absolute" style={styles.container}>
-        <div className="vhs-fade xbg-white xbg-striped bg-currentcolor" style={styles.backdrop} />
+
+        <div className="vhs-fade bg-currentcolor" style={styles.backdrop} />
+
         <svg style={styles.zigzag}
           className="vhs-left"
           viewBox="0 0 32 32">
@@ -100,11 +131,27 @@ var Stabs = React.createClass({
             d="M0 16 L4 12 L12 20 L20 12 L28 20 L32 16"
             className="stroke" />
         </svg>
+
         <svg style={styles.diagonal}
           className="vhs-right"
           viewBox="0 0 32 32">
           <path d="M34 -2 L-2 34" className="stroke" />
         </svg>
+
+        <svg style={styles.dots}
+          className="vhs-zoom"
+          viewBox="0 0 32 32">
+          <circle cx="4" cy="16" r="1" />
+          <circle cx="28" cy="16" r="1" />
+        </svg>
+
+        <svg style={styles.bar}
+          className="vhs-fade"
+          preserveAspectRatio="none"
+          viewBox="0 0 32 32">
+          <rect y="14" width="32" height="2" />
+        </svg>
+
       </div>
     )
   }

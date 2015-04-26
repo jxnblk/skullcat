@@ -35,7 +35,7 @@ var Controls = React.createClass({
   },
 
   handleKeydown: function(e) {
-    console.log(e.keyCode);
+    //console.log(e.keyCode);
     if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) {
       return false;
     }

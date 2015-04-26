@@ -1156,13 +1156,15 @@ hr {
 .vhs-fill-both { -webkit-animation-fill-mode: both; animation-fill-mode: both }
 .vhs-paused { -webkit-animation-play-state: paused; animation-play-state: paused }
 
+/*
 .bg-striped {
-  background-image: -webkit-repeating-linear-gradient(45deg, #fff 0, #fff 12%, transparent 0, transparent 50%);
   background-image: repeating-linear-gradient(45deg, #fff 0, #fff 12%, transparent 0, transparent 50%);
   background-size: 12px 12px;
 }
+*/
 
-.border { border-color: currentColor }
+svg { fill: currentcolor }
+.border { border-color: currentcolor }
 .bg-currentcolor { background-color: currentcolor }
 
 .stroke {
