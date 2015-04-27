@@ -39,7 +39,7 @@ function initSamplers(samples) {
 function loadSamples(samples) {
   samples.forEach(function(sample, i) {
     (function(index) {
-      bumpkit.loadBuffer(sample.src, function(buffer) {
+      bumpkit.loadBuffer(sample, function(buffer) {
         samplers[index].buffer(buffer);
       });
     })(i);
@@ -65,13 +65,16 @@ function initClips(samples) {
 var Bump = React.createClass({
 
   getInitialState: function() {
+    var tracks = this.props.samples.map(function(sample) {
+      return { src: sample };
+    });
     return {
       step: 0,
       playing: false,
-      tracks: this.props.samples,
+      tracks: tracks,
       queue: [],
       unqueue: [],
-      drop: true, 
+      drop: false, 
       time: 0,
       terminator: false,
     }
@@ -168,8 +171,8 @@ var Bump = React.createClass({
   },
 
   setDrop: function() {
-    this.activateTrack(0);
-    bumpkit.loopLength = 64;
+    //this.activateTrack(0);
+    //bumpkit.loopLength = 64;
   },
 
   endDrop: function() {

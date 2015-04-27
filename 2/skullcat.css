@@ -13,7 +13,8 @@ svg { max-height: 100% }
 
 button,
 .button {
-  font-size: inherit;
+  font-size: 14px;
+  font-size: .875rem;
   font-weight: bold;
   font-weight: bold;
   text-decoration: none;
@@ -721,6 +722,56 @@ hr {
 
 .button-transparent:disabled,
 .button-transparent.is-disabled {
+  opacity: .5;
+}
+/* Basscss Button Outline */
+
+.button-outline {
+  position: relative;
+  z-index: 2;
+  color: inherit;
+  background-color: transparent;
+  border-radius: 3px;
+  border: 1px solid currentcolor;
+}
+
+.button-outline:before {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  border: 1px solid transparent;
+  background-color: currentcolor;
+  border-radius: 3px;
+  opacity: 0;
+}
+
+.button-outline:hover {
+  box-shadow: none;
+}
+
+.button-outline:hover:before,
+.button-outline:focus:before {
+  opacity: .125;
+}
+
+.button-outline:focus {
+  outline: none;
+  border: 1px solid currentcolor;
+  box-shadow: 0 0 0 2px;
+}
+
+.button-outline:active,
+.button-outline.is-active {
+  box-shadow: inset 0 1px 5px 0, 0 0 1px;
+}
+
+.button-outline:disabled,
+.button-outline.is-disabled {
   opacity: .5;
 }
 /* Basscss Color Borders */

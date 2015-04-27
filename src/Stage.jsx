@@ -31,6 +31,14 @@ var Stage = React.createClass({
         bottom: 0,
         left: 0,
         display: (this.props.drop && !this.props.playing) ? '' : 'none',
+      },
+      paused: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        display: (!this.props.drop && !this.props.playing) ? '' : 'none',
       }
     };
 
@@ -49,6 +57,34 @@ var Stage = React.createClass({
             drop={this.props.drop}
             step={this.props.step}
             length={32} />
+        </div>
+        <div className="flex flex-center center" style={styles.paused}>
+          <div className="mx-auto">
+            <button className="caps mx-auto button button-big button-transparent"
+              onClick={this.props.playPause}>
+              <Icon name="play" className="h0" />
+            </button>
+            <div>
+              <a href="//github.com/jxnblk/skullcat"
+                className="m1 button button-outline">
+                GitHub
+              </a>
+              <a href="#!"
+                className="m1 button button-outline">
+                Tweet
+              </a>
+            </div>
+            <div>
+              <a href="/skullcat/1"
+                className="m1 button button-transparent">
+                Original Version
+              </a>
+              <a href="/skullcat/guidelines"
+                className="m1 button button-transparent">
+                Original Version
+              </a>
+            </div>
+          </div>
         </div>
         <div className="flex flex-center center" style={styles.play}>
           <button className="caps mx-auto button button-big button-transparent"

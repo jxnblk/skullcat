@@ -10,10 +10,15 @@ var Root = React.createClass({
     var initialProps = {
       __html: safeStringify(this.props)
     };
+    var s3path = this.props.s3path;
+
+    var samples = this.props.samples.map(function(sample) {
+      return s3path + sample;
+    });
 
     return (
       <Html {...this.props}>
-        <Bump samples={this.props.samples} />
+        <Bump samples={samples} />
         <script id="initial-props"
           type="application/json"
           dangerouslySetInnerHTML={initialProps} />

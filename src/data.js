@@ -7,45 +7,46 @@ module.exports = {
   javascripts: [
     'index.js'
   ],
-      // 32 beats at half tempo - 80 bpm
+  //s3path: 'http://d2v52k3cl9vedd.cloudfront.net/skullcat/',
+  s3path: 'http://jxnblk.s3.amazonaws.com/skullcat/',
   samples: [
     // 0
-    { src: 'audio/intro.mp3' },
-    { src: 'audio/drums-1.mp3' },
-    { src: 'audio/drums-2.mp3' },
-    { src: 'audio/drums-3.mp3' },
-    { src: 'audio/drums-4.mp3' },
+    'intro.mp3',
+    'drums-1.mp3',
+    'drums-2.mp3',
+    'drums-3.mp3',
+    'drums-4.mp3',
     // 5
-    { src: 'audio/bass-1.mp3' },
-    { src: 'audio/bass-2.mp3' },
+    'bass-1.mp3',
+    'bass-2.mp3',
     // 7
-    { src: 'audio/fx-1.mp3' },
-    { src: 'audio/fx-2.mp3' },
-    { src: 'audio/fx-3.mp3' },
-    { src: 'audio/fx-4.mp3' },
+    'fx-1.mp3',
+    'fx-2.mp3',
+    'fx-3.mp3',
+    'fx-4.mp3',
     // 11
-    { src: 'audio/science-1.mp3' },
-    { src: 'audio/science-2.mp3' },
-    { src: 'audio/science-3.mp3' },
-    { src: 'audio/science-4.mp3' },
+    'science-1.mp3',
+    'science-2.mp3',
+    'science-3.mp3',
+    'science-4.mp3',
     // 15
-    { src: 'audio/stabs-1.mp3' },
-    { src: 'audio/stabs-2.mp3' },
-    { src: 'audio/stabs-3.mp3' },
-    { src: 'audio/stabs-4.mp3' },
+    'stabs-1.mp3',
+    'stabs-2.mp3',
+    'stabs-3.mp3',
+    'stabs-4.mp3',
     // 19
-    { src: 'audio/meow-1.mp3' },
-    { src: 'audio/meow-2.mp3' },
+    'meow-1.mp3',
+    'meow-2.mp3',
     // 21
-    { src: 'audio/vocal-1.mp3' },
-    { src: 'audio/vocal-2.mp3' },
-    { src: 'audio/vocal-3.mp3' },
-    { src: 'audio/vocal-4.mp3' },
+    'vocal-1.mp3',
+    'vocal-2.mp3',
+    'vocal-3.mp3',
+    'vocal-4.mp3',
     // 25
-    { src: 'audio/chords-1.mp3' },
-    { src: 'audio/chords-2.mp3' },
-    { src: 'audio/chords-3.mp3' },
-    { src: 'audio/chords-4.mp3' },
+    'chords-1.mp3',
+    'chords-2.mp3',
+    'chords-3.mp3',
+    'chords-4.mp3',
   ],
 };
 

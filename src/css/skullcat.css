@@ -14,6 +14,7 @@
 @import 'flex-object';
 @import 'basscss-color-base';
 @import 'basscss-button-transparent';
+@import 'basscss-button-outline';
 @import 'basscss-borders';
 @import 'basscss-colors';
 
@@ -126,5 +127,6 @@ svg { fill: currentcolor }
 }
 
 :root {
+  --button-font-size: var(--h5);
 }
 
