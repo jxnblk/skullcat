@@ -1,0 +1,108 @@
+<!doctype html> 
+<html lang="en"> 
+<head>
+  <meta charset="utf-8">
+  <title>Skullcat</title>
+  <meta name="author" content="Jxnblk">
+  <meta name="description" content="Skullcat for Mrmrs">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="skullcat-32.png">
+  <link rel="apple-touch-icon-precomposed" href="skullcat-2014.png">
+  <link href="site/basscss.min.css" rel="stylesheet">
+  <link href="site/skullcat.css" rel="stylesheet">
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+  <script src="site/plangular.js"></script>
+  <script src="site/animangular.js"></script>
+</head>
+<body class="white bg-dark-gray" ng-app="plangular">
+
+  <header class="center min-h100" plangular data-src="http://soundcloud.com/mrsjxn/bbb">
+    <div animangular class="relative" >
+      <div ng-show="frame.flash" style="background-color:#fff;opacity:.6" class="absolute t0 r0 b0 l0 fade-out"></div>
+      <div ng-show="frame.strobe" style="background-color:#fff;opacity:.6" class="absolute t0 r0 b0 l0 strobe gpu"></div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 576" class="relative">
+        <filter id="screen"><feBlend mode="screen"/></filter>
+        <g id="eyes" ng-show="frame.eyes" transform="translate(496 260)">
+          <g ng-attr-style=" -webkit-transition: -webkit-transform .5s linear; -webkit-transform-origin: 50% 50%; -webkit-transform: scale({{ (ms < 7000) && (ms / 1000) * 1.714 || !(ms) && 0.001 || 12 }});" >
+            <path fill="#161616" d=" M2 0 C4 0 10 5 10 5 C13 4 15 4 16 4 C17 4 18 4 22 5 C22 5 28 0 30 0 C31 0 32 10 32 16 C32 26 24 30 16 30 C8 30 0 26 0 16 C0 10 1 0 2 0 "/>
+            <!-- #af0 -->
+            <path fill="#999" d=" M4 18 A4 4 0 0 0 12 18 A4 4 0 0 0 4 18 M5.5 18 A2.5 2.5 0 0 1 10.5 18 A2.5 2.5 0 0 1 5.5 18 M20 18 A4 4 0 0 0 28 18 A4 4 0 0 0 20 18 M21.5 18 A2.5 2.5 0 0 1 26.5 18 A2.5 2.5 0 0 1 21.5 18 "/>
+          </g>
+        </g>
+        <g ng-show="frame.ringWarp" fill="none" stroke="#fff">
+          <circle cx="512" cy="288" r="128" class="warp-fast" />
+          <circle cx="512" cy="288" r="128" class="warp1" />
+        </g>
+        <g id="stars" ng-show="frame.stars">
+          <g class="warp1" fill="#fff">
+            <circle cx="512" cy="288" r="128" fill="none" />
+            <circle cx="448" cy="160" r="2" /> <circle cx="384" cy="304" r="2" /> <circle cx="400" cy="368" r="2" /> <circle cx="580" cy="344" r="2" /> <circle cx="588" cy="256" r="2" /> <circle cx="524" cy="192" r="2" />
+          </g>
+          <g class="warp2" fill="#fff">
+            <circle cx="512" cy="288" r="128" fill="none"/>
+            <circle cx="360" cy="160" r="2" /> <circle cx="576" cy="188" r="2" /> <circle cx="620" cy="288" r="2" /> <circle cx="604" cy="312" r="2" /> <circle cx="512" cy="388" r="2" /> <circle cx="436" cy="366" r="2" />
+          </g>
+          <g class="warp3" fill="#fff">
+            <circle cx="512" cy="288" r="128" fill="none"/>
+            <circle cx="384" cy="280" r="2"/> <circle cx="496" cy="160" r="2"/> <circle cx="560" cy="180" r="2"/> <circle cx="640" cy="180" r="2"/> <circle cx="604" cy="330" r="2"/> <circle cx="580" cy="390" r="2"/> <circle cx="460" cy="400" r="2"/>
+          </g>
+        </g>
+        <rect ng-show="frame.diamond" class="spin-grow" fill="none" stroke="#fff" stroke-width="2" opacity="0.4" width="128" height="128" x="448" y="224" />
+        <rect ng-show="frame.diamond2" class="spin-grow-2" fill="none" stroke="#fff" stroke-width="2" opacity="0.4" width="128" height="128" x="448" y="224" />
+        <g ng-show="frame.skull" class="fade-out" transform="translate(320 96)" >
+          <g transform="scale(12)" >
+            <path fill="#333" d=" M2 0 C4 0 10 5 10 5 C13 4 15 4 16 4 C17 4 18 4 22 5 C22 5 28 0 30 0 C31 0 32 10 32 16 C32 26 24 30 16 30 C8 30 0 26 0 16 C0 10 1 0 2 0 "/>
+            <path fill="#fff" d="M16 7 C13 7 2 9 2 16 C2 23 6 23 10 24 L11 28 L12 26 L20 26 L21 28 L22 24 C26 23 30 23 30 16 C30 9 19 7 16 7 M4 18 A4 4 0 0 1 12 18 A4 4 0 0 1 4 18 M20 18 A4 4 0 0 1 28 18 A4 4 0 0 1 20 18 "/>
+          </g>
+        </g>
+        <g ng-show="frame.skullGlow" transform="translate(320 96)" >
+          <g transform="scale(12)" >
+            <!-- #f30 & #0cf -->
+            <path class="vibrate1" fill="#fff" opacity="0.5" d="M16 7 C13 7 2 9 2 16 C2 23 6 23 10 24 L11 28 L12 26 L20 26 L21 28 L22 24 C26 23 30 23 30 16 C30 9 19 7 16 7 M4 18 A4 4 0 0 1 12 18 A4 4 0 0 1 4 18 M20 18 A4 4 0 0 1 28 18 A4 4 0 0 1 20 18 "/>
+            <path class="vibrate2" fill="#fff" opacity="0.5" d="M16 7 C13 7 2 9 2 16 C2 23 6 23 10 24 L11 28 L12 26 L20 26 L21 28 L22 24 C26 23 30 23 30 16 C30 9 19 7 16 7 M4 18 A4 4 0 0 1 12 18 A4 4 0 0 1 4 18 M20 18 A4 4 0 0 1 28 18 A4 4 0 0 1 20 18 "/>
+          </g>
+        </g>
+        <circle ng-show="frame.dot" class="splode" cx="416" cy="310" r="128" fill="#fff"/>
+        <circle ng-show="frame.dot2" class="splode" cx="608" cy="310" r="128" fill="#fff"/>
+        <path ng-show="frame.zag" fill="none" stroke="#fff" stroke-width="4" class="vibrate-fade-out" d="M0 384 l128 -128 l128 128 l128 -128 l128 128 l128 -128 l128 128 l128 -128 l128 128"/>
+        <path ng-show="frame.zig1" fill="none" stroke="#fff" stroke-width="4" class="vibrate-fade-out" d="M208 -16 L816 592"/>
+        <path ng-show="frame.zig2" fill="none" stroke="#fff" stroke-width="4" class="vibrate-fade-out" d="M816 -16 L208 592"/>
+
+      </svg>
+      <div ng-show="player.playing" class="f5 bold caps absolute b0 r0 p2 mid-gray">
+        {{ bar }}.{{ beat }}
+      </div>
+    </div>
+    <div class="absolute t0 r0 b0 l0 bg-lines"></div>
+    <div class="oh absolute t0 r0 b0 l0">
+      <div class="absolute t0 r0 b0 l0 bg-video-lines"></div>
+    </div>
+    <div class="absolute t0 r0 b0 l0 bg-fade"></div>
+    <div class="center absolute t0 b0 l0 r0 pointer" ng-click="player.play(track)" ng-hide="player.playing || player.ended">
+      <div class="mobile-table min-h100 absolute t0 r0 b0 l0 py4 strobe">
+        <div class="mobile-table-cell">
+          <div class="h1 button button-circle button-ghost"> <div plangular-icon="play"></div> </div>
+          <p class="h2 bold">Turn up the volume and click</p>
+        </div>
+      </div>
+    </div>
+    <div class="center absolute t0 b0 l0 r0 strobe" ng-show="player.ended">
+      <div class="mobile-table min-h100">
+        <div class="mobile-table-cell">
+          <a href="#" ng-click="player.play(track)" class="p mr1 button button-ghost">Replay</a>
+          <a href="/skullcat/guidelines" class="p button button-ghost">Brand Guidelines</a>
+        </div>
+      </div>
+    </div>
+    <div class="absolute t0 r0 b0 l0 pointer" ng-click="player.pause()" ng-show="player.playing"> </div>
+    <div class="absolute r0 b0 l0" style="height:2rem;">
+      <div  class="absolute t0 r0 b0 l0" style="height:.25rem;margin-top:1.75rem;">
+        <div class="absolute t0 r0 b0 l0 xbg-white" style="opacity:.2"></div>
+        <div class="absolute t0 b0 l0 bg-green" style="background-color:cyan;width: {{ (currentTime / duration) * 100 }}%"></div>
+      </div>
+      <div class="absolute t0 r0 b0 l0" ng-click="seekTo($event)"></div>
+    </div>
+  </header>
+
+</body>
+</html>

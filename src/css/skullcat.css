@@ -1,0 +1,132 @@
+/*! skullcat | http://jxnblk.com/skullcat */
+
+@import 'basscss-base-reset';
+@import 'basscss-base-buttons';
+@import 'basscss-base-typography';
+@import 'basscss-utility-layout';
+@import 'basscss-utility-typography';
+@import 'basscss-utility-headings';
+@import 'basscss-white-space';
+@import 'basscss-positions';
+@import 'basscss-responsive-states';
+@import 'basscss-button-sizes';
+@import 'basscss-grid';
+@import 'flex-object';
+@import 'basscss-color-base';
+@import 'basscss-button-transparent';
+@import 'basscss-button-outline';
+@import 'basscss-borders';
+@import 'basscss-colors';
+
+@import 'vhs';
+
+@import 'basscss-defaults';
+
+/*
+.bg-striped {
+  background-image: repeating-linear-gradient(45deg, #fff 0, #fff 12%, transparent 0, transparent 50%);
+  background-size: 12px 12px;
+}
+*/
+
+svg { fill: currentcolor }
+.border { border-color: currentcolor }
+.bg-currentcolor { background-color: currentcolor }
+
+.stroke {
+  fill: none;
+  stroke: white;
+  stroke: currentColor;
+  stroke-width: 4;
+  vector-effect: non-scaling-stroke;
+  transform: scale(1);
+}
+
+.rotate {
+  animation-name: rotate;
+  animation-duration: 2.25s;
+  animation-timing-function: ease-out;
+  transform-origin: 50% 50%;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg) }
+    to { transform: rotate(180deg) }
+}
+
+.rotate-down {
+  animation-name: rotate-down;
+  animation-duration: 4.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  transform-origin: 50% 50%;
+}
+
+@keyframes rotate-down {
+  from { transform: scale(1) rotate(360deg) }
+    to { transform: scale(0) rotate(0) }
+}
+
+.haha-right {
+  animation-name: haha-right;
+  animation-duration: 6s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes haha-right {
+  from { transform: translateX(100%) }
+    to { transform: translateX(-100%) }
+}
+
+.cycle-right {
+  animation-name: cycle-right;
+  animation-duration: .3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes cycle-right {
+  from { transform: translateX(0) }
+    to { transform: translateX(32px) }
+}
+
+@keyframes warp {
+  from { transform: scale(.1); }
+  to { transform: scale(8); }
+}
+.warp-fast {
+  transform: scale(.1);
+  transform-origin: 50%;
+  animation: warp .375s ease-in infinite;
+}
+.warp1 {
+  transform: scale(.1);
+  transform-origin: 50%;
+  animation: warp .5s ease-in infinite;
+}
+.warp2 {
+  transform: scale(.1);
+  transform-origin: 50%;
+  animation: warp .5s .2s ease-in infinite;
+}
+.warp3 {
+  transform: scale(.1);
+  transform-origin: 50%;
+  animation: warp .5s .3s ease-in infinite;
+}
+
+@-webkit-keyframes vhs-blur {
+  from { filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="128" /></filter></svg>#filter'); -webkit-filter: blur(128px); filter: blur(128px) }
+  to { filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="0" /></filter></svg>#filter'); -webkit-filter: blur(0); filter: blur(0) }
+}
+
+@keyframes vhs-blur {
+  from { filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="128" /></filter></svg>#filter'); -webkit-filter: blur(128px); filter: blur(128px) }
+  to { filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="0" /></filter></svg>#filter'); -webkit-filter: blur(0); filter: blur(0) }
+}
+
+:root {
+  --button-font-size: var(--h5);
+}
+
