@@ -25,13 +25,21 @@ var Stage = React.createClass({
       container: {
         overflowX: 'hidden'
       },
+      loading: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        display: (!this.props.ready) ? '' : 'none',
+      },
       play: {
         position: 'absolute',
         top: 0,
         right: 0,
         bottom: 0,
         left: 0,
-        display: (this.props.drop && !this.props.playing) ? '' : 'none',
+        display: (this.props.ready && this.props.drop && !this.props.playing) ? '' : 'none',
       },
       paused: {
         position: 'absolute',
@@ -62,7 +70,12 @@ var Stage = React.createClass({
         <div className="flex flex-center center" style={styles.paused}>
           <Paused {...this.props} />
         </div>
-        <div className="flex flex-center center" style={styles.play}>
+        <div className="flex flex-center center vhs-fade" style={styles.loading}>
+          <div className="mx-auto">
+            loading...
+          </div>
+        </div>
+        <div className="flex flex-center center vhs-pop" style={styles.play}>
           <button className="caps mx-auto button button-big button-transparent"
             autoFocus="true"
             onClick={this.props.playPause}>

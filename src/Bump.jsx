@@ -1,4 +1,4 @@
-
+className="stroke" 
 var React = require('react');
 var Bumpkit = require('bumpkit');
 var classnames = require('classnames');
@@ -36,11 +36,16 @@ function initSamplers(samples) {
   }
 }
 
-function loadSamples(samples) {
+function loadSamples(samples, callback) {
+  var loaded = 0;
   samples.forEach(function(sample, i) {
     (function(index) {
       bumpkit.loadBuffer(sample, function(buffer) {
         samplers[index].buffer(buffer);
+        loaded++;
+        if (typeof callback === 'function') {
+          callback(loaded, index);
+        }
       });
     })(i);
   });
@@ -74,8 +79,9 @@ var Bump = React.createClass({
       tracks: tracks,
       queue: [],
       unqueue: [],
-      drop: false, 
+      drop: true, 
       time: 0,
+      ready: false,
       terminator: false,
     }
   },
@@ -171,8 +177,8 @@ var Bump = React.createClass({
   },
 
   setDrop: function() {
-    //this.activateTrack(0);
-    //bumpkit.loopLength = 64;
+    this.activateTrack(0);
+    bumpkit.loopLength = 64;
   },
 
   endDrop: function() {
@@ -221,6 +227,7 @@ var Bump = React.createClass({
 
   componentDidMount: function() {
     if (bumpkit && typeof window !== 'undefined') {
+      var self = this;
       var samples = this.props.samples;
       bumpkit.tempo = tempo;
       bumpkit.loopLength = loopLength;
@@ -228,7 +235,11 @@ var Bump = React.createClass({
       initSamplers(samples);
       initClips(samples);
       this.addStepListener();
-      loadSamples(samples);
+      loadSamples(samples, function(n, i) {
+        if (i === 0) {
+          self.setState({ ready: true });
+        }
+      });
       this.setDrop();
     }
   },

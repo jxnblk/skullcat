@@ -89,12 +89,6 @@ var frames2 = [
 ];
 
 var frames = {
-  drop: [
-    1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1,
-    1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1,
-    1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1,
-    0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-  ]
 };
 
 
@@ -104,10 +98,11 @@ var Skull = React.createClass({
     var playing = this.props.playing;
     var step = this.props.step;
     var tracks = this.props.tracks;
-    var animationDuration = (tracks[0].active && step < 40) ? '6s' : '.1875s';
+    //var animationDuration = (tracks[0].active && step < 40) ? '6s' : '.1875s';
     var active = (playing && (tracks[0].active || tracks[1].active || tracks[2].active || tracks[3].active || tracks[4].active));
     var styles = {
       container: {
+        position: 'absolute',
         top: '50%',
         left: '50%',
         WebkitTransform: 'translate(-50%, -50%)',
@@ -115,35 +110,58 @@ var Skull = React.createClass({
         display: active ? '' : 'none',
       },
       svg: {
-        MozAnimationDuration: animationDuration,
-        WebkitAnimationDuration: animationDuration,
-        animationDuration: animationDuration,
+        MozAnimationDuration: '.1875s',
+        WebkitAnimationDuration: '.1875s',
+        animationDuration: '.1875s',
       }
     };
-    var className = '';
+
+    var classes = {
+      container: '',
+      svg: '',
+    };
+
     if (playing) {
       if (tracks[0].active) {
-        console.log(step);
-        if (step < 40) {
-          className = 'vhs-blur';
-        } else {
-          className = 'vhs-zoom vhs-reverse';
-          console.log('>40', className, step);
+          classes.container = 'vhs-flicker vhs-duration-4 vhs-infinite';
+        if (step > 16) {
         }
-        styles.container.display = frames.drop[step] ? '' : 'none';
+        if (step < 48) {
+          var dur = '4.5s'
+          classes.svg = 'vhs-blur';
+          styles.svg = {
+            MozAnimationDuration: dur,
+            WebkitAnimationDuration: dur,
+            animationDuration: dur,
+          };
+        } else {
+          classes.svg = 'rotate-down';
+          var dur = '2.5s'
+          var fn = 'ease-in';
+          styles.svg = {
+            MozAnimationTimingFunction: fn,
+            WebkitAnimationTimingFunction: fn,
+            animationTimingFunction: fn,
+            MozAnimationDuration: dur,
+            WebkitAnimationDuration: dur,
+            animationDuration: dur,
+          };
+        }
+        styles.container.display = '';
       } else if (step < 32) {
         if (tracks[1].active || tracks[2].active || tracks[4].active) {
-          var className = frames1[step].className; 
+          classes.svg = frames1[step].className; 
         } else if (tracks[3].active) {
-          var className = frames2[step].className; 
+          classes.svg = frames2[step].className; 
         }
       }
     }
+
     return (
-      <div className="absolute" style={styles.container}>
+      <div className={classes.container} style={styles.container}>
         <svg xmlns="http://www.w3.org/2000/svg"
           style={styles.svg}
-          className={className}
+          className={classes.svg}
           viewBox="0 0 32 32"
           width="512"
           height="512">
