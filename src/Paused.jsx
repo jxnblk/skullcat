@@ -30,7 +30,7 @@ var Paused = React.createClass({
           </a>
           <a href="/skullcat/guidelines"
             className="button button-transparent">
-            Original Version
+            Brand Guidelines
           </a>
         </div>
       </div>

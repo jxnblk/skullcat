@@ -43,7 +43,7 @@ function loadSamples(samples, callback) {
       bumpkit.loadBuffer(sample, function(buffer) {
         samplers[index].buffer(buffer);
         loaded++;
-        if (typeof callback === 'function') {
+        if (typeof callback === 'function' && loaded === samples.length) {
           callback(loaded, index);
         }
       });
@@ -236,9 +236,7 @@ var Bump = React.createClass({
       initClips(samples);
       this.addStepListener();
       loadSamples(samples, function(n, i) {
-        if (i === 0) {
-          self.setState({ ready: true });
-        }
+        self.setState({ ready: true });
       });
       this.setDrop();
     }
