@@ -1,0 +1,42 @@
+
+body {
+  height: 100vh;
+  min-height: 100vh;
+  color: white;
+  background-color: #000;
+}
+
+.p2 { padding: 1rem }
+
+.flex { display: flex }
+
+.fixed { position: fixed }
+.t0 { top: 0 }
+.r0 { right: 0 }
+.b0 { bottom: 0 }
+.l0 { left: 0 }
+
+.an-spin {
+  animation-name: spin;
+  animation-duration: 32s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.an-scroll {
+  animation-name: scroll;
+  animation-duration: .5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg) }
+    to { transform: rotate(360deg) }
+}
+
+@keyframes scroll {
+  from { transform: translateX(0) }
+    to { transform: translateX(-64px) }
+}
+
