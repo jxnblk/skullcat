@@ -3,6 +3,8 @@
   "version": "3.0.0",
   "description": "A avatar fur mrmrs",
   "scripts": {
+    "pack": "electron-packager . Skullcat --platform=mas --arch=all --osx-sign --overwrite",
+    "electron": "electron .",
     "build": "webpack -p --progress --colors",
     "start": "webpack-dev-server --progress --colors --config webpack.dev.config.js"
   },
@@ -27,6 +29,8 @@
     "basscss-basic": "^1.0.0",
     "bumpkit": "^0.2.0-beta.3",
     "css-loader": "^0.23.1",
+    "electron-packager": "^7.0.0",
+    "electron-prebuilt": "^0.37.6",
     "keycode": "^2.1.1",
     "lodash": "^4.11.1",
     "react": "^15.0.1",
@@ -48,5 +52,8 @@
       "stage-0",
       "react"
     ]
+  },
+  "dependencies": {
+    "electron": "^0.4.1"
   }
 }
