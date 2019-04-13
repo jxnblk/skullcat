@@ -1,26 +1,31 @@
 import React, {
   useReducer,
   useContext,
+  useEffect,
 } from 'react'
-import {
-  Song,
-  Sequencer,
-  Sampler,
-  Synth,
-} from 'react-music'
-import merge from 'lodash.merge'
 import { url, tracks, clips } from './data'
 
-const useState = (init) => useReducer((state, next) =>
-  merge({}, state, next),
-  init
-)
+import {
+  useSequencer,
+  useSampler,
+} from '../skullbeats'
+
+const samples = {
+  a: url + tracks.A0.uri,
+  b: url + tracks.B0.uri,
+  c: url + tracks.B1.uri,
+}
 
 export const wrapper = props => {
-  const [ state, setState ] = useState({
-    playing: false,
-    tempo: 128,
-  })
+  const [ state, setState ] = useSequencer({
+    tempo: 160,
+    loop: 32,
+  }, [ ])
+  const sampler = useSampler(state, samples.c)
+
+  if (state.playing && state.step === 0) {
+    sampler.play(state.time, { length: 32 })
+  }
 
   return (
     <>
@@ -28,25 +33,19 @@ export const wrapper = props => {
       <button onClick={e => setState({ playing: !state.playing })}>
         {state.playing ? 'Pause' : 'Play'}
       </button>
-      <Song
-        playing={state.playing}
-        tempo={state.tempo}>
-        <Sequencer bars={1}>
-          <Sampler
-            sample={url + tracks.A0.uri}
-            steps={[0]}
-          />
-          <Synth
-            type="square"
-            steps={[
-              [0, 2, "c3"],
-              [8, 2, ["c3", "d#3", "f4"]]
-            ]}
-          />
-
-          {props.children}
-        </Sequencer>
-      </Song>
+      <input
+        readOnly
+        name='tempo'
+        type='number'
+        value={state.tempo}
+        onChange={e => {
+          setState({
+            tempo: Number(e.target.value)
+          })
+        }}
+      />
+      {props.children}
     </>
   )
 }
+

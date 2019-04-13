@@ -1,5 +1,7 @@
 .cache
 public
+gatsby-config.js
 static
 src
 docs
+skullbeats
