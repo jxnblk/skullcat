@@ -21,7 +21,6 @@ import {
   PlayPause,
   Sampler,
   useAudio,
-  usePatternFollow,
   Debug,
 } from '../index'
 
@@ -46,55 +45,13 @@ const samples = {
 }
 
 const Beep = props => {
-  const on = usePatternFollow('kick')
+  const on = false
   return (
     <div
       style={{
         padding: 32,
         backgroundColor: on ? 'magenta' : 'cyan',
         transform: `scale(${on ? 2/1 : 1/2})`,
-        transition: 'transform .05s ease-out',
-      }}
-    />
-  )
-}
-
-const Boop = props => {
-  const on = usePatternFollow('hit')
-  return (
-    <div
-      style={{
-        padding: 32,
-        backgroundColor: 'cyan',
-        transform: `scale(${on ? 2/1 : 1/2})`,
-        transition: 'transform .05s ease-out',
-      }}
-    />
-  )
-}
-
-const Baz = props => {
-  const on = usePatternFollow('hat')
-  return (
-    <div
-      style={{
-        padding: 32,
-        backgroundColor: 'magenta',
-        transform: `scale(${on ? 7/8 : 1/2})`,
-        transition: 'transform .05s ease-out',
-      }}
-    />
-  )
-}
-
-const Foo = props => {
-  const on = usePatternFollow('rim')
-  return (
-    <div
-      style={{
-        padding: 32,
-        backgroundColor: 'yellow',
-        transform: `scale(${on ? 7/8 : 1/2})`,
         transition: 'transform .05s ease-out',
       }}
     />
@@ -192,9 +149,6 @@ export const wrapper = props => {
       />
       {/*
       <Beep />
-      <Boop />
-      <Baz />
-      <Foo />
       */}
       <Debug />
       <Drums kit='everything' />

@@ -143,27 +143,6 @@ export const useSampler = (state, url) => {
   return { play, audio }
 }
 
-export const usePattern = (name, steps, repeat = Infinity) => {
-  const state = useAudio()
-  if (typeof state.setState !== 'function') return false
-  steps.repeat = repeat
-  useEffect(() => {
-    state.setState({
-      patterns: {
-        [name]: steps
-      }
-    })
-  }, [name, steps])
-}
-
-export const usePatternFollow = (name) => {
-  const state = useAudio()
-  const pattern = (state.patterns && state.patterns[name]) || []
-  const repeat = pattern.repeat || Infinity
-  const on = pattern.includes(state.step % repeat)
-  return on
-}
-
 export const Provider = ({
   initialState,
   children,
@@ -198,7 +177,6 @@ export const PlayPause = props => {
 export const Sampler = props => {
   const state = useAudio()
   const sampler = useSampler(state, props.src)
-  if (props.name) usePattern(props.name, props.steps, props.repeat)
 
   if (!state.playing || props.muted) {
     if (sampler.audio.source) sampler.audio.source.stop(0)
