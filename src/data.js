@@ -121,3 +121,41 @@ export const clips = {
     uri: 'beta.mp3'
   },
 }
+
+
+const bucket = 'http://jxnblk.s3.amazonaws.com/stepkit/'
+
+export const x808 = [
+  // '808/cowbell.mp3',
+  // for some reason s3 hates this file
+  '808/kick.mp3',
+  '808/clap.mp3',
+  '808/hihat.mp3',
+  '808/clave.mp3',
+].map(f => bucket + f)
+
+export const x909 = [
+  '909/kick.mp3',
+  '909/snare.mp3',
+  '909/hihat.mp3',
+  '909/tom-low.mp3',
+].map(f => bucket + f)
+
+export const bedford = [
+  'bedford/kick.mp3',
+  'bedford/rim.mp3',
+  'bedford/hat.mp3',
+  'bedford/snare.mp3',
+  // 'bedford/stab01.mp3',
+  // 'bedford/stab02.mp3',
+  // 'bedford/stab03.mp3',
+].map(f => bucket + f)
+
+export const everything = [
+  'everything/kick.mp3',
+  'everything/snare.mp3',
+  'everything/hat.mp3',
+  'everything/vocal-4.mp3',
+].map(f => bucket + f)
+
+

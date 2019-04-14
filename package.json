@@ -2,7 +2,7 @@
   "name": "skullcat",
   "version": "4.0.0-0",
   "description": "A avatar fur mrmrs",
-  "main": "skullcat.svg",
+  "main": "index.js",
   "scripts": {
     "start": "gatsby develop",
     "build": "gatsby build"
