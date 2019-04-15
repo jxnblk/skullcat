@@ -42,6 +42,12 @@ const samples = {
     hat: everything[2],
     rim: everything[3],
   },
+  skull: {
+    kick: url + tracks.D0.uri,
+    snare: url + tracks.D1.uri,
+    hat: url + tracks.D3.uri,
+    rim: url + tracks.D2.uri,
+  }
 }
 
 const Beep = props => {
@@ -83,14 +89,17 @@ const Keyboard = props => {
 
 const Drums = ({ kit }) => {
   const s = samples[kit]
+  console.log(kit, s)
   return (
     <>
       <Sampler
         name='kick'
         src={s.kick}
         steps={[ 0, 6, 12, ]}
+        muted
       />
       <Sampler
+        muted
         name='hit'
         src={s.snare}
         steps={[ 8 ]}
@@ -100,31 +109,35 @@ const Drums = ({ kit }) => {
         src={s.hat}
         steps={[ 4, 8, 12, 16 ]}
         repeat={16}
+        muted
       />
       <Sampler
         name='rim'
-        volume={2}
+        volume={1}
         src={s.rim}
         steps={[ 0 ]}
-        start={0}
-        repeat={16}
+        start={8}
+        length={16}
+        repeat={32}
         pitch={3/4}
       />
       <Sampler
         name='rim'
-        volume={1.4}
+        volume={1}
         src={s.rim}
-        steps={[ 8 ]}
-        start={0}
-        pitch={5/4}
+        steps={[ 16 ]}
+        start={12}
+        length={8}
+        pitch={5/8}
       />
       <Sampler
         name='rim'
-        volume={1.4}
+        volume={1}
         src={s.rim}
-        steps={[ 20 ]}
+        steps={[ 24 ]}
         start={0}
-        pitch={8/8}
+        length={8}
+        pitch={7/8}
       />
     </>
   )
@@ -139,6 +152,7 @@ export const wrapper = props => {
       }}>
       <Keyboard />
       <PlayPause />
+      {/*
       <Sampler
         muted
         volume={1/8}
@@ -147,11 +161,10 @@ export const wrapper = props => {
         start={22}
         steps={[ 0 ]}
       />
-      {/*
       <Beep />
       */}
       <Debug />
-      <Drums kit='everything' />
+      <Drums kit='skull' />
       {props.children}
     </Provider>
   )
