@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{147:function(e){e.exports={pages:[{componentChunkName:"component---src-pages-remix-js",jsonName:"remix-9eb",path:"/remix/"}],dataPaths:{"dev-404-page-5f9":"386/path---dev-404-page-5-f-9-fab-0SUcWyAf8ecbYDsMhQkEfPzV8",index:"140/path---index-6a9-0SUcWyAf8ecbYDsMhQkEfPzV8","notes-6e9":"129/path---notes-6-e-9-166-ZgNvD22DZ1bsaxJwqoEdjIBtusU","remix-9eb":"988/path---remix-9-eb-629-0SUcWyAf8ecbYDsMhQkEfPzV8"}}}}]);
+//# sourceMappingURL=pages-manifest-8c04894488301df2354d.js.map
