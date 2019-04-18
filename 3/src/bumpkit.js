@@ -18,87 +18,87 @@ bumpkit.setState({
 
 export const tracks = {
   'intro': {
-    uri: 'intro.wav',
+    uri: 'intro.mp3',
     bpm: 160,
     loop: 128
   },
   'A0': {
-    uri: '1984_A0.wav',
+    uri: '1984_A0.mp3',
     bpm: 160,
     loop: 128
   },
   'A1': {
-    uri: '1984_A1.wav',
+    uri: '1984_A1.mp3',
     bpm: 160,
     loop: 128
   },
   'A2': {
-    uri: '1984_A2.wav',
+    uri: '1984_A2.mp3',
     bpm: 160,
     loop: 128
   },
   'A3': {
-    uri: '1984_A3.wav',
+    uri: '1984_A3.mp3',
     bpm: 160,
     loop: 128
   },
   'B0': {
-    uri: '2016_B0.wav',
+    uri: '2016_B0.mp3',
     bpm: 160,
     loop: 128
   },
   'B1': {
-    uri: '2016_B1.wav',
+    uri: '2016_B1.mp3',
     bpm: 160,
     loop: 128
   },
   'B2': {
-    uri: '2016_B2.wav',
+    uri: '2016_B2.mp3',
     bpm: 160,
     loop: 128
   },
   'B3': {
-    uri: '2016_B3.wav',
+    uri: '2016_B3.mp3',
     bpm: 160,
     loop: 128
   },
   'C0': {
-    uri: '2016_C0.wav',
+    uri: '2016_C0.mp3',
     bpm: 160,
     loop: 128
   },
   'C1': {
-    uri: '2016_C1.wav',
+    uri: '2016_C1.mp3',
     bpm: 160,
     loop: 128
   },
   'C2': {
-    uri: '2016_C2.wav',
+    uri: '2016_C2.mp3',
     bpm: 160,
     loop: 128
   },
   'C3': {
-    uri: '2016_C3.wav',
+    uri: '2016_C3.mp3',
     bpm: 160,
     loop: 128
   },
   'D0': {
-    uri: '2048_D0.wav',
+    uri: '2048_D0.mp3',
     bpm: 160,
     loop: 128
   },
   'D1': {
-    uri: '2048_D1.wav',
+    uri: '2048_D1.mp3',
     bpm: 160,
     loop: 128
   },
   'D2': {
-    uri: '2048_D2.wav',
+    uri: '2048_D2.mp3',
     bpm: 160,
     loop: 128
   },
   'D3': {
-    uri: '2048_D3.wav',
+    uri: '2048_D3.mp3',
     bpm: 160,
     loop: 128
   }
