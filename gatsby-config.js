@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: '/skullcat',
   plugins: [
     'gatsby-mdx',
     'gatsby-plugin-emotion',

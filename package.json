@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "gatsby develop",
-    "build": "gatsby build"
+    "build": "gatsby build --prefix-paths",
+    "deploy": "gh-pages -d public"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,9 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-music": "^1.0.3",
-    "use-beats": "0.0.3"
+    "use-beats": "0.0.4"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
   }
 }
