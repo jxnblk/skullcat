@@ -7,7 +7,7 @@ const config = {
   loop: 256
 }
 
-const DOMAIN = 'http://jxnblk.s3.amazonaws.com/skullcat/3d/'
+const DOMAIN = '//jxnblk.s3.amazonaws.com/skullcat/3d/'
 
 const bumpkit = new Bumpkit(config)
 

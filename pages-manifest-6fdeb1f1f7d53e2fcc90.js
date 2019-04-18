@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{147:function(e){e.exports={pages:[{componentChunkName:"component---src-pages-remix-js",jsonName:"remix-9eb",path:"/remix/"}],dataPaths:{"remix-9eb":"988/path---remix-9-eb-629-0SUcWyAf8ecbYDsMhQkEfPzV8"}}}}]);
+//# sourceMappingURL=pages-manifest-6fdeb1f1f7d53e2fcc90.js.map
